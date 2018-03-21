@@ -1,4 +1,4 @@
-package de.mrrrobworks.springbootangular.backend;
+package de.mrrobworks.springbootangular.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
