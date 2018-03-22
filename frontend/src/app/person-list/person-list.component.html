@@ -1,0 +1,20 @@
+<p>
+  person-list works!
+</p>
+
+<p>Personen count: {{ persons.length }}</p>
+
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of persons">
+      <td>{{person.id}}</td>
+      <td>{{person.firstname}}</td>
+      <td>{{person.lastname}}</td>
+    </tr>
+  </tbody>
+</table>

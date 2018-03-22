@@ -14,5 +14,62 @@
 
 	<name>spring-boot-angular-template-frontend</name>
 	<description>Frontend with Angular</description>
-	
+
+	<properties>
+		<eirslett.version>1.6</eirslett.version>
+		<npm.node.version>v8.9.0</npm.node.version>
+		<npm.version>5.5.1</npm.version>
+	</properties>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>target/frontend</directory>
+				<targetPath>static</targetPath>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>${eirslett.version}</version>
+
+				<configuration>
+					<nodeVersion>${npm.node.version}</nodeVersion>
+					<npmVersion>${npm.version}</npmVersion>
+					<nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
+					<npmDownloadRoot>http://registry.npmjs.org/npm/-/</npmDownloadRoot>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>install-node-and-npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>npm-install-no-optional</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>install --no-optional</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>npm-run-build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
