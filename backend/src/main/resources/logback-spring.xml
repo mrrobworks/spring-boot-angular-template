@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include
+		resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+	<!-- =============================== -->
+	<!-- = Appender for Console-Output = -->
+	<!-- =============================== -->
+	<appender name="consoleAppender"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+	</appender>
+
+
+	<!-- =================================== -->
+	<!-- = Appender for File-Output (INFO) = -->
+	<!-- =================================== -->
+	<appender name="fileAppenderInfo"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<prudent>true</prudent>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>log/springbootangular-backend.%d{yyyy-MM-dd}.info.log
+			</fileNamePattern>
+			<maxHistory>60</maxHistory>
+			<totalSizeCap>20GB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+	<!-- ==================================== -->
+	<!-- = Appender for File-Output (ERROR) = -->
+	<!-- ==================================== -->
+	<appender name="fileAppenderError"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<prudent>true</prudent>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>log/springbootangular-backend.%d{yyyy-MM-dd}.error.log
+			</fileNamePattern>
+			<maxHistory>60</maxHistory>
+			<totalSizeCap>20GB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+	<!-- ==================================== -->
+	<!-- = Appender for File-Output (DEBUG) = -->
+	<!-- ==================================== -->
+	<appender name="fileAppenderDebug"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>true</append>
+		<prudent>true</prudent>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>log/springbootangular-backend.%d{yyyy-MM-dd}.debug.log
+			</fileNamePattern>
+			<maxHistory>60</maxHistory>
+			<totalSizeCap>20GB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+	<root>
+		<level value="DEBUG" />
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="fileAppenderInfo" />
+		<appender-ref ref="fileAppenderError" />
+		<appender-ref ref="fileAppenderDebug" />
+	</root>
+</configuration>
