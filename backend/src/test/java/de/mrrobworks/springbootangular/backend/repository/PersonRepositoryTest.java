@@ -2,7 +2,6 @@ package de.mrrobworks.springbootangular.backend.repository;
 
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,6 @@ public class PersonRepositoryTest extends EnableDatabaseManager implements DbUni
     Assertions.assertEquals(3, persons.size());
   }
 
-  @Disabled
   @Test
   @ExpectedDatabase(value = "/dbunit-db/expected/expected-person.xml",
       assertionMode = DatabaseAssertionMode.NON_STRICT)
