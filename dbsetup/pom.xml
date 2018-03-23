@@ -13,7 +13,7 @@
 	<artifactId>spring-boot-angular-template-dbsetup</artifactId>
 	<packaging>jar</packaging>
 
-	<name>spring-boot-angular-template-frontend</name>
+	<name>spring-boot-angular-template-dbsetup</name>
 	<description>DB-Setup with Liquibase</description>
 
 	<dependencies>

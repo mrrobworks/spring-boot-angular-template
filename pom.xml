@@ -28,6 +28,5 @@
 		<module>frontend</module>
 		<module>backend</module>
 		<module>dbsetup</module>
-		<module>webapp</module>
 	</modules>
 </project>
