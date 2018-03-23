@@ -21,6 +21,8 @@
 		<junit.platform.runner.version>1.1.0</junit.platform.runner.version>
 		<dbunit.spring.version>1.2.0</dbunit.spring.version>
 		<dbunit.version>2.5.4</dbunit.version>
+		<maven.surefire.version>2.19.1</maven.surefire.version>
+		<maven.surefire.provider>1.1.0</maven.surefire.provider>
 	</properties>
 
 	<dependencies>
@@ -156,6 +158,17 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.version}</version><!--$NO-MVN-MAN-VER$ -->
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<version>${maven.surefire.provider}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
