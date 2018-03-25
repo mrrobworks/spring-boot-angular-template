@@ -10,6 +10,11 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 
+/**
+ * Interface which need to be implemented from a Test-class which uses at least one DbUnit-Test.
+ * 
+ * @author robert
+ */
 @ExtendWith(SpringExtension.class)
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
     DirtiesContextTestExecutionListener.class, TransactionalTestExecutionListener.class,

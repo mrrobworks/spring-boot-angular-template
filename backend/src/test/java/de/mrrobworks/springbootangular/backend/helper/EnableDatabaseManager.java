@@ -7,6 +7,11 @@ import org.hsqldb.util.DatabaseManagerSwing;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * A Test-Class which inherit this class get access to the Hsqldb-DatabaseManger in debug-Mode.
+ * 
+ * @author robert
+ */
 public abstract class EnableDatabaseManager {
 
   @Autowired

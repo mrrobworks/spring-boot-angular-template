@@ -7,6 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entity-Class for a Person.
+ *  
+ * @author robert
+ */
 @Data
 @Entity
 @NoArgsConstructor

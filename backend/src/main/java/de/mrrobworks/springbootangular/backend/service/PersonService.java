@@ -4,8 +4,13 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import de.mrrobworks.springbootangular.backend.domain.Person;
 
+/**
+ * Service-Interface for Persons.
+ * 
+ * @author robert
+ */
 @Service
 public interface PersonService {
-  
-  public List<Person> findAllPersons(); 
+
+  public List<Person> findAllPersons();
 }

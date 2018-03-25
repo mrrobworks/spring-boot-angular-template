@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import de.mrrobworks.springbootangular.backend.domain.Person;
 import de.mrrobworks.springbootangular.backend.service.PersonService;
 
+/**
+ * REST-Controller for {@link PersonService}.
+ * 
+ * @author robert
+ */
 @RestController
 @RequestMapping("/springbootangular")
 public class PersonController implements CorsConfiguration {

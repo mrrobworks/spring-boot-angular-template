@@ -12,6 +12,12 @@ import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.database.QueryDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
+/**
+ * Helper Class to create Test-XML-Files for DbUnit-Tests. Hint: Not in Spring-Boot-Context, just a
+ * Helper.
+ *
+ * @author robert
+ */
 class DatabaseExportForDbUnit {
 
   private Connection con;

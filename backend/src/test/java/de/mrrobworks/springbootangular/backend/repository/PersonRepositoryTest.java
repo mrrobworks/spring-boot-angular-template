@@ -15,6 +15,11 @@ import de.mrrobworks.springbootangular.backend.domain.Person;
 import de.mrrobworks.springbootangular.backend.helper.DbUnitTestCase;
 import de.mrrobworks.springbootangular.backend.helper.EnableDatabaseManager;
 
+/**
+ * Test-Class for Persons.
+ *  
+ * @author robert
+ */
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 public class PersonRepositoryTest extends EnableDatabaseManager implements DbUnitTestCase {
