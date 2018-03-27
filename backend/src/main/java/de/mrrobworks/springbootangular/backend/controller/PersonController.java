@@ -1,5 +1,6 @@
 package de.mrrobworks.springbootangular.backend.controller;
 
+import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,11 @@ public class PersonController implements CorsConfiguration {
 
   @Autowired
   private PersonService service;
+
+  @RequestMapping("/user")
+  public Principal user(Principal user) {
+    return user;
+  }
 
   @RequestMapping(value = "/findallpersons", method = RequestMethod.GET)
   public List<Person> findAllPersons() {

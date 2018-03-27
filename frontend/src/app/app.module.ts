@@ -6,14 +6,22 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PersonListComponent } from './person-list/person-list.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
-import { PersonListService } from './person-list.service';
+import { PersonListService } from './person-list/person-list.service';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { AppService } from './app.service';
 
 @NgModule({
-  declarations: [AppComponent, PersonListComponent],
+  declarations: [
+    AppComponent,
+    PersonListComponent,
+    HomeComponent,
+    LoginComponent
+  ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [PersonListService],
+  providers: [PersonListService, AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

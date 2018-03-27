@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonListService} from '../person-list.service';
+import { PersonListService} from './person-list.service';
 import { Observable } from 'rxjs/Observable';
 import { Person } from '../domain/person';
 
