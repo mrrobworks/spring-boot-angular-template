@@ -1,20 +1,18 @@
-<p>
-  person-list works!
-</p>
-
+<div class="container">
 <p>Personen count: {{ persons.length }}</p>
 
-<table class="table-dark">
-  <thead>
-    <th>ID</th>
-    <th>Firstname</th>
-    <th>Lastname</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let person of persons">
-      <td>{{person.id}}</td>
-      <td>{{person.firstname}}</td>
-      <td>{{person.lastname}}</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-hover table-striped">
+    <thead class="thead-dark">
+      <th>ID</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of persons">
+        <td>{{person.id}}</td>
+        <td>{{person.firstname}}</td>
+        <td>{{person.lastname}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
