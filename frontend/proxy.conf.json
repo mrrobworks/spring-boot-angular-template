@@ -1,6 +1,22 @@
 {
-  "/springbootangular": {
+  "/login": {
     "target": "http://localhost:8081",
-    "secure": false
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": false
+  },
+
+  "/backend/*": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": false
+  },
+
+  "/logout": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": false
   }
 }

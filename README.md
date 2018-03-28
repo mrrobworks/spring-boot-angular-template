@@ -6,3 +6,5 @@ https://spring.io/guides/tutorials/spring-security-and-angular-js/
 * Microservices from this Projekt for creating github-repositories
 * User-Roles access on custom sites / elements
 * Angular / CSS / Bootstrap
+
+* npm install bootstrap --save

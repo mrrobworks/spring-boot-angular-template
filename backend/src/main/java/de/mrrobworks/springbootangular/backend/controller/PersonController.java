@@ -15,7 +15,7 @@ import de.mrrobworks.springbootangular.backend.service.PersonService;
  * @author robert
  */
 @RestController
-@RequestMapping("/springbootangular")
+@RequestMapping("/backend/person")
 public class PersonController implements CorsConfiguration {
 
   @Autowired

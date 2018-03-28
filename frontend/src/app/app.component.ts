@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { AppService } from './app.service';
 import 'rxjs/add/operator/finally';
 
 @Component({
@@ -11,7 +9,7 @@ import 'rxjs/add/operator/finally';
 })
 export class AppComponent {
 
-  title = 'Demo';
+  title = 'Spring Boot 2 + Angular 5 Template';
   authenticated = false;
   greeting = {};
 
@@ -20,8 +18,7 @@ export class AppComponent {
   }
 
   authenticate() {
-
-    this.http.get('springbootangular/user').subscribe(response => {
+    this.http.get('/backend/person/user').subscribe(response => {
       if (response['name']) {
         this.authenticated = true;
         this.http.get('resource').subscribe(data => this.greeting = data);
@@ -31,6 +28,7 @@ export class AppComponent {
     }, () => { this.authenticated = false; });
 
   }
+
   logout() {
     this.http.post('logout', {}).finally(() => {
       this.authenticated = false;

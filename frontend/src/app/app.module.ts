@@ -10,15 +10,13 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { PersonListService } from './person-list/person-list.service';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     PersonListComponent,
-    HomeComponent,
-    LoginComponent
+    HomeComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [PersonListService, AppService],
