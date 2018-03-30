@@ -1,28 +1,24 @@
 package de.mrrobworks.springbootangular.backend.configuration;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @EnableOAuth2Client
 @EnableWebSecurity
-public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
+public class OAuthSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Autowired
   private OAuth2ClientContext oauth2ClientContext;
@@ -33,19 +29,29 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   private ResourceServerProperties resourceServerProperties;
 
+  @Autowired
+  private GooglePrincipalExtractor googlePrincipalExtractor;
+
+  @Autowired
+  private GoogleAuthoritiesExtractor googleAuthoritiesExtractor;
+
   @Override
   public void configure(HttpSecurity http) throws Exception {
 
+    log.info("#######################configure HttpSecurity http");
     // @formatter:off
     http
-      .logout().logoutSuccessUrl("/")
+      .logout()
+      .logoutSuccessUrl("/")
       .and()
       
       .authorizeRequests()
-      .antMatchers("/index.html", "/", "/**.html", "/**.js").permitAll()
-      .anyRequest().authenticated()
+      .antMatchers("/index.html", "/", "/**.html", "/**.js")
+      .permitAll()
+      .anyRequest()
+      .authenticated()
       .and()
-          
+      
       .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
       .csrf()
       .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
@@ -57,13 +63,7 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
     final OAuth2ClientAuthenticationProcessingFilter oAuth2Filter =
         new OAuth2ClientAuthenticationProcessingFilter("/login");
 
-    oAuth2Filter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler() {
-      public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-          Authentication authentication) throws IOException, ServletException {
-        this.setDefaultTargetUrl("/");
-        super.onAuthenticationSuccess(request, response, authentication);
-      }
-    });
+    oAuth2Filter.setAuthenticationSuccessHandler(new GoogleAuthenticationSuccessHandler());
 
     final OAuth2RestTemplate oAuth2RestTemplate =
         new OAuth2RestTemplate(authorizationCodeResourceDetails, oauth2ClientContext);
@@ -73,6 +73,9 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
     final UserInfoTokenServices tokenServices = new UserInfoTokenServices(
         resourceServerProperties.getUserInfoUri(), resourceServerProperties.getClientId());
     tokenServices.setRestTemplate(oAuth2RestTemplate);
+    tokenServices.setPrincipalExtractor(googlePrincipalExtractor);
+    tokenServices.setAuthoritiesExtractor(googleAuthoritiesExtractor);
+    
     oAuth2Filter.setTokenServices(tokenServices);
 
     return oAuth2Filter;
