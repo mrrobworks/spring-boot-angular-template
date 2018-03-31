@@ -1,8 +1,10 @@
 package de.mrrobworks.springbootangular.backend.configuration;
 
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,6 +18,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Configuration
 @EnableOAuth2Client
 @EnableWebSecurity
 public class OAuthSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -35,6 +38,7 @@ public class OAuthSecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Autowired
   private GoogleAuthoritiesExtractor googleAuthoritiesExtractor;
 
+  @Transactional
   @Override
   public void configure(HttpSecurity http) throws Exception {
 
@@ -42,6 +46,7 @@ public class OAuthSecurityConfiguration extends WebSecurityConfigurerAdapter {
     // @formatter:off
     http
       .logout()
+//      .logoutUrl("/logout")
       .logoutSuccessUrl("/")
       .and()
       

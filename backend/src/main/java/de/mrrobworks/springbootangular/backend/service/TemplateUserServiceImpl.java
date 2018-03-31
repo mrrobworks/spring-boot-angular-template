@@ -11,7 +11,7 @@ import de.mrrobworks.springbootangular.backend.repository.TemplateUserRepository
 public class TemplateUserServiceImpl implements TemplateUserService {
 
   @Autowired
-  private TemplateUserRepository temlateUserRepository;
+  private TemplateUserRepository templateUserRepository;
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -21,7 +21,7 @@ public class TemplateUserServiceImpl implements TemplateUserService {
 
   @Override
   public TemplateUser getByGoogleId(String id) {
-    // TODO Auto-generated method stub
-    return null;
+    final TemplateUser templateUser = templateUserRepository.findById(id).get();
+    return templateUser;
   }
 }
