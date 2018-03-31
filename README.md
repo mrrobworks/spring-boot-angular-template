@@ -32,3 +32,17 @@ there.
 Custom User Google Account, so no registration in the application is
 required.
 - The Role-Management is handled by the backend-frontend + backend-db.
+
+Jpa-Entities for User-Role-Management
+-------------------------------------
+* Many-to-Many Association between User-Role
+
+* @JsonManagedReference <-> @JsonBackReference important for displaying
+user-data in json, so frontend can access to user-data such as the
+google-id (sub) and the associated roles.
+
+* Authentication success with GoogleId + Password,
+so no registration in spring-boot-angular-template-application is
+required
+
+* User-Role-Management in Backend-Database

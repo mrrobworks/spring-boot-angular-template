@@ -2,7 +2,6 @@ package de.mrrobworks.springbootangular.backend.repository;
 
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,6 @@ import de.mrrobworks.springbootangular.backend.helper.EnableDatabaseManager;
  * 
  * @author robert
  */
-@Disabled
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 public class PersonRepositoryTest extends EnableDatabaseManager implements DbUnitTestCase {
@@ -40,6 +38,7 @@ public class PersonRepositoryTest extends EnableDatabaseManager implements DbUni
   @ExpectedDatabase(value = "/dbunit-db/expected/expected-person.xml",
       assertionMode = DatabaseAssertionMode.NON_STRICT)
   void testSavePerson() throws Exception {
-    cut.save(Person.builder().id(1L).firstname("firstname4").lastname("lastname4").build());
+    cut.save(
+        Person.builder().id(1L).firstname("personFirstname4").lastname("personLastname4").build());
   }
 }

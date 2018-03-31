@@ -1,0 +1,24 @@
+CREATE MEMORY TABLE person(
+	id INTEGER NOT NULL,
+	firstname VARCHAR(25),
+	lastname VARCHAR(25),
+	CONSTRAINT pk_person PRIMARY KEY (id)
+);
+
+CREATE MEMORY TABLE template_user(
+	id VARCHAR(100) NOT NULL,
+	CONSTRAINT pk_user PRIMARY KEY (id)
+);
+
+CREATE MEMORY TABLE template_role(
+	id VARCHAR(50) NOT NULL,
+	description VARCHAR(250),
+	CONSTRAINT pk_role PRIMARY KEY (id)
+);
+
+CREATE MEMORY TABLE template_user_role(
+	user_id VARCHAR(100) NOT NULL,
+	role_id VARCHAR(50) NOT NULL,
+	CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES template_user(id),
+	CONSTRAINT fk_role_id FOREIGN KEY (role_id) REFERENCES template_user(id)
+);
