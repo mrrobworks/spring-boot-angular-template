@@ -25,7 +25,7 @@ public class TemplateUser {
   private String id;
 
   // TODO: Fetch.EAGER replace with @EntityGraph
-  @ManyToMany (fetch=FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.EAGER)
   @JsonManagedReference
   @JoinTable(name = "template_user_role",
       joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

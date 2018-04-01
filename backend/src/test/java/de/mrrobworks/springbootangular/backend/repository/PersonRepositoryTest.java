@@ -35,10 +35,11 @@ public class PersonRepositoryTest extends EnableDatabaseManager implements DbUni
   }
 
   @Test
+  @DatabaseSetup(value = "/dbunit-db/setup/setup-person.xml", type = DatabaseOperation.CLEAN_INSERT)
   @ExpectedDatabase(value = "/dbunit-db/expected/expected-person.xml",
       assertionMode = DatabaseAssertionMode.NON_STRICT)
   void testSavePerson() throws Exception {
     cut.save(
-        Person.builder().id(1L).firstname("personFirstname4").lastname("personLastname4").build());
+        Person.builder().id(4L).firstname("personFirstname4").lastname("personLastname4").build());
   }
 }
