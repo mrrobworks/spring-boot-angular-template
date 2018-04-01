@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Component} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/finally';
+import {TemplateUser} from './domain/template-user';
 
 @Component({
   selector: 'app-root',
@@ -12,21 +13,25 @@ export class AppComponent {
   title = 'Spring Boot 2 + Angular 5 Template';
   authenticated = false;
   greeting = {};
+  templateUser: TemplateUser;
 
   constructor(private http: HttpClient) {
     this.authenticate();
   }
 
   authenticate() {
-    this.http.get('/backend/person/user').subscribe(response => {
-      if (response['name']) {
+    this.http.get<TemplateUser>('/backend/user/info').subscribe(response => {
+      this.templateUser = response;
+      // if (response['name']) {
+      if (response['id']) {
         this.authenticated = true;
         this.http.get('resource').subscribe(data => this.greeting = data);
       } else {
         this.authenticated = false;
       }
-    }, () => { this.authenticated = false; });
-
+    }, () => {
+      this.authenticated = false;
+    });
   }
 
   logout() {

@@ -9,5 +9,4 @@ import de.mrrobworks.springbootangular.backend.domain.Person;
  * @author robert
  */
 public interface PersonRepository extends JpaRepository<Person, Long> {
-
 }

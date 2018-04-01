@@ -17,6 +17,7 @@
 
 <div class="container" [hidden]="!authenticated">
   <p>Login Successful</p>
+  <p>ID: {{templateUser.id}}</p>
 
   <button type="button" class="btn btn-danger" (click)="logout()">
     <i class="material-icons">eject</i>

@@ -18,8 +18,8 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(of = "id") // End Lombok
 @Entity
-@Table(name = "template_user") // End JPA
-public class TemplateUser {
+@Table(name = "app_user") // End JPA
+public class AppUser {
 
   @Id
   private String id;
@@ -27,8 +27,8 @@ public class TemplateUser {
   // TODO: Fetch.EAGER replace with @EntityGraph
   @ManyToMany(fetch = FetchType.EAGER)
   @JsonManagedReference
-  @JoinTable(name = "template_user_role",
+  @JoinTable(name = "app_user_role",
       joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-  private List<TemplateRole> roles = new ArrayList<>();
+  private List<AppRole> roles = new ArrayList<>();
 }

@@ -12,15 +12,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id") // End Lombok
 @Entity
-@Table(name = "template_role") // End JPA
+@Table(name = "app_role") // End JPA
 @SuppressWarnings("serial")
-public class TemplateRole implements GrantedAuthority {
+public class AppRole implements GrantedAuthority {
 
   @Id
   private String id;
@@ -29,7 +28,7 @@ public class TemplateRole implements GrantedAuthority {
   // TODO: Fetch.EAGER replace with @EntityGraph
   @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
   @JsonBackReference
-  private List<TemplateUser> users = new ArrayList<TemplateUser>();
+  private List<AppUser> users = new ArrayList<AppUser>();
 
   @Override
   public String getAuthority() {
