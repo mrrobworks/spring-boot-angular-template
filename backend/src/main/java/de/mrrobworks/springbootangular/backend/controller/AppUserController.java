@@ -7,7 +7,7 @@ import de.mrrobworks.springbootangular.backend.domain.AppUser;
 
 @RestController
 @RequestMapping("/backend/user")
-public class AppUserController {
+public class AppUserController implements CorsConfiguration  {
 
   @RequestMapping("/info")
   public AppUser user(@AuthenticationPrincipal AppUser user) {
