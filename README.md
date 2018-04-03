@@ -4,13 +4,13 @@ Template for a new Web-Project with OAuth 2.0 User Authentication (Google, Githu
 
 Technology-Stack:
 -----------------
-* Spring-Boot 2 (Spring AOP, Spring Web, Spring Data JPA, Spring Security)
-* Angular 5 (TypeScript, HTML, CSS)
-* OAuth 2.0 Authentication
-* [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)**
+* :leaves: Spring-Boot 2 (Spring AOP, Spring Web, Spring Data JPA, Spring Security)
+* :triangular_ruler: Angular 5 (TypeScript, HTML, CSS)
+* :lock: OAuth 2.0 Authentication
+* :coffee: [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)**
 * [Maven](https://maven.apache.org/download.cgi)**
 * Lombok
-* Liquibase
+* :droplet: Liquibase
 * [MariaDB](https://mariadb.org/download/)**
 * JUnit 5
 * DBUnit 1.3 with HSQLDB
