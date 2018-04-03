@@ -4,7 +4,7 @@ Template for a new Web-Project with OAuth 2.0 User Authentication (Google, Githu
 
 Technology-Stack:
 -----------------
-* Spring-Boot 2 (aop, web, data-jpa, security)
+* Spring-Boot 2 (Spring AOP, Spring Web, Spring Data JPA, Spring Security)
 * Angular 5 (TypeScript, HTML, CSS)
 * OAuth 2.0 Authentication
 * [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)**
@@ -14,6 +14,7 @@ Technology-Stack:
 * [MariaDB](https://mariadb.org/download/)**
 * JUnit 5
 * DBUnit 1.3 with HSQLDB
+* Logback (logback-spring.xml)
 
 ** Need to be installed on the Operating System
 
@@ -25,30 +26,30 @@ Modules
 
 Installation-Instructions
 -------------------------
-In the Command-Line (>) type:
+In the Command-Line ($) type:
 
-```
-> git clone https://github.com/mrrobworks/spring-boot-angular-template.git
-> mysql -uroot -p<PASSWORD>
-	> create database spring_boot_angular_db;
-	> quit;
-> cd spring-boot-angular-template
-> mvn clean install
-> cd dbsetup/target
+```bash
+$ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
+$ mysql -uroot -p<PASSWORD>
+	$ create database spring_boot_angular_db;
+	$ quit;
+$ cd spring-boot-angular-template
+$ mvn clean install
+$ cd dbsetup/target
 ```
 
 * Unzip the file `spring-boot-angular-template-dbsetup-0.0.1-SNAPSHOT-install.zip` and go to the unzipped directory
 * Edit the file `application-external.properties` with your custom values:
 
-```
-	spring.datasource.username=<ROOT>
-	spring.datasource.password=<PASSWORD>
+```properties
+spring.datasource.username=<ROOT>
+spring.datasource.password=<PASSWORD>
 ```
 
 * Start the DB-Setup with
 
-```
-> sh DBSETUP-spring-boot-angular-template.sh
+```bash
+$ sh DBSETUP-spring-boot-angular-template.sh
 ```
 
 Now the registration of the spring-boot-angular-template in Google:
@@ -64,14 +65,14 @@ Now the registration of the spring-boot-angular-template in Google:
 
 * Go to the backen/target Folder
 
-```
-> cd ../../backend/target
+```bash
+$ cd ../../backend/target
 ```
 
 * Unzip the file `spring-boot-angular-template-backend-0.0.1-SNAPSHOT-install.zip` and go to the unzipped directory
 * Edit the file `application-external.properties` with your custom values:
 
-```
+```properties
 spring.datasource.username=root
 spring.datasource.password=<PASSWORD>
 security.oauth2.client.client-id=<CLIENTID> 
@@ -80,8 +81,8 @@ security.oauth2.client.client-secret=<CLIENTSECRET>
 
 * Start the Web-Application with
 
-```
-> sh WEBAPP-spring-boot-angular-template.sh
+```bash
+$ sh WEBAPP-spring-boot-angular-template.sh
 ```
 
 * Open your Browser on `http://localhost:8081`
@@ -100,9 +101,9 @@ standard-role (ROLE_USER).
 
 * If access is granted by Google, than the Google-User-Id (sub,
 principalid) get stored into the backend-db with a
-JPA-TemplateUser-Object
+JPA-AppUser-Object
 
-* TemplateUser-Object get Roles from the backend-db and can be added
+* AppUser-Object get Roles from the backend-db and can be added
 there.
 
 * Summary:
@@ -111,22 +112,8 @@ Custom User Google Account, so no registration in the application is
 required.
 - The Role-Management is handled by the backend-frontend + backend-db.
 
-Jpa-Entities for User-Role-Management
--------------------------------------
-* Many-to-Many Association between User-Role
-
-* @JsonManagedReference <-> @JsonBackReference important for displaying
-user-data in json, so frontend can access to user-data such as the
-google-id (sub) and the associated roles.
-
-* Authentication success with GoogleId + Password,
-so no registration in spring-boot-angular-template-application is
-required
-
-* User-Role-Management in Backend-Database
-
-TODO
-----
+TODOs
+-----
 - [ ] Microservices from this Projekt for creating github-repositories
 - [ ] User-Roles Access on custom sites / elements
 - [ ] Angular / CSS / Bootstrap
