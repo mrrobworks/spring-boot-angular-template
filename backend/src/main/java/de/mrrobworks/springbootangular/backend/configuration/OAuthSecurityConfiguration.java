@@ -1,6 +1,8 @@
 package de.mrrobworks.springbootangular.backend.configuration;
 
 import javax.transaction.Transactional;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
@@ -19,25 +21,26 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @EnableOAuth2Client
 @EnableWebSecurity
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class OAuthSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  private OAuth2ClientContext oauth2ClientContext;
+  @NonNull
+  private final OAuth2ClientContext oauth2ClientContext;
 
-  @Autowired
-  private AuthorizationCodeResourceDetails authorizationCodeResourceDetails;
+  @NonNull
+  private final AuthorizationCodeResourceDetails authorizationCodeResourceDetails;
 
-  @Autowired
-  private ResourceServerProperties resourceServerProperties;
+  @NonNull
+  private final ResourceServerProperties resourceServerProperties;
 
-  @Autowired
-  private GooglePrincipalExtractor googlePrincipalExtractor;
+  @NonNull
+  private final GooglePrincipalExtractor googlePrincipalExtractor;
 
-  @Autowired
-  private GoogleAuthoritiesExtractor googleAuthoritiesExtractor;
+  @NonNull
+  private final GoogleAuthoritiesExtractor googleAuthoritiesExtractor;
 
-  @Autowired
-  private GoogleAuthenticationSuccessHandler googleAuthenticationSuccessHandler;
+  @NonNull
+  private final GoogleAuthenticationSuccessHandler googleAuthenticationSuccessHandler;
 
   @Override
   @Transactional

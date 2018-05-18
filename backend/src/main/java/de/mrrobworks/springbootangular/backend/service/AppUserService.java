@@ -5,7 +5,7 @@ import de.mrrobworks.springbootangular.backend.domain.AppUser;
 
 public interface AppUserService {
 
-  public Optional<AppUser> getByGoogleId(String id);
+  Optional<AppUser> getByGoogleId(String id);
   
-  public void createAppUser(final AppUser appUser);
+  void createAppUser(final AppUser appUser);
 }

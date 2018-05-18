@@ -1,6 +1,8 @@
 package de.mrrobworks.springbootangular.backend.controller;
 
 import java.util.List;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,9 +21,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/backend/person")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController implements CorsConfiguration {
 
-  @Autowired
+  @NonNull
   private PersonService service;
 
   @RequestMapping(value = "/findallpersons", method = RequestMethod.GET)

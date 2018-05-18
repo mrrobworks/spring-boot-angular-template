@@ -28,7 +28,7 @@ public class AppRole implements GrantedAuthority {
   // TODO: Fetch.EAGER replace with @EntityGraph
   @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
   @JsonBackReference
-  private List<AppUser> users = new ArrayList<AppUser>();
+  private List<AppUser> users = new ArrayList<>();
 
   @Override
   public String getAuthority() {

@@ -6,5 +6,5 @@ import de.mrrobworks.springbootangular.backend.domain.AppRole;
 
 public interface AppRoleService {
 
-  public Map<GrantedAuthority, AppRole> getAppRoles();
+  Map<GrantedAuthority, AppRole> getAppRoles();
 }

@@ -1,5 +1,7 @@
 package de.mrrobworks.springbootangular.backend.configuration;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
@@ -25,14 +27,15 @@ import lombok.Getter;
  */
 @Getter
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DbProvider {
 
-  @Autowired
+  @NonNull
   private PersonRepository personRepository;
 
-  @Autowired
+  @NonNull
   private AppUserRepository appUserRepository;
 
-  @Autowired
+  @NonNull
   private AppRoleRepository appRoleRepository;
 }

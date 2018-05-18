@@ -3,6 +3,8 @@ package de.mrrobworks.springbootangular.backend.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,9 +13,10 @@ import de.mrrobworks.springbootangular.backend.domain.AppRole;
 import de.mrrobworks.springbootangular.backend.repository.AppRoleRepository;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AppRoleServiceImpl implements AppRoleService {
 
-  @Autowired
+  @NonNull
   private AppRoleRepository appRoleRepository;
 
   @Override

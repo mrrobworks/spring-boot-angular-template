@@ -22,14 +22,14 @@ import de.mrrobworks.springbootangular.backend.helper.EnableDatabaseManager;
  */
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-public class PersonRepositoryTest extends EnableDatabaseManager implements DbUnitTestCase {
+class PersonRepositoryTest extends EnableDatabaseManager implements DbUnitTestCase {
 
   @Autowired
   private PersonRepository cut;
 
   @Test
   @DatabaseSetup(value = "/dbunit-db/setup/setup-person.xml", type = DatabaseOperation.CLEAN_INSERT)
-  void testFindPersons() throws Exception {
+  void testFindPersons() {
     final List<Person> persons = cut.findAll();
     Assertions.assertEquals(3, persons.size());
   }
@@ -38,7 +38,7 @@ public class PersonRepositoryTest extends EnableDatabaseManager implements DbUni
   @DatabaseSetup(value = "/dbunit-db/setup/setup-person.xml", type = DatabaseOperation.CLEAN_INSERT)
   @ExpectedDatabase(value = "/dbunit-db/expected/expected-person.xml",
       assertionMode = DatabaseAssertionMode.NON_STRICT)
-  void testSavePerson() throws Exception {
+  void testSavePerson() {
     cut.save(
         Person.builder().id(4L).firstname("personFirstname4").lastname("personLastname4").build());
   }

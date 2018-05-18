@@ -12,5 +12,5 @@ import de.mrrobworks.springbootangular.backend.domain.Person;
 @Service
 public interface PersonService {
 
-  public List<Person> findAllPersons();
+  List<Person> findAllPersons();
 }
