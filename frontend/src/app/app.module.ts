@@ -9,8 +9,8 @@ import {PersonListComponent} from './person-list/person-list.component';
 import {AppRoutingModule} from './app-routing.module';
 
 import {PersonListService} from './services/person-list.service';
-import {AppService} from './services/app.service';
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
+import {LoginService} from "./services/login.service";
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { LoginComponent } from './login/login.component';
     LoginComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [PersonListService, AppService],
+  providers: [PersonListService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
