@@ -6,34 +6,13 @@
   <!--<img src="../assets/images/tcb-logo.svg" alt="tcb logo" width="400" height="300" >-->
 </div>
 
-<div class="container" [hidden]="authenticated">
-  <p>Login to access Data</p>
+<app-login (authenticated)="authenticated($event)"></app-login>
 
-  <a href="/login" class="btn btn-success">
-    <i class="material-icons">done</i>
-    Login
-  </a>
-</div>
-
-<div class="container" [hidden]="!authenticated">
-  <p>Login Successful</p>
-  <p>ID: {{templateUser.id}}</p>
-
-  <button type="button" class="btn btn-danger" (click)="logout()">
-    <i class="material-icons">eject</i>
-    Logout
-  </button>
-</div>
-
-<div class="container">
-  <span class="d-block p-2 bg-secondary text-white"></span>
-</div>
-
-<div class="container">
+<div *ngIf="auth" class="container">
   <nav class="nav nav-tabs">
     <a class="nav-link active" routerLink="/personlist">Personenliste</a>
     <a class="nav-link" href="#">Administration</a>
   </nav>
 </div>
 
-<router-outlet></router-outlet>
+<router-outlet *ngIf="auth"></router-outlet>

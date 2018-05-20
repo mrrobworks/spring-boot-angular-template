@@ -1,0 +1,22 @@
+<div class="container" *ngIf="!auth">
+  <p>Login to access Data</p>
+
+  <a href="/login" class="btn btn-success">
+    <i class="material-icons">done</i>
+    Login
+  </a>
+</div>
+
+<div class="container" *ngIf="auth">
+  <p>Login Successful</p>
+  <p>ID: {{templateUser?.id}}</p>
+
+  <button type="button" class="btn btn-danger" (click)="logout()">
+    <i class="material-icons">eject</i>
+    Logout
+  </button>
+</div>
+
+<div class="container">
+  <span class="d-block p-2 bg-secondary text-white"></span>
+</div>

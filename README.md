@@ -119,4 +119,4 @@ TODOs
 - [ ] Angular / CSS / Bootstrap
 - [ ] Profile in OAuthSecurityConfiguration (Google, Github)
 - [ ] User-Role-assignment through webapplication
-
+- [ ] Save LoggedIn User to Session

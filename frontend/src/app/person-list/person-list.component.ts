@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { PersonListService} from './person-list.service';
-import { Observable } from 'rxjs/Observable';
-import { Person } from '../domain/person';
+import {Component, OnInit} from '@angular/core';
+import {PersonListService} from '../services/person-list.service';
+import {Observable} from 'rxjs/Observable';
+import {Person} from '../models/person';
 
 @Component({
   selector: 'app-person-list',
-  templateUrl: './person-list.component.html',
-  styleUrls: ['./person-list.component.css']
+  templateUrl: './person-list.component.html'
 })
 export class PersonListComponent implements OnInit {
 
-  constructor(private personListService: PersonListService) { }
+  constructor(private personListService: PersonListService) {
+  }
 
   ngOnInit() {
     this.personListService.load();
