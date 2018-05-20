@@ -120,3 +120,4 @@ TODOs
 - [ ] Profile in OAuthSecurityConfiguration (Google, Github)
 - [ ] User-Role-assignment through webapplication
 - [ ] Save LoggedIn User to Session
+- [ ] Changing Bootstrap-CSS to Semantic-UI
