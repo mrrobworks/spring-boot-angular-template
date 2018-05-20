@@ -24,6 +24,6 @@ export class PersonListService {
   findAllPersons(): Observable<Person[]> {
     const url = '/backend/person/findallpersons';
     const headers = new HttpHeaders().set('Accept', 'application/json');
-    return this.http.get<Person[]>(url, {headers});
+    return this.http.get<Person[]>(url, { headers });
   }
 }

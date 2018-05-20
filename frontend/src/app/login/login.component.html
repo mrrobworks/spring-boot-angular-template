@@ -10,6 +10,10 @@
 <div class="container" *ngIf="auth">
   <p>Login Successful</p>
   <p>ID: {{templateUser?.id}}</p>
+  <ul *ngFor="let role of templateUser.roles">
+    <li>Role-Description: {{role.description}}</li>
+    <li>Role-Authority: {{role.authority}}</li>
+  </ul>
 
   <button type="button" class="btn btn-danger" (click)="logout()">
     <i class="material-icons">eject</i>
