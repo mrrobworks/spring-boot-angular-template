@@ -4,6 +4,7 @@ import 'rxjs/add/operator/finally';
 import { Output } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { TemplateUserFactory } from '../models/template-user-factory';
+import { AuthorizationService } from '../services/authorization.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private authService: AuthorizationService
   ) {}
 
   ngOnInit() {
@@ -34,6 +36,10 @@ export class LoginComponent implements OnInit {
         templateUser => {
           this.templateUser = templateUser;
           this.auth = templateUser['id'] ? true : false;
+          if (this.auth) {
+            sessionStorage.setItem('currentUser', JSON.stringify(this.templateUser));
+            this.authService.initializePermissions();
+          }
         },
         () => {
           this.auth = false;

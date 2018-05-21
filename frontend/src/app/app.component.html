@@ -9,9 +9,11 @@
 <app-login (authenticated)="authenticated($event)"></app-login>
 
 <div *ngIf="auth" class="container">
+  <h3 [appHideIfUnauthorized]="'ROLE_ADMIN'">Adminstration enabled</h3>
+
   <nav class="nav nav-tabs">
     <a class="nav-link active" routerLink="/personlist">Personenliste</a>
-    <a class="nav-link" href="#">Administration</a>
+    <a [appHideIfUnauthorized]="'ROLE_ADMIN'" class="nav-link" href="#">Administration</a>
   </nav>
 </div>
 
