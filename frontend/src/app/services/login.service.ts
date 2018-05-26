@@ -15,13 +15,11 @@ export class LoginService {
       .get<TemplateUserRaw>('/backend/user/info')
       .pipe(
         retry(3),
-        map(rawTemplateUser =>
-            TemplateUserFactory.fromObject(rawTemplateUser)
-          )
-        );
-        //,
-        //catchError(this.errorHandler)
-      //);
+        map(rawTemplateUser => TemplateUserFactory.fromObject(rawTemplateUser))
+      );
+    //,
+    //catchError(this.errorHandler)
+    //);
   }
 
   logout(): Observable<any> {
