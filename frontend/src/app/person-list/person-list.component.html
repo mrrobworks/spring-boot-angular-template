@@ -5,13 +5,13 @@
 
   <table class="table table-hover table-striped">
     <thead class="thead-dark">
-      <th [appShowForPermission]="'ROLE_ADMIN'">ID</th>
+      <th [appShowIfPermission]="'ROLE_ADMIN'">ID</th>
       <th>Firstname</th>
       <th>Lastname</th>
     </thead>
     <tbody>
       <tr *ngFor="let person of persons">
-        <td [appShowForPermission]="'ROLE_ADMIN'">{{person.id}}</td>
+        <td [appShowIfPermission]="'ROLE_ADMIN'">{{person.id}}</td>
         <td>{{person.firstname}}</td>
         <td>{{person.lastname}}</td>
       </tr>

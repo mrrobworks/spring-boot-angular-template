@@ -3,10 +3,10 @@ import { AuthGroup } from '../models/authorization-types';
 import { AuthorizationService } from '../services/authorization.service';
 
 @Directive({
-  selector: '[appShowForPermission]'
+  selector: '[appEnableIfPermission]'
 })
-export class ShowForPermissionDirective implements OnInit {
-  @Input() appShowForPermission: AuthGroup;
+export class EnableIfPermissionDirective implements OnInit {
+  @Input() appEnableIfPermission: AuthGroup;
 
   constructor(
     private elementRef: ElementRef,
@@ -14,8 +14,8 @@ export class ShowForPermissionDirective implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (!this.authorizationService.hasPermission(this.appShowForPermission)) {
-      this.elementRef.nativeElement.style.display = 'none';
+    if (!this.authorizationService.hasPermission(this.appEnableIfPermission)) {
+      this.elementRef.nativeElement.disabled = true;
     }
   }
 }

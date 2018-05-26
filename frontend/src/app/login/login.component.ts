@@ -37,7 +37,10 @@ export class LoginComponent implements OnInit {
           this.templateUser = templateUser;
           this.auth = templateUser['id'] ? true : false;
           if (this.auth) {
-            sessionStorage.setItem('currentUser', JSON.stringify(this.templateUser));
+            sessionStorage.setItem(
+              'currentUser',
+              JSON.stringify(this.templateUser)
+            );
             this.authService.initializePermissions();
           }
         },
