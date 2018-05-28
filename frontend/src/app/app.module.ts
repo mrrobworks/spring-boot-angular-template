@@ -14,6 +14,8 @@ import { LoginService } from './services/login.service';
 import { EnableIfPermissionDirective } from './directives/enable-if-permission.directive';
 import { ShowIfPermissionDirective } from './directives/show-if-permission.directive';
 import { AuthorizationService } from './services/authorization.service';
+import { RoleListComponent } from './role-list/role-list.component';
+import {RoleService} from './services/role.service';
 
 @NgModule({
   declarations: [
@@ -21,10 +23,11 @@ import { AuthorizationService } from './services/authorization.service';
     PersonListComponent,
     LoginComponent,
     EnableIfPermissionDirective,
-    ShowIfPermissionDirective
+    ShowIfPermissionDirective,
+    RoleListComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [PersonListService, LoginService, AuthorizationService],
+  providers: [PersonListService, LoginService, AuthorizationService, RoleService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

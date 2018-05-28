@@ -20,12 +20,17 @@ public class AppRoleServiceImpl implements AppRoleService {
   private AppRoleRepository appRoleRepository;
 
   @Override
-  public Map<GrantedAuthority, AppRole> getAppRoles() {
+  public Map<GrantedAuthority, AppRole> getMappedAppRoles() {
     final Map<GrantedAuthority, AppRole> ret = new HashMap<>();
     final List<AppRole> appRoles = appRoleRepository.findAll();
     for (final AppRole appRole : appRoles) {
       ret.put(new SimpleGrantedAuthority(appRole.getAuthority()), appRole);
     }
     return ret;
+  }
+
+  @Override
+  public List<AppRole> getAppRoles() {
+    return appRoleRepository.findAll();
   }
 }

@@ -12,8 +12,8 @@
   <h3 [appShowIfPermission]="'ROLE_ADMIN'">Adminstration enabled</h3>
 
   <nav class="nav nav-tabs">
-    <a class="nav-link active" routerLink="/personlist">Personenliste</a>
-    <a [appShowIfPermission]="'ROLE_ADMIN'" class="nav-link" href="#">Administration</a>
+    <a class="nav-link active" routerLink="/personlist">Person-List</a>
+    <a [appShowIfPermission]="'ROLE_ADMIN'" class="nav-link" routerLink="/rolelist">Role-List</a>
   </nav>
 </div>
 

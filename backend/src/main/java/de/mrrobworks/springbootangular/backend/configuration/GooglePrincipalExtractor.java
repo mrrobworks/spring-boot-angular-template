@@ -39,7 +39,7 @@ final class GooglePrincipalExtractor implements PrincipalExtractor {
     final AppUser appUser = new AppUser();
     appUser.setId(googleUserId);
     final List<AppRole> appUserRoles = new ArrayList<>();
-    final Map<GrantedAuthority, AppRole> appRoles = appRoleService.getAppRoles();
+    final Map<GrantedAuthority, AppRole> appRoles = appRoleService.getMappedAppRoles();
     final List<GrantedAuthority> authorities = AppUserAuthorityUtils.createAuthorities(appUser);
     for (final GrantedAuthority grantedAuthority : authorities) {
       appUserRoles.add(appRoles.get(grantedAuthority));
