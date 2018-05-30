@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { TemplateRoleRaw } from '../models/template-role-raw';
 import { TemplateRole } from '../models/template-role';
 import { map, retry } from 'rxjs/operators';
@@ -10,10 +10,18 @@ import { TemplateRoleFactory } from '../models/template-role-factory';
 export class RoleService {
   constructor(private http: HttpClient) {}
 
+  getRole(id: String): Observable<TemplateRole> {
+    return this.http
+      .get<TemplateRoleRaw>(`/backend/role/${id}`)
+      .pipe(
+        retry(3),
+        map(templateRoleRaw => TemplateRoleFactory.fromObject(templateRoleRaw))
+      );
+    // TODO: catchError(...)
+  }
+
   getAllRoles(): Observable<Array<TemplateRole>> {
-    const url = '/backend/role/list';
-    // TODO: map...
-    return this.http.get<TemplateRole[]>(url).pipe(
+    return this.http.get<TemplateRoleRaw[]>('/backend/role/list').pipe(
       retry(3),
       map(templateRolesRaw =>
         templateRolesRaw.map(oneTemplateRoleRaw =>

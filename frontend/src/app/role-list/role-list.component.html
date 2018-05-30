@@ -6,10 +6,9 @@
     <th>Description</th>
     </thead>
     <tbody>
-    <tr *ngFor="let templateRole of templateRoles">
-      <td>{{templateRole.id}}</td>
-      <td>{{templateRole.authority}}</td>
-      <td>{{templateRole.description}}</td>
+    <tr>
+    <a class="app-role-list-item list-group-item list-group-item-action" *ngFor="let templateRole of templateRoles"
+       [templateRole]="templateRole" [routerLink]="templateRole.id"></a>
     </tr>
     </tbody>
   </table>

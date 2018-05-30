@@ -1,5 +1,9 @@
 package de.mrrobworks.springbootangular.backend.controller;
 
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +17,7 @@ public class AppUserController implements CorsConfiguration  {
   public AppUser user(@AuthenticationPrincipal AppUser user) {
     return user;
   }
+
 
   // @RequestMapping("/info")
   // public Principal user(Principal user) {

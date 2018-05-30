@@ -20,6 +20,12 @@ public class AppRoleServiceImpl implements AppRoleService {
   private AppRoleRepository appRoleRepository;
 
   @Override
+  public AppRole getAppRole(@NonNull final String id) {
+    // TODO: orElseThrow EntityNotFoundExcption. Best Practise?
+    return appRoleRepository.findById(id).orElse(null);
+  }
+
+  @Override
   public Map<GrantedAuthority, AppRole> getMappedAppRoles() {
     final Map<GrantedAuthority, AppRole> ret = new HashMap<>();
     final List<AppRole> appRoles = appRoleRepository.findAll();
