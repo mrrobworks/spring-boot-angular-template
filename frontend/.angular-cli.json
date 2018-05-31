@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/@icon/open-iconic/open-iconic.css"
       ],
       "scripts": [
         "../node_modules/bootstrap/dist/js/bootstrap.js"

@@ -1,15 +1,16 @@
 <div class="container" [appShowIfPermission]="'ROLE_ADMIN'">
   <table class="table table-hover table-striped">
     <thead class="thead-dark">
-    <th>ID</th>
-    <th>Authority</th>
-    <th>Description</th>
+    <tr>
+      <th>ID</th>
+      <th>Authority</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
     </thead>
     <tbody>
-    <tr>
-    <a class="app-role-list-item list-group-item list-group-item-action" *ngFor="let templateRole of templateRoles"
-       [templateRole]="templateRole" [routerLink]="templateRole.id"></a>
-    </tr>
+    <tr class="app-role-list-item"
+        *ngFor="let templateRole of templateRoles" [templateRole]="templateRole"></tr>
     </tbody>
   </table>
 </div>
