@@ -15,9 +15,11 @@ import { EnableIfPermissionDirective } from './directives/enable-if-permission.d
 import { ShowIfPermissionDirective } from './directives/show-if-permission.directive';
 import { AuthorizationService } from './services/authorization.service';
 import { RoleListComponent } from './role-list/role-list.component';
-import {RoleService} from './services/role.service';
+import { RoleService } from './services/role.service';
 import { RoleDetailComponent } from './role-detail/role-detail.component';
 import { RoleListItemComponent } from './role-list-item/role-list-item.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -30,8 +32,20 @@ import { RoleListItemComponent } from './role-list-item/role-list-item.component
     RoleDetailComponent,
     RoleListItemComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [PersonListService, LoginService, AuthorizationService, RoleService],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
+  ],
+  providers: [
+    PersonListService,
+    LoginService,
+    AuthorizationService,
+    RoleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -2,19 +2,25 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <img width="150" alt="Angular Logo"
+       src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg== ">
   <!--<img src="../assets/images/tcb-logo.svg" alt="tcb logo" width="400" height="300" >-->
 </div>
 
 <app-login (authenticated)="authenticated($event)"></app-login>
 
-<div *ngIf="auth" class="container">
-  <h3 [appShowIfPermission]="'ROLE_ADMIN'">Adminstration enabled</h3>
+<mat-toolbar *ngIf="auth" color="primary">
 
-  <nav class="nav nav-tabs">
-    <a class="nav-link active" routerLink="/personlist">Person-List</a>
-    <a [appShowIfPermission]="'ROLE_ADMIN'" class="nav-link" routerLink="/rolelist">Role-List</a>
-  </nav>
-</div>
+  <mat-toolbar-row>
+    <span>Menu</span>
+
+    <span class="example-spacer"></span>
+
+    <button mat-button routerLink="/personlist">Persons</button>
+    <button mat-button [appShowIfPermission]="'ROLE_ADMIN'" routerLink="/rolelist">Roles</button>
+    <button mat-button [appShowIfPermission]="'ROLE_ADMIN'">Administration Enabled</button>
+  </mat-toolbar-row>
+
+</mat-toolbar>
 
 <router-outlet *ngIf="auth"></router-outlet>

@@ -7,19 +7,24 @@
   </a>
 </div>
 
-<div class="container" *ngIf="auth">
-  <p>Login Successful</p>
-  <p>ID: {{templateUser?.id}}</p>
-  <ul *ngFor="let role of templateUser.roles">
-    <li>Role-Description: {{role.description}}</li>
-    <li>Role-Authority: {{role.authority}}</li>
-  </ul>
-
-  <button type="button" class="btn btn-danger" (click)="logout()">
-    <i class="material-icons">eject</i>
-    Logout
-  </button>
-</div>
+<mat-card class="example-card" *ngIf="auth">
+  <mat-card-header>
+    <mat-card-title>Login Successful</mat-card-title>
+    <mat-card-subtitle>ID: {{templateUser?.id}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <ul *ngFor="let role of templateUser.roles">
+      <li>Role-Description: {{role.description}}</li>
+      <li>Role-Authority: {{role.authority}}</li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="logout()" color="warn">
+      <i class="material-icons">eject</i>
+      Logout
+    </button>
+  </mat-card-actions>
+</mat-card>
 
 <div class="container">
   <span class="d-block p-2 bg-secondary text-white"></span>

@@ -115,10 +115,11 @@ required.
 TODOs
 -----
 - [ ] Microservices from this Projekt for creating github-repositories
-- [ ] User-Roles Access on custom sites / elements
-- [ ] Angular / CSS / Bootstrap
+- [x] User-Roles Access on custom sites / elements
+- [x] Angular / CSS / Bootstrap (Angular-Material Implemented)
 - [ ] Profile in OAuthSecurityConfiguration (Google, Github)
 - [ ] User-Role-assignment through webapplication
-- [ ] Save LoggedIn User to Session
-- [ ] Changing Bootstrap-CSS to Semantic-UI
+- [x] Save LoggedIn User to Session
 - [ ] CRUD Roles for Administrator of the Application
+- [x] Update from Angular from Version 5 to 6
+- [ ] Update from Sping Boot from Version 2.0 to 2.0.2

@@ -3,6 +3,7 @@ import { TemplateRole } from '../models/template-role';
 import { TemplateRoleFactory } from '../models/template-role-factory';
 import { RoleService } from '../services/role.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-role-detail',
@@ -13,7 +14,8 @@ export class RoleDetailComponent implements OnInit {
 
   constructor(
     private roleService: RoleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialogRef: MatDialogRef<RoleDetailComponent>
   ) {}
 
   ngOnInit() {

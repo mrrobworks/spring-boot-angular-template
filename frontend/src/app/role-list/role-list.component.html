@@ -1,3 +1,18 @@
+<mat-card *ngFor="let templateRole of templateRoles" [appShowIfPermission]="'ROLE_ADMIN'">
+
+  <mat-card-header>
+    <mat-card-title>Role-List</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>{{templateRole.id}}</p>
+    <p>{{templateRole.description}}</p>
+    <p>{{templateRole.authority}}</p>
+  </mat-card-content>
+</mat-card>
+
+
+<!--
 <div class="container" [appShowIfPermission]="'ROLE_ADMIN'">
   <table class="table table-hover table-striped">
     <thead class="thead-dark">
@@ -14,3 +29,4 @@
     </tbody>
   </table>
 </div>
+-->
