@@ -1,1 +1,9 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+mat-row:nth-child(even){
+  background-color:lightgray;
+}
+
+mat-row:nth-child(odd){
+  background-color:white;
+}
