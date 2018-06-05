@@ -1,5 +1,8 @@
 package de.mrrobworks.springbootangular.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -19,6 +22,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id") // End Lombok
 @Entity
 @Table(name = "app_user") // End JPA
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AppUser {
 
   @Id
@@ -28,7 +32,7 @@ public class AppUser {
   @ManyToMany(fetch = FetchType.EAGER)
   @JsonManagedReference
   @JoinTable(name = "app_user_role",
-      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-      inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
   private List<AppRole> roles = new ArrayList<>();
 }

@@ -1,32 +1,41 @@
-<mat-card *ngFor="let templateRole of templateRoles" [appShowIfPermission]="'ROLE_ADMIN'">
+<mat-table [dataSource]="templateRoles" class="mat-elevation-z8"
+           [appShowIfPermission]="'ROLE_ADMIN'">
 
-  <mat-card-header>
-    <mat-card-title>Role-List</mat-card-title>
-  </mat-card-header>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef [appShowIfPermission]="'ROLE_ADMIN'">ID</mat-header-cell>
+    <mat-cell *matCellDef="let templateRole" [appShowIfPermission]="'ROLE_ADMIN'">
+      {{templateRole.id}}
+    </mat-cell>
+  </ng-container>
 
-  <mat-card-content>
-    <p>{{templateRole.id}}</p>
-    <p>{{templateRole.description}}</p>
-    <p>{{templateRole.authority}}</p>
-  </mat-card-content>
-</mat-card>
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+    <mat-cell *matCellDef="let templateRole">{{templateRole.description}}</mat-cell>
+  </ng-container>
 
+  <ng-container matColumnDef="authority">
+    <mat-header-cell *matHeaderCellDef>Authority</mat-header-cell>
+    <mat-cell *matCellDef="let templateRole">{{templateRole.authority}}</mat-cell>
+  </ng-container>
 
-<!--
-<div class="container" [appShowIfPermission]="'ROLE_ADMIN'">
-  <table class="table table-hover table-striped">
-    <thead class="thead-dark">
-    <tr>
-      <th>ID</th>
-      <th>Authority</th>
-      <th>Description</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="app-role-list-item"
-        *ngFor="let templateRole of templateRoles" [templateRole]="templateRole"></tr>
-    </tbody>
-  </table>
-</div>
--->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button (click)="onClick">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let templateRole">
+      <button mat-icon-button (click)="openDialog(templateRole)" color="primary">
+        <mat-icon>create</mat-icon>
+      </button>
+    </mat-cell>
+    <!--<mat-cell *matCellDef="let templateRole">
+      <button mat-icon-button (click)="onClick">
+        <mat-icon>delete_sweep</mat-icon>
+      </button>
+    </mat-cell>-->
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

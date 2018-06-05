@@ -39,4 +39,9 @@ public class AppRoleServiceImpl implements AppRoleService {
   public List<AppRole> getAppRoles() {
     return appRoleRepository.findAll();
   }
+
+  @Override
+  public void save(AppRole appRole) {
+    appRoleRepository.save(appRole);
+  }
 }

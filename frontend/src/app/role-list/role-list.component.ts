@@ -3,6 +3,8 @@ import { TemplateRole } from '../models/template-role';
 import { RoleService } from '../services/role.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { RoleDetailComponent } from '../role-detail/role-detail.component';
+import { DataSource } from '@angular/cdk/table';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-role-list',
@@ -10,6 +12,8 @@ import { RoleDetailComponent } from '../role-detail/role-detail.component';
 })
 export class RoleListComponent implements OnInit {
   templateRoles: TemplateRole[];
+  dataSource = new RoleListDataSource(this.roleService);
+  displayedColumns = ['id', 'description', 'authority', 'actions'];
 
   constructor(private roleService: RoleService, private dialog: MatDialog) {}
 
@@ -19,10 +23,23 @@ export class RoleListComponent implements OnInit {
       .subscribe(templateRoles => (this.templateRoles = templateRoles));
   }
 
-  openDialog() {
+  openDialog(templateRole: TemplateRole) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+    dialogConfig.width = '350px';
+    dialogConfig.height = '350px';
+    dialogConfig.data = templateRole;
     this.dialog.open(RoleDetailComponent, dialogConfig);
   }
+}
+
+export class RoleListDataSource extends DataSource<any> {
+  constructor(private roleService: RoleService) {
+    super();
+  }
+
+  connect(): Observable<TemplateRole[]> {
+    return this.roleService.getAllRoles();
+  }
+
+  disconnect() {}
 }

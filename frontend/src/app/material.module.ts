@@ -4,6 +4,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
+  MatIconModule,
   MatInputModule,
   MatTableModule,
   MatToolbarModule
@@ -17,7 +18,8 @@ import {
     MatDialogModule,
     MatInputModule,
     MatToolbarModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule
   ],
   exports: [
     MatButtonModule,
@@ -26,7 +28,8 @@ import {
     MatDialogModule,
     MatInputModule,
     MatToolbarModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule
   ]
 })
 export class MaterialModule {}

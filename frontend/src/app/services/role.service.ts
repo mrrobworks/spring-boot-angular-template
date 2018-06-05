@@ -31,4 +31,12 @@ export class RoleService {
       // TODO: catchError(...)
     );
   }
+
+  update(templateRole: TemplateRole): Observable<TemplateRole> {
+    return this.http.put<TemplateRoleRaw>(
+      `/backend/role/${templateRole.id}`,
+      templateRole
+      // TODO: catchError(...)
+    );
+  }
 }

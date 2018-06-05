@@ -11,4 +11,5 @@ public interface AppRoleService {
   AppRole getAppRole(@NonNull final String id);
   Map<GrantedAuthority, AppRole> getMappedAppRoles();
   List<AppRole> getAppRoles();
+  void save(AppRole appRole);
 }

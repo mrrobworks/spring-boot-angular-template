@@ -1,5 +1,8 @@
 package de.mrrobworks.springbootangular.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -18,7 +21,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id") // End Lombok
 @Entity
 @Table(name = "app_role") // End JPA
-@SuppressWarnings("serial")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AppRole implements GrantedAuthority {
 
   @Id
@@ -26,8 +29,8 @@ public class AppRole implements GrantedAuthority {
   private String description;
 
   // TODO: Fetch.EAGER replace with @EntityGraph
-  @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
   @JsonBackReference
+  @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
   private List<AppUser> users = new ArrayList<>();
 
   @Override
