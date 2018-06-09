@@ -28,8 +28,7 @@ export class AuthorizationService {
   initializePermissions() {
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     for (const role of this.currentUser.roles) {
-      console.info("Authority: ####" + role.authority);
-      this.permissions.push(role.authority);
+      this.permissions.push(role.id);
     }
   }
 

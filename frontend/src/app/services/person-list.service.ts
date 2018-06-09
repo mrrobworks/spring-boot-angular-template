@@ -1,8 +1,7 @@
-import {Inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Person} from '../models/person';
-import {catchError, map, tap} from 'rxjs/operators';
 
 @Injectable()
 export class PersonListService {

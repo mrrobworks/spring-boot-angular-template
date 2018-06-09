@@ -1,16 +1,19 @@
 <h2 mat-dialog-title>Role-Detail</h2>
 <mat-dialog-content [formGroup]="form">
+
   <mat-form-field>
-    <input matInput placeholder="Description" formControlName="description">
+    <input matInput placeholder="ID:" value="{{templateRole.id}}" [disabled]="true">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Authority" formControlName="authority">
+    <input matInput placeholder="Description:" formControlName="description">
   </mat-form-field>
 
 </mat-dialog-content>
 
 <mat-dialog-actions>
+
   <button mat-raised-button color="primary" (click)="close()">Close</button>
   <button mat-raised-button color="warn" (click)="update()">Save</button>
+
 </mat-dialog-actions>

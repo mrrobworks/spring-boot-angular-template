@@ -13,14 +13,12 @@ import { Observable } from 'rxjs/Observable';
 export class RoleListComponent implements OnInit {
   templateRoles: TemplateRole[];
   dataSource = new RoleListDataSource(this.roleService);
-  displayedColumns = ['id', 'description', 'authority', 'actions'];
+  displayedColumns = ['id', 'description', 'actions'];
 
   constructor(private roleService: RoleService, private dialog: MatDialog) {}
 
   ngOnInit() {
-    this.roleService
-      .getAllRoles()
-      .subscribe(templateRoles => (this.templateRoles = templateRoles));
+    this.initAllRoles();
   }
 
   openDialog(templateRole: TemplateRole) {
@@ -28,7 +26,15 @@ export class RoleListComponent implements OnInit {
     dialogConfig.width = '350px';
     dialogConfig.height = '350px';
     dialogConfig.data = templateRole;
-    this.dialog.open(RoleDetailComponent, dialogConfig);
+
+    const dialogRef = this.dialog.open(RoleDetailComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(() => this.initAllRoles());
+  }
+
+  private initAllRoles() {
+    return this.roleService
+      .getAllRoles()
+      .subscribe(templateRoles => (this.templateRoles = templateRoles));
   }
 }
 

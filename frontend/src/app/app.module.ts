@@ -17,7 +17,6 @@ import { AuthorizationService } from './services/authorization.service';
 import { RoleListComponent } from './role-list/role-list.component';
 import { RoleService } from './services/role.service';
 import { RoleDetailComponent } from './role-detail/role-detail.component';
-import { RoleListItemComponent } from './role-list-item/role-list-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 
@@ -29,8 +28,7 @@ import { MaterialModule } from './material.module';
     EnableIfPermissionDirective,
     ShowIfPermissionDirective,
     RoleListComponent,
-    RoleDetailComponent,
-    RoleListItemComponent
+    RoleDetailComponent
   ],
   imports: [
     BrowserModule,

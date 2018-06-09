@@ -3,6 +3,5 @@ export interface TemplateUserRaw {
   roles: {
     id: string;
     description: string;
-    authority: string;
   }[];
 }
