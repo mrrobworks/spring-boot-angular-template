@@ -1,6 +1,6 @@
 Spring-Boot-Angular-Template
 ----------------------------
-Template for a new Web-Project with OAuth 2.0 User Authentication (Google, Github). Spring-Boot 2.0 with Java 8 as Backend and Angular 5 as Frontend.
+Template for a new Web-Project with OAuth 2.0 User Authentication (Google, Github). Spring-Boot 2 with Java 8 as Backend and Angular 6 as Frontend.
 
 Technology-Stack:
 -----------------
