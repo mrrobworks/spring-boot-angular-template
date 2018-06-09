@@ -5,7 +5,7 @@ Template for a new Web-Project with OAuth 2.0 User Authentication (Google, Githu
 Technology-Stack:
 -----------------
 * :leaves: Spring-Boot 2 (Spring AOP, Spring Web, Spring Data JPA, Spring Security)
-* :a: Angular 5 (TypeScript, HTML, CSS)
+* :a: Angular 6 (TypeScript, HTML, CSS)
 * :lock: OAuth 2.0 Authentication
 * :coffee: [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)**
 * [Maven](https://maven.apache.org/download.cgi)**
@@ -20,8 +20,8 @@ Technology-Stack:
 
 Modules
 -------
-* backend - Spring-Boot 2.0
-* frontend - Angular 5
+* backend - Spring-Boot 2
+* frontend - Angular 6
 * dbsetup - Liquibase Database-Setup with MariaDB as Database for the backend
 
 Installation-Instructions
@@ -123,3 +123,4 @@ TODOs
 - [ ] CRUD Roles for Administrator of the Application
 - [x] Update from Angular from Version 5 to 6
 - [ ] Update from Sping Boot from Version 2.0 to 2.0.2
+- [ ] Building Docker-Image with Spring-Boot and Angular
