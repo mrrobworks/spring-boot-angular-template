@@ -1,9 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/finally';
-import {TemplateUser} from './models/template-user';
-
-import {Router, ActivatedRoute} from '@angular/router';
+import { TemplateUser } from './models/template-user';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +12,10 @@ export class AppComponent implements OnInit {
   currentUser: TemplateUser = undefined;
 
   ngOnInit(): void {
-    this.currentUser = (this.auth == true)
-      ? JSON.parse(sessionStorage.getItem('currentUser'))
-      : undefined;
+    this.currentUser =
+      this.auth === true
+        ? JSON.parse(sessionStorage.getItem('currentUser'))
+        : undefined;
   }
 
   authenticated(auth: boolean) {

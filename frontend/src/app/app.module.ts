@@ -18,7 +18,6 @@ import { RoleListComponent } from './role-list/role-list.component';
 import { RoleService } from './services/role.service';
 import { RoleDetailComponent } from './role-detail/role-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -36,8 +35,7 @@ import { MaterialModule } from './material.module';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MaterialModule
+    ReactiveFormsModule
   ],
   providers: [
     PersonListService,

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PersonListService } from '../services/person-list.service';
 import { TemplateUser } from '../models/template-user';
 import { Person } from '../models/person';
-import { DataSource } from '@angular/cdk/table';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-person-list',
@@ -12,8 +10,6 @@ import { Observable } from 'rxjs/Observable';
 export class PersonListComponent implements OnInit {
   currentUser: TemplateUser;
   persons: Person[];
-  dataSource = new PersonListDataSource(this.personListService);
-  displayedColumns = ['id', 'firstname', 'lastname'];
 
   constructor(private personListService: PersonListService) {}
 
@@ -24,16 +20,4 @@ export class PersonListComponent implements OnInit {
       .findAllPersons()
       .subscribe(persons => (this.persons = persons));
   }
-}
-
-export class PersonListDataSource extends DataSource<any> {
-  constructor(private personListService: PersonListService) {
-    super();
-  }
-
-  connect(): Observable<Person[]> {
-    return this.personListService.findAllPersons();
-  }
-
-  disconnect() {}
 }

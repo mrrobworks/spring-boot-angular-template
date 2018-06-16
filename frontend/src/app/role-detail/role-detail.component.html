@@ -1,19 +1,37 @@
-<h2 mat-dialog-title>Role-Detail</h2>
-<mat-dialog-content [formGroup]="form">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
 
-  <mat-form-field>
-    <input matInput placeholder="ID:" value="{{templateRole.id}}" [disabled]="true">
-  </mat-form-field>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Role-Detail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
-  <mat-form-field>
-    <input matInput placeholder="Description:" formControlName="description">
-  </mat-form-field>
+      <div class="modal-body">
+        <form (ngSubmit)="update()">
+          <div class="form-group">
+            <label for="id" class="col-form-label">ID:</label>
+            <input type="text" class="form-control" id="id" [disabled]="true"
+                   [(ngModel)]="templateRole.id" name="id">
+          </div>
+          <div class="form-group">
+            <label for="description" class="col-form-label">Description:</label>
+            <input type="text" class="form-control" id="description"
+                   [(ngModel)]="templateRole.description" name="description">
+          </div>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      </div>
 
-</mat-dialog-content>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">
+          Close
+        </button>
+      </div>
 
-<mat-dialog-actions>
-
-  <button mat-raised-button color="primary" (click)="close()">Close</button>
-  <button mat-raised-button color="warn" (click)="update()">Save</button>
-
-</mat-dialog-actions>
+    </div>
+  </div>
+</div>

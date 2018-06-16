@@ -1,36 +1,23 @@
-<mat-table [dataSource]="templateRoles" class="mat-elevation-z8"
-           [appShowIfPermission]="'ROLE_ADMIN'">
-
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef [appShowIfPermission]="'ROLE_ADMIN'">ID</mat-header-cell>
-    <mat-cell *matCellDef="let templateRole" [appShowIfPermission]="'ROLE_ADMIN'">
-      {{templateRole.id}}
-    </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="description">
-    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-    <mat-cell *matCellDef="let templateRole">{{templateRole.description}}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef>
-      <button mat-icon-button (click)="openDialog(undefined)">
-        <mat-icon>add_circle</mat-icon>
+<table class="table table-striped" [appShowIfPermission]="'ROLE_ADMIN'">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Description</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let templateRole of templateRoles">
+    <td>{{templateRole.id}}</td>
+    <td>{{templateRole.description}}</td>
+    <td>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+              data-whatever="@getbootstrap" (click)="edit(templateRole)">Edit
       </button>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let templateRole">
-      <button mat-icon-button (click)="openDialog(templateRole)" color="primary">
-        <mat-icon>create</mat-icon>
-      </button>
-    </mat-cell>
-    <!--<mat-cell *matCellDef="let templateRole">
-      <button mat-icon-button (click)="onClick">
-        <mat-icon>delete_sweep</mat-icon>
-      </button>
-    </mat-cell>-->
-  </ng-container>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+<app-role-detail *ngIf="selectedTemplateRole"
+                 [templateRole]="selectedTemplateRole"></app-role-detail>

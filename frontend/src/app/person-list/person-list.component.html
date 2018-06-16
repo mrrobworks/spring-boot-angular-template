@@ -1,26 +1,18 @@
 <p>Current User: {{currentUser.id}}</p>
 
-<mat-table [dataSource]="persons" class="mat-elevation-z8">
-
-  <!-- ID Column -->
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef [appShowIfPermission]="'ROLE_ADMIN'"> ID</mat-header-cell>
-    <mat-cell *matCellDef="let person" [appShowIfPermission]="'ROLE_ADMIN'"> {{person.id}}
-    </mat-cell>
-  </ng-container>
-
-  <!-- Firstname Column -->
-  <ng-container matColumnDef="firstname">
-    <mat-header-cell *matHeaderCellDef> Firstname</mat-header-cell>
-    <mat-cell *matCellDef="let person"> {{person.firstname}}</mat-cell>
-  </ng-container>
-
-  <!-- Lastname Column -->
-  <ng-container matColumnDef="lastname">
-    <mat-header-cell *matHeaderCellDef> Lastname</mat-header-cell>
-    <mat-cell *matCellDef="let person"> {{person.lastname}}</mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col" [appShowIfPermission]="'ROLE_ADMIN'">ID</th>
+    <th scope="col">Firstname</th>
+    <th scope="col">Lastname</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let person of persons">
+    <td [appShowIfPermission]="'ROLE_ADMIN'">{{person.id}}</td>
+    <td>{{person.firstname}}</td>
+    <td>{{person.lastname}}</td>
+  </tr>
+  </tbody>
+</table>
