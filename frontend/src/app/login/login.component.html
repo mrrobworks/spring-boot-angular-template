@@ -1,18 +1,45 @@
-<div class="container" *ngIf="!auth">
-  <p>Login to access Data</p>
+<div class="container py-5" *ngIf="!auth">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center text-white mb-4">Bootstrap 4 Login Form</h2>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
 
-  <a href="/login" class="btn btn-success">
-    <i class="material-icons">done</i>
-    Login
-  </a>
+          <!-- form card login -->
+          <div class="card rounded-0">
+            <div class="card-header">
+              <h3 class="mb-0">Login</h3>
+            </div>
+            <div class="card-body">
+              <span>Authentication through your Google-Account.</span>
+              <a href="/login" class="btn btn-success  btn-lg float-right" id="btnLogin">
+                <span class="oi oi-account-login"></span>
+                Login
+              </a>
+
+            </div>
+            <!--/card-block-->
+          </div>
+          <!-- /form card login -->
+
+        </div>
+      </div>
+      <!--/row-->
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
 </div>
+<!--/container-->
 
-<div *ngIf="auth">
-  <p>Login Successfull</p>
-  <p>ID: {{templateUser?.id}}</p>
-  <ul *ngFor="let role of templateUser.roles">
+<div class="card" style="width: 18rem;" *ngIf="auth">
+  <div class="card-body">
+    <h5 class="card-title">Login Successfull</h5>
+    <p class="card-text" [appShowIfPermission]="'ROLE_ADMIN'">Adminstration enabled</p>
+    <ul *ngFor="let role of templateUser.roles">
       <li>{{role.id}}</li>
       <li>{{role.description}}</li>
-  </ul>
-  <button (click)="logout()" class="btn btn-danger">Logout</button>
+    </ul>
+    <button (click)="logout()" class="btn btn-danger">Logout</button>
+  </div>
 </div>
