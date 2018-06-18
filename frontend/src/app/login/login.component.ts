@@ -11,6 +11,7 @@ import { AuthorizationService } from '../services/authorization.service';
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
+  title = 'Spring-Boot 2 + Angular 6 Web-Template';
   auth = false;
   @Output() authenticated = new EventEmitter<boolean>();
   templateUser = TemplateUserFactory.empty();
@@ -48,15 +49,5 @@ export class LoginComponent implements OnInit {
           this.auth = false;
         }
       );
-  }
-
-  logout() {
-    this.loginService
-      .logout()
-      .finally(() => {
-        this.auth = false;
-        this.authenticated.emit(this.auth);
-      })
-      .subscribe();
   }
 }
