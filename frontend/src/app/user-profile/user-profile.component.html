@@ -1,0 +1,21 @@
+<div class="card border-dark mb-3" style="max-width: 18rem;">
+  <div class="card-header">User Information</div>
+  <div class="card-body text-dark">
+    <h5 class="card-title">Signed in as <br><b>{{currentUser.id}}</b></h5>
+    <p class="card-text" [appShowIfPermission]="'ROLE_ADMIN'">Adminstration enabled</p>
+    <table>
+      <thead>
+      <tr>
+        <td>Role-ID</td>
+        <td>Role-Description</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let role of currentUser.roles">
+        <td>{{role.id}}</td>
+        <td>{{role.description}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

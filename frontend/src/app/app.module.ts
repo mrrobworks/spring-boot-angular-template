@@ -19,6 +19,7 @@ import { RoleService } from './services/role.service';
 import { RoleDetailComponent } from './role-detail/role-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavTopBarComponent } from './nav-top-bar/nav-top-bar.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NavTopBarComponent } from './nav-top-bar/nav-top-bar.component';
     ShowIfPermissionDirective,
     RoleListComponent,
     RoleDetailComponent,
-    NavTopBarComponent
+    NavTopBarComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
