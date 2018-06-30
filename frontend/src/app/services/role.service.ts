@@ -32,6 +32,10 @@ export class RoleService {
     );
   }
 
+  add(templateRole: TemplateRole): Observable<TemplateRole> {
+    return this.http.post<TemplateRoleRaw>('/backend/role/add', templateRole);
+  }
+
   update(templateRole: TemplateRole): Observable<TemplateRole> {
     return this.http.put<TemplateRoleRaw>(
       `/backend/role/${templateRole.id}`,
