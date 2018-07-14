@@ -1,7 +1,7 @@
 <h1 class="display-4">Role List</h1>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-        data-whatever="@getbootstrap" (click)="detail(DetailMode.NEW, TemplateRoleFactory.empty())">
+        data-whatever="@getbootstrap" (click)="init(DetailMode.NEW, TemplateRoleFactory.empty())">
   New Role
 </button>
 
@@ -19,13 +19,13 @@
     <td>{{templateRole.description}}</td>
     <td>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-              data-whatever="@getbootstrap" (click)="detail(DetailMode.EDIT, templateRole)">Edit
+              data-whatever="@getbootstrap" (click)="init(DetailMode.EDIT, templateRole)">Edit
       </button>
     </td>
   </tr>
   </tbody>
 </table>
 
-<app-role-detail *ngIf="selectedTemplateRole" [detailMode]="detailMode"
-                 [templateRole]="selectedTemplateRole"></app-role-detail>
+<app-role-detail *ngIf="selectedTemplateRole" [detailMode]="detailMode" [form]="detailForm "
+                 [header]="detailHeader"></app-role-detail>
 

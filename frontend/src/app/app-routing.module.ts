@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: 'personlist', component: PersonListComponent },
   { path: 'rolelist', component: RoleListComponent },
   { path: 'rolelist/:id', component: RoleDetailComponent }
+  // TODO: 404 not found message component
+  // { path: '**', component: NotFoundComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

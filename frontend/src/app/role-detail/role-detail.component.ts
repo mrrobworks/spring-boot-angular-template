@@ -1,62 +1,38 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TemplateRole } from '../models/template-role';
 import { RoleService } from '../services/role.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { map } from 'rxjs/operators';
+import { FormGroup } from '@angular/forms';
 import { DetailMode } from '../models/detail-mode';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-role-detail',
   templateUrl: './role-detail.component.html'
 })
-export class RoleDetailComponent implements OnInit {
-  form: FormGroup;
-  @Input() templateRole: TemplateRole;
+export class RoleDetailComponent {
   @Input() detailMode: DetailMode;
-  DetailMode = DetailMode;
+  @Input() form: FormGroup;
+  @Input() header: string;
   errorMsg: string = undefined;
   success = undefined;
 
-  constructor(private fb: FormBuilder, private roleService: RoleService) {}
+  constructor(private roleService: RoleService, private router: Router) {}
 
-  ngOnInit() {
-    this.form = this.fb.group({
-      description: [this.templateRole.description]
-    });
-
-    this.form.valueChanges
-      .pipe(
-        // TODO: Validation with filter(() => this.form.valid)
-        map(form => new TemplateRole(this.templateRole.id, form.description))
-      )
-      .subscribe(templateRole => (this.templateRole = templateRole));
-  }
-
-  header(): string {
-    // TODO: success need to be set undefined, every time a new Role Detail dialog is showing after
-    // a button is clicked. Not good location to set the success variable in the header()-method.
-    this.success = undefined;
+  save(model: TemplateRole) {
     if (this.detailMode === DetailMode.NEW) {
-      return 'Create a new role';
+      this.roleService.add(model).subscribe();
     } else {
-      return 'Edit role with ID: ' + this.templateRole.id;
+      this.roleService.update(model).subscribe(
+        value => {},
+        error => {
+          this.errorMsg = error.toString();
+          this.success = false;
+        },
+        () => {
+          this.success = true;
+        }
+      );
     }
-  }
-
-  save() {
-    if (this.detailMode === DetailMode.NEW) {
-      this.roleService.add(this.templateRole).subscribe();
-    } else {
-      this.roleService
-        .update(this.templateRole)
-        .subscribe(
-          value => (this.templateRole = value),
-          // TODO: After Exception success not saved to false.
-          error => (this.success = false),
-          () => (this.success = true)
-        );
-    }
-    this.roleService.getAllRoles().subscribe();
   }
 
   close() {

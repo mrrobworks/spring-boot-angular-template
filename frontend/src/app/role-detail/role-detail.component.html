@@ -3,7 +3,7 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{header()}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{header}}</h5>
         <button type="button" class="close" data-dismiss="modal"></button>
         <div class="alert alert-success" role="alert" *ngIf="success === true">
           Successfull changed
@@ -14,19 +14,17 @@
       </div>
 
       <div class="modal-body">
-        <form (ngSubmit)="save()">
+        <form [formGroup]="form" (ngSubmit)="save(form.getRawValue())">
           <div class="form-group">
             <label for="id" class="col-form-label">ID:</label>
-            <input type="text" class="form-control" id="id"
-                   [disabled]="detailMode === DetailMode.EDIT"
-                   [(ngModel)]="templateRole.id" name="id">
+            <input type="text" class="form-control" id="id" formControlName="id" name="id">
           </div>
           <div class="form-group">
             <label for="description" class="col-form-label">Description:</label>
             <input type="text" class="form-control" id="description"
-                   [(ngModel)]="templateRole.description" name="description">
+                   formControlName="description" name="description">
           </div>
-          <button type="submit" class="btn btn-primary">Save</button>
+          <input type="submit" class="btn btn-primary" value="Save" [disabled]="!form.valid">
         </form>
       </div>
 
