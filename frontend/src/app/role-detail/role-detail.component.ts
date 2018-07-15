@@ -1,22 +1,62 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TemplateRole } from '../models/template-role';
 import { RoleService } from '../services/role.service';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DetailMode } from '../models/detail-mode';
-import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-role-detail',
   templateUrl: './role-detail.component.html'
 })
-export class RoleDetailComponent {
-  @Input() detailMode: DetailMode;
-  @Input() form: FormGroup;
-  @Input() header: string;
+export class RoleDetailComponent implements OnInit {
+  form: FormGroup;
+  header: string;
   errorMsg: string = undefined;
   success = undefined;
+  detailMode: DetailMode;
+  DetailMode = DetailMode;
+  selectedTemplateRole: TemplateRole;
 
-  constructor(private roleService: RoleService, private router: Router) {}
+  constructor(private roleService: RoleService, private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.roleService.roleDetailSubject
+      .pipe(
+        tap(value => {
+          this.detailMode = value.detailMode;
+          this.selectedTemplateRole = value.selectedTemplateRole;
+          this.initDetailHeader();
+          this.initDetailForm();
+        })
+      )
+      .subscribe();
+  }
+
+  public initDetailHeader(): void {
+    this.header =
+      this.detailMode === DetailMode.NEW
+        ? 'Create a new role'
+        : 'Edit role with ID: ' + this.selectedTemplateRole.id;
+  }
+
+  public initDetailForm(): void {
+    if (this.form !== undefined) {
+      this.form.reset();
+    }
+
+    this.form = this.fb.group({
+      id: [this.selectedTemplateRole.id, Validators.required],
+      description: [
+        this.selectedTemplateRole.description,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(250)
+        ])
+      ]
+    });
+  }
 
   save(model: TemplateRole) {
     if (this.detailMode === DetailMode.NEW) {

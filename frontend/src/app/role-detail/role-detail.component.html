@@ -1,4 +1,4 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" *ngIf="form">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
@@ -16,8 +16,10 @@
       <div class="modal-body">
         <form [formGroup]="form" (ngSubmit)="save(form.getRawValue())">
           <div class="form-group">
-            <label for="id" class="col-form-label">ID:</label>
-            <input type="text" class="form-control" id="id" formControlName="id" name="id">
+            <fieldset [disabled]="detailMode === DetailMode.EDIT">
+              <label for="id" class="col-form-label">ID:</label>
+              <input type="text" class="form-control" id="id" formControlName="id" name="id">
+            </fieldset>
           </div>
           <div class="form-group">
             <label for="description" class="col-form-label">Description:</label>
