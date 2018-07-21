@@ -44,4 +44,9 @@ public class AppRoleServiceImpl implements AppRoleService {
   public void save(AppRole appRole) {
     appRoleRepository.save(appRole);
   }
+
+  @Override
+  public void delete(String id) {
+    appRoleRepository.deleteById(id);
+  }
 }

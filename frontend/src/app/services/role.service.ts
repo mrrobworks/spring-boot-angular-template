@@ -61,4 +61,10 @@ export class RoleService {
       selectedTemplateRole: selectedTemplateRole
     });
   }
+
+  delete(id: string) {
+    return this.http
+      .delete<TemplateRoleRaw>(`/backend/role/${id}`)
+      .pipe(catchError(this.errorHandler));
+  }
 }

@@ -13,7 +13,7 @@ export class RoleDetailComponent implements OnInit {
   form: FormGroup;
   header: string;
   errorMsg: string = undefined;
-  success = undefined;
+  roleSavedSuccessful = undefined;
   detailMode: DetailMode;
   DetailMode = DetailMode;
   selectedTemplateRole: TemplateRole;
@@ -25,6 +25,7 @@ export class RoleDetailComponent implements OnInit {
     this.roleService.roleDetailSubject
       .pipe(
         tap(value => {
+          this.roleSavedSuccessful = undefined;
           this.detailMode = value.detailMode;
           this.selectedTemplateRole = value.selectedTemplateRole;
           this.initDetailHeader();
@@ -65,11 +66,11 @@ export class RoleDetailComponent implements OnInit {
         value => {},
         error => {
           this.errorMsg = error.toString();
-          this.success = false;
+          this.roleSavedSuccessful = false;
         },
         () => {
-          this.success = true;
-          this.reloadListEvent.emit(this.success);
+          this.roleSavedSuccessful = true;
+          this.reloadListEvent.emit(this.roleSavedSuccessful);
         }
       );
     } else if (this.detailMode === DetailMode.EDIT) {
@@ -77,17 +78,17 @@ export class RoleDetailComponent implements OnInit {
         value => {},
         error => {
           this.errorMsg = error.toString();
-          this.success = false;
+          this.roleSavedSuccessful = false;
         },
         () => {
-          this.success = true;
-          this.reloadListEvent.emit(this.success);
+          this.roleSavedSuccessful = true;
+          this.reloadListEvent.emit(this.roleSavedSuccessful);
         }
       );
     }
   }
 
   close() {
-    this.reloadListEvent.emit(this.success);
+    this.reloadListEvent.emit(this.roleSavedSuccessful);
   }
 }

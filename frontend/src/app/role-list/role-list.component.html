@@ -1,6 +1,14 @@
 <h1 class="display-4">Role List</h1>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+<div class="alert alert-success" role=alert *ngIf="deleteSuccess === true">Role
+  '{{selectedTemplateRoleId}}' success deleted.
+</div>
+<div class="alert alert-danger" role=alert *ngIf="deleteSuccess === false">Failure. Role
+  '{{selectedTemplateRoleId}}' not
+  deleted.
+</div>
+
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#detailModal"
         data-whatever="@getbootstrap" (click)="init(DetailMode.NEW, TemplateRoleFactory.empty())">
   New Role
 </button>
@@ -18,8 +26,12 @@
     <td>{{templateRole.id}}</td>
     <td>{{templateRole.description}}</td>
     <td>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal"
               data-whatever="@getbootstrap" (click)="init(DetailMode.EDIT, templateRole)">Edit
+      </button>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+              data-whatever="@getbootstrap" (click)="openRoleDeleteDialog(templateRole.id)">
+        Delete
       </button>
     </td>
   </tr>
@@ -28,3 +40,5 @@
 
 <app-role-detail (reloadListEvent)="reloadList($event)"></app-role-detail>
 
+<app-role-delete [templateRoleId]="selectedTemplateRoleId"
+                 (reloadListEvent)="deleteActionDone($event)"></app-role-delete>

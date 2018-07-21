@@ -20,6 +20,8 @@ import { RoleDetailComponent } from './role-detail/role-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavTopBarComponent } from './nav-top-bar/nav-top-bar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RoleDeleteComponent } from './role-delete/role-delete.component';
+import { AutofocusDirective } from './directives/autofocus.directive';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     RoleListComponent,
     RoleDetailComponent,
     NavTopBarComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    RoleDeleteComponent,
+    AutofocusDirective
   ],
   imports: [
     BrowserModule,

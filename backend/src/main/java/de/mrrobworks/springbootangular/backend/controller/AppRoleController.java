@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,18 +28,23 @@ public class AppRoleController implements CorsConfiguration {
     return appRoleService.getAppRole(id);
   }
 
-  @GetMapping(value = "/list")
+  @GetMapping("/list")
   public List<AppRole> getAppRoles() {
     return appRoleService.getAppRoles();
   }
 
   @PutMapping("/{id}")
-  public void updateRole(@RequestBody AppRole appRole, @PathVariable String id) {
+  public void updateRole(@RequestBody AppRole appRole, @PathVariable("id") String id) {
     appRoleService.save(appRole);
   }
 
   @PostMapping("/add")
   public void addRole(@RequestBody AppRole appRole) {
     appRoleService.save(appRole);
+  }
+
+  @DeleteMapping("/{id}")
+  public void deleteRole(@PathVariable("id") String id) {
+    this.appRoleService.delete(id);
   }
 }
