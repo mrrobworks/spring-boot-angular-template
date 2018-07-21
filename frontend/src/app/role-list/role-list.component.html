@@ -4,17 +4,17 @@
   '{{selectedTemplateRoleId}}' success deleted.
 </div>
 <div class="alert alert-danger" role=alert *ngIf="deleteSuccess === false">Failure. Role
-  '{{selectedTemplateRoleId}}' not
-  deleted.
+  '{{selectedTemplateRoleId}}' not deleted.<br>Reason: {{statusMessage}}
 </div>
 
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#detailModal"
         data-whatever="@getbootstrap" (click)="init(DetailMode.NEW, TemplateRoleFactory.empty())">
-  New Role
+  <span class="oi oi-plus"></span>
+  New
 </button>
 
 <table class="table table-striped" [appShowIfPermission]="'ROLE_ADMIN'">
-  <thead>
+  <thead class="thead-light">
   <tr>
     <th scope="col">ID</th>
     <th scope="col">Description</th>
@@ -27,11 +27,12 @@
     <td>{{templateRole.description}}</td>
     <td>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal"
-              data-whatever="@getbootstrap" (click)="init(DetailMode.EDIT, templateRole)">Edit
-      </button>
+              data-whatever="@getbootstrap" (click)="init(DetailMode.EDIT, templateRole)">
+        <span class="oi oi-pencil"></span>
+      </button>&nbsp;
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
               data-whatever="@getbootstrap" (click)="openRoleDeleteDialog(templateRole.id)">
-        Delete
+        <span class="oi oi-trash"></span>
       </button>
     </td>
   </tr>

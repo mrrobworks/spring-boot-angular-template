@@ -16,6 +16,11 @@ export class RoleService {
   constructor(private http: HttpClient) {}
 
   private errorHandler(error: Error | any): Observable<any> {
+    const errMsg = error.message
+      ? error.message
+      : error.status
+        ? `${error.status} - ${error.statusText}`
+        : 'Server error';
     return throwError(error);
   }
 

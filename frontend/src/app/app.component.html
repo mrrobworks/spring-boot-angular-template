@@ -1,5 +1,9 @@
 <app-login *ngIf="!auth" (authenticated)="authenticated($event)"></app-login>
 
-<app-nav-top-bar [auth]="auth" (authenticated)="authenticated($event)" *ngIf="auth"></app-nav-top-bar>
 
-<router-outlet *ngIf="auth"></router-outlet>
+<app-nav-top-bar [auth]="auth" (authenticated)="authenticated($event)"
+                 *ngIf="auth"></app-nav-top-bar>
+
+<div class="container">
+  <router-outlet *ngIf="auth"></router-outlet>
+</div>

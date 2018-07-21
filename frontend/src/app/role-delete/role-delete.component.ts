@@ -16,7 +16,7 @@ import { RoleService } from '../services/role.service';
 export class RoleDeleteComponent implements OnInit {
   @Input() templateRoleId: string;
   @ViewChild('disposeModal') disposeModal: ElementRef;
-  @Output() reloadListEvent = new EventEmitter<boolean>();
+  @Output() reloadListEvent = new EventEmitter<any>();
 
   constructor(private roleService: RoleService) {}
 
@@ -26,12 +26,19 @@ export class RoleDeleteComponent implements OnInit {
     this.roleService.delete(this.templateRoleId).subscribe(
       value => {},
       error => {
+        console.log(error.message);
         this.disposeModal.nativeElement.click();
-        this.reloadListEvent.emit(false);
+        this.reloadListEvent.emit({
+          errorMessage: error.message,
+          deleteSuccess: false
+        });
       },
       () => {
         this.disposeModal.nativeElement.click();
-        this.reloadListEvent.emit(true);
+        this.reloadListEvent.emit({
+          errorMessage: '',
+          deleteSuccess: true
+        });
       }
     );
   }

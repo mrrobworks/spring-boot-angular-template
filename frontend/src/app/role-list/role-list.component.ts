@@ -17,6 +17,7 @@ export class RoleListComponent implements OnInit {
   detailMode: DetailMode;
   selectedTemplateRoleId: String;
   deleteSuccess: boolean;
+  statusMessage: string;
 
   constructor(private roleService: RoleService) {}
 
@@ -27,6 +28,7 @@ export class RoleListComponent implements OnInit {
   }
 
   init(detailMode: DetailMode, templateRole: TemplateRole) {
+    this.deleteSuccess = undefined;
     this.detailMode = detailMode;
     this.selectedTemplateRole = templateRole;
     this.roleService.initRoleDetail(this.detailMode, this.selectedTemplateRole);
@@ -40,9 +42,10 @@ export class RoleListComponent implements OnInit {
     }
   }
 
-  deleteActionDone(deleteSuccess: boolean) {
-    this.deleteSuccess = deleteSuccess;
-    this.reloadList(deleteSuccess);
+  deleteActionDone(event: any) {
+    this.deleteSuccess = event.deleteSuccess;
+    this.reloadList(event.deleteSuccess);
+    this.statusMessage = event.errorMessage;
   }
 
   openRoleDeleteDialog(templateRoleId: String) {

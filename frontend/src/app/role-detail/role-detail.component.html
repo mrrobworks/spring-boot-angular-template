@@ -14,6 +14,7 @@
         <div class="alert alert-danger" role="alert" *ngIf="roleSavedSuccessful === false">
           Failure while changing Role {{selectedTemplateRole.id}}
         </div>
+
         <form [formGroup]="form" (ngSubmit)="save(form.getRawValue())">
           <div class="form-group">
             <fieldset [disabled]="detailMode === DetailMode.EDIT">
