@@ -29,4 +29,12 @@ export class RoleListComponent implements OnInit {
     this.selectedTemplateRole = templateRole;
     this.roleService.initRoleDetail(this.detailMode, this.selectedTemplateRole);
   }
+
+  reloadList(isReload: boolean) {
+    if (isReload) {
+      this.roleService
+        .getAllRoles()
+        .subscribe(templateRoles => (this.templateRoles = templateRoles));
+    }
+  }
 }

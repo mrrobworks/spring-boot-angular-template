@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TemplateRole } from '../models/template-role';
 import { RoleService } from '../services/role.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,6 +17,7 @@ export class RoleDetailComponent implements OnInit {
   detailMode: DetailMode;
   DetailMode = DetailMode;
   selectedTemplateRole: TemplateRole;
+  @Output() reloadListEvent = new EventEmitter<boolean>();
 
   constructor(private roleService: RoleService, private fb: FormBuilder) {}
 
@@ -60,8 +61,18 @@ export class RoleDetailComponent implements OnInit {
 
   save(model: TemplateRole) {
     if (this.detailMode === DetailMode.NEW) {
-      this.roleService.add(model).subscribe();
-    } else {
+      this.roleService.add(model).subscribe(
+        value => {},
+        error => {
+          this.errorMsg = error.toString();
+          this.success = false;
+        },
+        () => {
+          this.success = true;
+          this.reloadListEvent.emit(this.success);
+        }
+      );
+    } else if (this.detailMode === DetailMode.EDIT) {
       this.roleService.update(model).subscribe(
         value => {},
         error => {
@@ -70,12 +81,13 @@ export class RoleDetailComponent implements OnInit {
         },
         () => {
           this.success = true;
+          this.reloadListEvent.emit(this.success);
         }
       );
     }
   }
 
   close() {
-    this.roleService.getAllRoles().subscribe();
+    this.reloadListEvent.emit(this.success);
   }
 }
