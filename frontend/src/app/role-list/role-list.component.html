@@ -8,7 +8,8 @@
 </div>
 
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#detailModal"
-        data-whatever="@getbootstrap" (click)="init(DetailMode.NEW, TemplateRoleFactory.empty())">
+        data-whatever="@getbootstrap"
+        (click)="openRoleDetailDialog(DetailMode.NEW, TemplateRoleFactory.empty())">
   <span class="oi oi-plus"></span>
   New
 </button>
@@ -27,7 +28,8 @@
     <td>{{templateRole.description}}</td>
     <td>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal"
-              data-whatever="@getbootstrap" (click)="init(DetailMode.EDIT, templateRole)">
+              data-whatever="@getbootstrap"
+              (click)="openRoleDetailDialog(DetailMode.EDIT, templateRole)">
         <span class="oi oi-pencil"></span>
       </button>&nbsp;
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
@@ -39,7 +41,7 @@
   </tbody>
 </table>
 
-<app-role-detail (reloadListEvent)="reloadList($event)"></app-role-detail>
+<app-role-detail (detailActionDoneEvent)="detailActionDone($event)"></app-role-detail>
 
 <app-role-delete [templateRoleId]="selectedTemplateRoleId"
-                 (reloadListEvent)="deleteActionDone($event)"></app-role-delete>
+                 (deleteActionDoneEvent)="deleteActionDone($event)"></app-role-delete>

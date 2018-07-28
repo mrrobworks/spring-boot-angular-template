@@ -3,7 +3,6 @@ import { TemplateRole } from '../models/template-role';
 import { RoleService } from '../services/role.service';
 import { TemplateRoleFactory } from '../models/template-role-factory';
 import { DetailMode } from '../models/detail-mode';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'app-role-list',
@@ -22,34 +21,45 @@ export class RoleListComponent implements OnInit {
   constructor(private roleService: RoleService) {}
 
   ngOnInit() {
+    this.loadRoleList();
+  }
+
+  private loadRoleList() {
     this.roleService
-      .getAllRoles()
+      .getRoles()
       .subscribe(templateRoles => (this.templateRoles = templateRoles));
   }
 
-  init(detailMode: DetailMode, templateRole: TemplateRole) {
+  private resetAlertMessages() {
     this.deleteSuccess = undefined;
-    this.detailMode = detailMode;
-    this.selectedTemplateRole = templateRole;
-    this.roleService.initRoleDetail(this.detailMode, this.selectedTemplateRole);
   }
 
-  reloadList(isReload: boolean) {
-    if (isReload) {
-      this.roleService
-        .getAllRoles()
-        .subscribe(templateRoles => (this.templateRoles = templateRoles));
+  openRoleDetailDialog(detailMode: DetailMode, templateRole: TemplateRole) {
+    this.resetAlertMessages();
+    this.detailMode = detailMode;
+    this.selectedTemplateRole = templateRole;
+    this.roleService.initRoleDetailComponent(
+      this.detailMode,
+      this.selectedTemplateRole
+    );
+  }
+
+  openRoleDeleteDialog(templateRoleId: String) {
+    this.resetAlertMessages();
+    this.selectedTemplateRoleId = templateRoleId;
+  }
+
+  detailActionDone(event: boolean) {
+    if (event) {
+      this.loadRoleList();
     }
   }
 
   deleteActionDone(event: any) {
     this.deleteSuccess = event.deleteSuccess;
-    this.reloadList(event.deleteSuccess);
+    if (this.deleteSuccess) {
+      this.loadRoleList();
+    }
     this.statusMessage = event.errorMessage;
-  }
-
-  openRoleDeleteDialog(templateRoleId: String) {
-    this.deleteSuccess = undefined;
-    this.selectedTemplateRoleId = templateRoleId;
   }
 }

@@ -17,12 +17,12 @@ export class RoleDetailComponent implements OnInit {
   detailMode: DetailMode;
   DetailMode = DetailMode;
   selectedTemplateRole: TemplateRole;
-  @Output() reloadListEvent = new EventEmitter<boolean>();
+  @Output() detailActionDoneEvent = new EventEmitter<boolean>();
 
   constructor(private roleService: RoleService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.roleService.roleDetailSubject
+    this.roleService.initRoleDetailComponentSubject
       .pipe(
         tap(value => {
           this.roleSavedSuccessful = undefined;
@@ -62,7 +62,7 @@ export class RoleDetailComponent implements OnInit {
 
   save(model: TemplateRole) {
     if (this.detailMode === DetailMode.NEW) {
-      this.roleService.add(model).subscribe(
+      this.roleService.addRole(model).subscribe(
         value => {},
         error => {
           this.errorMsg = error.toString();
@@ -70,11 +70,11 @@ export class RoleDetailComponent implements OnInit {
         },
         () => {
           this.roleSavedSuccessful = true;
-          this.reloadListEvent.emit(this.roleSavedSuccessful);
+          this.detailActionDoneEvent.emit(this.roleSavedSuccessful);
         }
       );
     } else if (this.detailMode === DetailMode.EDIT) {
-      this.roleService.update(model).subscribe(
+      this.roleService.updateRole(model).subscribe(
         value => {},
         error => {
           this.errorMsg = error.toString();
@@ -82,13 +82,13 @@ export class RoleDetailComponent implements OnInit {
         },
         () => {
           this.roleSavedSuccessful = true;
-          this.reloadListEvent.emit(this.roleSavedSuccessful);
+          this.detailActionDoneEvent.emit(this.roleSavedSuccessful);
         }
       );
     }
   }
 
   close() {
-    this.reloadListEvent.emit(this.roleSavedSuccessful);
+    this.detailActionDoneEvent.emit(this.roleSavedSuccessful);
   }
 }

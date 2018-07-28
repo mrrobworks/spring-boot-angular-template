@@ -11,7 +11,9 @@ import { DetailMode } from '../models/detail-mode';
 
 @Injectable()
 export class RoleService {
-  public roleDetailSubject = new Subject<any>();
+  private urlPrefix = '/backend/role';
+
+  public initRoleDetailComponentSubject = new Subject<any>();
 
   constructor(private http: HttpClient) {}
 
@@ -24,9 +26,19 @@ export class RoleService {
     return throwError(error);
   }
 
+  initRoleDetailComponent(
+    detailMode: DetailMode,
+    selectedTemplateRole: TemplateRole
+  ) {
+    this.initRoleDetailComponentSubject.next({
+      detailMode: detailMode,
+      selectedTemplateRole: selectedTemplateRole
+    });
+  }
+
   getRole(id: String): Observable<TemplateRole> {
     return this.http
-      .get<TemplateRoleRaw>(`/backend/role/${id}`)
+      .get<TemplateRoleRaw>(`${this.urlPrefix}/${id}`)
       .pipe(
         retry(3),
         map(templateRoleRaw => TemplateRoleFactory.fromObject(templateRoleRaw)),
@@ -34,9 +46,9 @@ export class RoleService {
       );
   }
 
-  getAllRoles(): Observable<Array<TemplateRole>> {
+  getRoles(): Observable<Array<TemplateRole>> {
     return this.http
-      .get<TemplateRoleRaw[]>('/backend/role/list')
+      .get<TemplateRoleRaw[]>(`${this.urlPrefix}/list`)
       .pipe(
         retry(3),
         map(templateRolesRaw =>
@@ -48,28 +60,24 @@ export class RoleService {
       );
   }
 
-  add(templateRole: TemplateRole): Observable<TemplateRole> {
+  addRole(templateRole: TemplateRole): Observable<TemplateRole> {
     return this.http
-      .post<TemplateRoleRaw>('/backend/role/add', templateRole)
+      .post<TemplateRoleRaw>(`${this.urlPrefix}/add`, templateRole)
       .pipe(catchError(this.errorHandler));
   }
 
-  update(templateRole: TemplateRole): Observable<TemplateRole> {
+  updateRole(templateRole: TemplateRole): Observable<TemplateRole> {
     return this.http
-      .put<TemplateRoleRaw>(`/backend/role/${templateRole.id}`, templateRole)
+      .put<TemplateRoleRaw>(
+        `${this.urlPrefix}/${templateRole.id}`,
+        templateRole
+      )
       .pipe(catchError(this.errorHandler));
   }
 
-  initRoleDetail(detailMode: DetailMode, selectedTemplateRole: TemplateRole) {
-    this.roleDetailSubject.next({
-      detailMode: detailMode,
-      selectedTemplateRole: selectedTemplateRole
-    });
-  }
-
-  delete(id: string) {
+  deleteRole(id: string) {
     return this.http
-      .delete<TemplateRoleRaw>(`/backend/role/${id}`)
+      .delete<TemplateRoleRaw>(`${this.urlPrefix}/${id}`)
       .pipe(catchError(this.errorHandler));
   }
 }

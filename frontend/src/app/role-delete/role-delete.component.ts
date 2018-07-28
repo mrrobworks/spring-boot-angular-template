@@ -3,7 +3,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild
 } from '@angular/core';
@@ -13,29 +12,25 @@ import { RoleService } from '../services/role.service';
   selector: 'app-role-delete',
   templateUrl: './role-delete.component.html'
 })
-export class RoleDeleteComponent implements OnInit {
+export class RoleDeleteComponent {
   @Input() templateRoleId: string;
+  @Output() deleteActionDoneEvent = new EventEmitter<any>();
   @ViewChild('disposeModal') disposeModal: ElementRef;
-  @Output() reloadListEvent = new EventEmitter<any>();
 
   constructor(private roleService: RoleService) {}
 
-  ngOnInit() {}
-
   deleteRole() {
-    this.roleService.delete(this.templateRoleId).subscribe(
+    this.disposeModal.nativeElement.click();
+    this.roleService.deleteRole(this.templateRoleId).subscribe(
       value => {},
       error => {
-        console.log(error.message);
-        this.disposeModal.nativeElement.click();
-        this.reloadListEvent.emit({
+        this.deleteActionDoneEvent.emit({
           errorMessage: error.message,
           deleteSuccess: false
         });
       },
       () => {
-        this.disposeModal.nativeElement.click();
-        this.reloadListEvent.emit({
+        this.deleteActionDoneEvent.emit({
           errorMessage: '',
           deleteSuccess: true
         });
