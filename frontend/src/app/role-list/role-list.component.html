@@ -1,11 +1,7 @@
 <h1 class="display-4">Role List</h1>
 
-<div class="alert alert-success" role=alert *ngIf="deleteSuccess === true">Role
-  '{{selectedTemplateRoleId}}' success deleted.
-</div>
-<div class="alert alert-danger" role=alert *ngIf="deleteSuccess === false">Failure. Role
-  '{{selectedTemplateRoleId}}' not deleted.<br>Reason: {{statusMessage}}
-</div>
+<div class="alert alert-success" role=alert *ngIf="deleteSuccessful === true">{{statusMessage}}</div>
+<div class="alert alert-danger" role=alert *ngIf="deleteSuccessful === false">{{statusMessage}}</div>
 
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#detailModal"
         data-whatever="@getbootstrap"
@@ -43,5 +39,4 @@
 
 <app-role-detail (detailActionDoneEvent)="detailActionDone($event)"></app-role-detail>
 
-<app-role-delete [templateRoleId]="selectedTemplateRoleId"
-                 (deleteActionDoneEvent)="deleteActionDone($event)"></app-role-delete>
+<app-role-delete (deleteActionDoneEvent)="deleteActionDone($event)"></app-role-delete>

@@ -2,7 +2,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  Input,
   Output,
   ViewChild
 } from '@angular/core';
@@ -13,11 +12,15 @@ import { RoleService } from '../services/role.service';
   templateUrl: './role-delete.component.html'
 })
 export class RoleDeleteComponent {
-  @Input() templateRoleId: string;
   @Output() deleteActionDoneEvent = new EventEmitter<any>();
   @ViewChild('disposeModal') disposeModal: ElementRef;
+  templateRoleId: string;
 
   constructor(private roleService: RoleService) {}
+
+  initComponent(templateRoleId: string) {
+    this.templateRoleId = templateRoleId;
+  }
 
   deleteRole() {
     this.disposeModal.nativeElement.click();
@@ -25,14 +28,16 @@ export class RoleDeleteComponent {
       value => {},
       error => {
         this.deleteActionDoneEvent.emit({
-          errorMessage: error.message,
-          deleteSuccess: false
+          statusMessage: `Failure. Role ${
+            this.templateRoleId
+          } not deleted. Reason: ${error.message}`,
+          deleteSuccessful: false
         });
       },
       () => {
         this.deleteActionDoneEvent.emit({
-          errorMessage: '',
-          deleteSuccess: true
+          statusMessage: `Role ${this.templateRoleId} successfully deleted.`,
+          deleteSuccessful: true
         });
       }
     );

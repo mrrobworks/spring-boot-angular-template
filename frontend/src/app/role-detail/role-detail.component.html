@@ -1,4 +1,4 @@
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" *ngIf="form">
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" *ngIf="selectedTemplateRole">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
@@ -8,11 +8,11 @@
       </div>
 
       <div class="modal-body">
-        <div class="alert alert-success" role="alert" *ngIf="roleSavedSuccessful === true">
-          Role {{selectedTemplateRole.id}} successfull changed.
+        <div class="alert alert-success" role="alert" *ngIf="saveSuccessful === true">
+          {{statusMessage}}
         </div>
-        <div class="alert alert-danger" role="alert" *ngIf="roleSavedSuccessful === false">
-          Failure while changing Role {{selectedTemplateRole.id}}
+        <div class="alert alert-danger" role="alert" *ngIf="saveSuccessful === false">
+          {{statusMessage}}
         </div>
 
         <form [formGroup]="form" (ngSubmit)="save(form.getRawValue())">

@@ -1,38 +1,31 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { TemplateRole } from '../models/template-role';
 import { RoleService } from '../services/role.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DetailMode } from '../models/detail-mode';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-role-detail',
   templateUrl: './role-detail.component.html'
 })
-export class RoleDetailComponent implements OnInit {
+export class RoleDetailComponent {
+  @Output() detailActionDoneEvent = new EventEmitter<boolean>();
   form: FormGroup;
   header: string;
-  errorMsg: string = undefined;
-  roleSavedSuccessful = undefined;
+  statusMessage: string = undefined;
+  saveSuccessful = undefined;
   detailMode: DetailMode;
   DetailMode = DetailMode;
   selectedTemplateRole: TemplateRole;
-  @Output() detailActionDoneEvent = new EventEmitter<boolean>();
 
   constructor(private roleService: RoleService, private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.roleService.initRoleDetailComponentSubject
-      .pipe(
-        tap(value => {
-          this.roleSavedSuccessful = undefined;
-          this.detailMode = value.detailMode;
-          this.selectedTemplateRole = value.selectedTemplateRole;
-          this.initDetailHeader();
-          this.initDetailForm();
-        })
-      )
-      .subscribe();
+  initComponent(detailMode: DetailMode, selectedTemplateRole: TemplateRole) {
+    this.saveSuccessful = undefined;
+    this.detailMode = detailMode;
+    this.selectedTemplateRole = selectedTemplateRole;
+    this.initDetailHeader();
+    this.initDetailForm();
   }
 
   public initDetailHeader(): void {
@@ -65,30 +58,42 @@ export class RoleDetailComponent implements OnInit {
       this.roleService.addRole(model).subscribe(
         value => {},
         error => {
-          this.errorMsg = error.toString();
-          this.roleSavedSuccessful = false;
+          this.saveSuccessful = false;
+          this.statusMessage = `Failure. New Role not created. Reason: ${
+            error.message
+          }`;
         },
         () => {
-          this.roleSavedSuccessful = true;
-          this.detailActionDoneEvent.emit(this.roleSavedSuccessful);
+          this.saveSuccessful = true;
+          this.statusMessage = `New Role ${
+            this.selectedTemplateRole.id
+          } successfully created.`;
+          this.detailActionDoneEvent.emit(this.saveSuccessful);
         }
       );
     } else if (this.detailMode === DetailMode.EDIT) {
       this.roleService.updateRole(model).subscribe(
         value => {},
         error => {
-          this.errorMsg = error.toString();
-          this.roleSavedSuccessful = false;
+          this.saveSuccessful = false;
+          this.statusMessage = `Failure. Role ${
+            this.selectedTemplateRole.id
+          } has not been changed. Reason: ${error.message}`;
         },
         () => {
-          this.roleSavedSuccessful = true;
-          this.detailActionDoneEvent.emit(this.roleSavedSuccessful);
+          this.saveSuccessful = true;
+          this.statusMessage = `Role ${
+            this.selectedTemplateRole.id
+          } successfully changed.`;
+          this.detailActionDoneEvent.emit(this.saveSuccessful);
         }
       );
     }
   }
 
   close() {
-    this.detailActionDoneEvent.emit(this.roleSavedSuccessful);
+    this.selectedTemplateRole = undefined;
+    this.detailMode = undefined;
+    this.detailActionDoneEvent.emit(this.saveSuccessful);
   }
 }

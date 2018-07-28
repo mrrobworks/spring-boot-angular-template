@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TemplateRole } from '../models/template-role';
 import { RoleService } from '../services/role.service';
 import { TemplateRoleFactory } from '../models/template-role-factory';
 import { DetailMode } from '../models/detail-mode';
+import { RoleDetailComponent } from '../role-detail/role-detail.component';
+import { RoleDeleteComponent } from '../role-delete/role-delete.component';
 
 @Component({
   selector: 'app-role-list',
   templateUrl: './role-list.component.html'
 })
 export class RoleListComponent implements OnInit {
-  selectedTemplateRole: TemplateRole;
-  templateRoles: TemplateRole[];
-  TemplateRoleFactory = TemplateRoleFactory;
+  @ViewChild(RoleDetailComponent) roleDetailComponent;
+  @ViewChild(RoleDeleteComponent) roleDeleteComponent;
   DetailMode = DetailMode;
-  detailMode: DetailMode;
-  selectedTemplateRoleId: String;
-  deleteSuccess: boolean;
+  TemplateRoleFactory = TemplateRoleFactory;
+  templateRoles: TemplateRole[];
+  deleteSuccessful: boolean;
   statusMessage: string;
 
   constructor(private roleService: RoleService) {}
@@ -31,22 +32,17 @@ export class RoleListComponent implements OnInit {
   }
 
   private resetAlertMessages() {
-    this.deleteSuccess = undefined;
+    this.deleteSuccessful = undefined;
   }
 
   openRoleDetailDialog(detailMode: DetailMode, templateRole: TemplateRole) {
     this.resetAlertMessages();
-    this.detailMode = detailMode;
-    this.selectedTemplateRole = templateRole;
-    this.roleService.initRoleDetailComponent(
-      this.detailMode,
-      this.selectedTemplateRole
-    );
+    this.roleDetailComponent.initComponent(detailMode, templateRole);
   }
 
-  openRoleDeleteDialog(templateRoleId: String) {
+  openRoleDeleteDialog(templateRoleId: string) {
     this.resetAlertMessages();
-    this.selectedTemplateRoleId = templateRoleId;
+    this.roleDeleteComponent.initComponent(templateRoleId);
   }
 
   detailActionDone(event: boolean) {
@@ -56,10 +52,10 @@ export class RoleListComponent implements OnInit {
   }
 
   deleteActionDone(event: any) {
-    this.deleteSuccess = event.deleteSuccess;
-    if (this.deleteSuccess) {
+    this.deleteSuccessful = event.deleteSuccessful;
+    if (this.deleteSuccessful) {
       this.loadRoleList();
     }
-    this.statusMessage = event.errorMessage;
+    this.statusMessage = event.statusMessage;
   }
 }

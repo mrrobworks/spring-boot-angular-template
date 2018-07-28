@@ -6,34 +6,15 @@ import { TemplateRole } from '../models/template-role';
 import { catchError, map, retry } from 'rxjs/operators';
 import { TemplateRoleFactory } from '../models/template-role-factory';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { Subject } from 'rxjs/Subject';
-import { DetailMode } from '../models/detail-mode';
 
 @Injectable()
 export class RoleService {
   private urlPrefix = '/backend/role';
 
-  public initRoleDetailComponentSubject = new Subject<any>();
-
   constructor(private http: HttpClient) {}
 
-  private errorHandler(error: Error | any): Observable<any> {
-    const errMsg = error.message
-      ? error.message
-      : error.status
-        ? `${error.status} - ${error.statusText}`
-        : 'Server error';
+  private static errorHandler(error: Error | any): Observable<any> {
     return throwError(error);
-  }
-
-  initRoleDetailComponent(
-    detailMode: DetailMode,
-    selectedTemplateRole: TemplateRole
-  ) {
-    this.initRoleDetailComponentSubject.next({
-      detailMode: detailMode,
-      selectedTemplateRole: selectedTemplateRole
-    });
   }
 
   getRole(id: String): Observable<TemplateRole> {
@@ -42,7 +23,7 @@ export class RoleService {
       .pipe(
         retry(3),
         map(templateRoleRaw => TemplateRoleFactory.fromObject(templateRoleRaw)),
-        catchError(this.errorHandler)
+        catchError(RoleService.errorHandler)
       );
   }
 
@@ -56,14 +37,14 @@ export class RoleService {
             TemplateRoleFactory.fromObject(oneTemplateRoleRaw)
           )
         ),
-        catchError(this.errorHandler)
+        catchError(RoleService.errorHandler)
       );
   }
 
   addRole(templateRole: TemplateRole): Observable<TemplateRole> {
     return this.http
       .post<TemplateRoleRaw>(`${this.urlPrefix}/add`, templateRole)
-      .pipe(catchError(this.errorHandler));
+      .pipe(catchError(RoleService.errorHandler));
   }
 
   updateRole(templateRole: TemplateRole): Observable<TemplateRole> {
@@ -72,12 +53,12 @@ export class RoleService {
         `${this.urlPrefix}/${templateRole.id}`,
         templateRole
       )
-      .pipe(catchError(this.errorHandler));
+      .pipe(catchError(RoleService.errorHandler));
   }
 
   deleteRole(id: string) {
     return this.http
       .delete<TemplateRoleRaw>(`${this.urlPrefix}/${id}`)
-      .pipe(catchError(this.errorHandler));
+      .pipe(catchError(RoleService.errorHandler));
   }
 }
