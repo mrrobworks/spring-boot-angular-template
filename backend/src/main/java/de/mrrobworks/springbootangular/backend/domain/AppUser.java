@@ -1,10 +1,6 @@
 package de.mrrobworks.springbootangular.backend.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,16 +20,14 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id") // End Lombok
 @Entity
 @Table(name = "app_user") // End JPA
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AppUser implements Serializable {
 
   @Id
   private String id;
 
   // TODO: Fetch.EAGER replace with @EntityGraph
+  @JsonIgnoreProperties("users")
   @ManyToMany(fetch = FetchType.EAGER)
-  @JsonManagedReference(value = "roles")
-  @JsonIgnore
   @JoinTable(name = "app_user_role",
     joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))

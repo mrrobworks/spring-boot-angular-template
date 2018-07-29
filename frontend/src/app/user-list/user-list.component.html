@@ -1,0 +1,22 @@
+<h1 class="display-4">User List</h1>
+
+<table class="table table-striped" [appShowIfPermission]="'ROLE_ADMIN'">
+  <thead class="thead-light">
+  <tr>
+    <th>User-ID</th>
+    <th>Roles</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let templateUser of templateUsers">
+    <td>{{templateUser.id}}</td>
+    <td>
+      <span *ngFor="let templateRole of templateUser.roles; last as lastTemplateRole">
+        {{templateRole.id}}<span *ngIf="!lastTemplateRole">, </span>
+      </span>
+    </td>
+    <td></td>
+  </tr>
+  </tbody>
+</table>

@@ -124,3 +124,4 @@ TODOs
 - [x] Update from Angular from Version 5 to 6
 - [ ] Update from Sping Boot from Version 2.0 to 2.0.2
 - [ ] Building Docker-Image with Spring-Boot and Angular
+- [ ] Comment Function for Blog-Entries (after successful login with userid)

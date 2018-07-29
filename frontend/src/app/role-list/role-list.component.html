@@ -1,7 +1,9 @@
 <h1 class="display-4">Role List</h1>
 
-<div class="alert alert-success" role=alert *ngIf="deleteSuccessful === true">{{statusMessage}}</div>
-<div class="alert alert-danger" role=alert *ngIf="deleteSuccessful === false">{{statusMessage}}</div>
+<div class="alert alert-success" role=alert *ngIf="deleteSuccessful === true">{{statusMessage}}
+</div>
+<div class="alert alert-danger" role=alert *ngIf="deleteSuccessful === false">{{statusMessage}}
+</div>
 
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#detailModal"
         data-whatever="@getbootstrap"

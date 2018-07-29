@@ -22,6 +22,8 @@ import { NavTopBarComponent } from './nav-top-bar/nav-top-bar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RoleDeleteComponent } from './role-delete/role-delete.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { AutofocusDirective } from './directives/autofocus.directive';
     NavTopBarComponent,
     UserProfileComponent,
     RoleDeleteComponent,
-    AutofocusDirective
+    AutofocusDirective,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { AutofocusDirective } from './directives/autofocus.directive';
     PersonListService,
     LoginService,
     AuthorizationService,
-    RoleService
+    RoleService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

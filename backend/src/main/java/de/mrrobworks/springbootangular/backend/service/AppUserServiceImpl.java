@@ -1,5 +1,6 @@
 package de.mrrobworks.springbootangular.backend.service;
 
+import java.util.List;
 import java.util.Optional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,10 @@ public class AppUserServiceImpl implements AppUserService {
   @Override
   public void createAppUser(AppUser appUser) {
     appUserRepository.save(appUser);
+  }
+
+  @Override
+  public List<AppUser> getAllAppUsers() {
+    return appUserRepository.findAll();
   }
 }

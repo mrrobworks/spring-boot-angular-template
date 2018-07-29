@@ -16,19 +16,23 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
     <ul class="navbar-nav mr-auto">
-      <!-- Menu-Item: Users -->
+
+      <!-- Menu-Item: Persons -->
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/personlist">Users <span
+        <a class="nav-link" routerLink="/personlist">Persons <span
           class="sr-only">(current)</span></a>
       </li>
+
+      <!-- Menu-Item: Users -->
+      <li class="nav-item">
+        <a href="" class="nav-link" routerLink="/userlist" [appShowIfPermission]="'ROLE_ADMIN'">Users</a>
+      </li>
+
       <!-- Menu-Item: Roles -->
       <li class="nav-item">
         <a class="nav-link" routerLink="/rolelist" [appShowIfPermission]="'ROLE_ADMIN'">Roles</a>
       </li>
-      <!-- Menu-Item: Assign User to Roles -->
-      <li class="nav-item">
-        <a href="" class="nav-link" [appShowIfPermission]="'ROLE_ADMIN'">Assign Users to Roles</a>
-      </li>
+
     </ul>
 
     <!-- Menu-Item (Drop-Down): Settings -->

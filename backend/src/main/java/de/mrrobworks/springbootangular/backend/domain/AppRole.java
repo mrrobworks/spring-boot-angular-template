@@ -1,8 +1,6 @@
 package de.mrrobworks.springbootangular.backend.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,6 @@ import org.springframework.security.core.GrantedAuthority;
 @EqualsAndHashCode(of = "id") // End Lombok
 @Entity
 @Table(name = "app_role") // End JPA
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AppRole implements GrantedAuthority, Serializable {
 
   @Id
@@ -29,7 +26,7 @@ public class AppRole implements GrantedAuthority, Serializable {
   private String description;
 
   // TODO: Fetch.EAGER replace with @EntityGraph
-  @JsonBackReference(value = "users")
+  @JsonIgnoreProperties("roles")
   @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
   private List<AppUser> users = new ArrayList<>();
 
