@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { UserService } from '../services/user.service';
 import { TemplateUser } from '../models/template-user';
+import {UserDetailComponent} from '../user-detail/user-detail.component';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html'
 })
 export class UserListComponent implements OnInit {
+  @ViewChild(UserDetailComponent) userDetailComponent;
   templateUsers: TemplateUser[];
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {
+    //document.getElementById('preloader').classList.add('hide');
+    //jQuery('select').selectpicker();
     this.getAllUsers();
   }
 
@@ -19,5 +23,15 @@ export class UserListComponent implements OnInit {
     return this.userService
       .getUsers()
       .subscribe(templateUsers => (this.templateUsers = templateUsers));
+  }
+
+  openUserDetail(templateUser: TemplateUser) {
+    this.userDetailComponent.initComponent(templateUser);
+  }
+
+  detailActionDone(event: boolean) {
+    if (event) {
+      this.getAllUsers();
+    }
   }
 }

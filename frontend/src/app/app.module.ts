@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,6 +25,7 @@ import { RoleDeleteComponent } from './role-delete/role-delete.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from './services/user.service';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,14 +40,16 @@ import { UserService } from './services/user.service';
     UserProfileComponent,
     RoleDeleteComponent,
     AutofocusDirective,
-    UserListComponent
+    UserListComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     PersonListService,

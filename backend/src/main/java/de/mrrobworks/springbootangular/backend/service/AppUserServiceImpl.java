@@ -30,4 +30,9 @@ public class AppUserServiceImpl implements AppUserService {
   public List<AppUser> getAllAppUsers() {
     return appUserRepository.findAll();
   }
+
+  @Override
+  public void save(AppUser appUser) {
+    appUserRepository.save(appUser);
+  }
 }

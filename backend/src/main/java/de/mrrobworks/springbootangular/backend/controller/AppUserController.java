@@ -8,13 +8,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/backend/user")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class AppUserController implements CorsConfiguration  {
+public class AppUserController implements CorsConfiguration {
 
   @NonNull
   private AppUserService appUserService;
@@ -27,6 +30,11 @@ public class AppUserController implements CorsConfiguration  {
   @GetMapping("/list")
   public List<AppUser> getAppUsers() {
     return appUserService.getAllAppUsers();
+  }
+
+  @PutMapping("/{id}")
+  public void updateUser(@RequestBody AppUser appUser, @PathVariable("id") String id) {
+    appUserService.save(appUser);
   }
 
   // @RequestMapping("/info")

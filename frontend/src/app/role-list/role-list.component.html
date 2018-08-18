@@ -5,7 +5,7 @@
 <div class="alert alert-danger" role=alert *ngIf="deleteSuccessful === false">{{statusMessage}}
 </div>
 
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#detailModal"
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#roleDetailModal"
         data-whatever="@getbootstrap"
         (click)="openRoleDetailDialog(DetailMode.NEW, TemplateRoleFactory.empty())">
   <span class="oi oi-plus"></span>
@@ -25,13 +25,12 @@
     <td>{{templateRole.id}}</td>
     <td>{{templateRole.description}}</td>
     <td>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal"
-              data-whatever="@getbootstrap"
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roleDetailModal"
               (click)="openRoleDetailDialog(DetailMode.EDIT, templateRole)">
         <span class="oi oi-pencil"></span>
       </button>&nbsp;
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
-              data-whatever="@getbootstrap" (click)="openRoleDeleteDialog(templateRole.id)">
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#roleDeleteModal"
+              (click)="openRoleDeleteDialog(templateRole.id)">
         <span class="oi oi-trash"></span>
       </button>
     </td>

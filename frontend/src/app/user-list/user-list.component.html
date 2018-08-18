@@ -16,7 +16,14 @@
         {{templateRole.id}}<span *ngIf="!lastTemplateRole">, </span>
       </span>
     </td>
-    <td></td>
+    <td>
+      <button type="button" class="btn btn-primary" data-toggle="modal"
+              data-target="#userDetailModal" (click)="openUserDetail(templateUser)">
+        <span class="oi oi-pencil"></span>
+      </button>
+    </td>
   </tr>
   </tbody>
 </table>
+
+<app-user-detail (detailActionDoneEvent)="detailActionDone($event)"></app-user-detail>

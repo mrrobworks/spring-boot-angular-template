@@ -11,4 +11,6 @@ public interface AppUserService {
   void createAppUser(final AppUser appUser);
 
   List<AppUser> getAllAppUsers();
+
+  void save(AppUser appUser);
 }

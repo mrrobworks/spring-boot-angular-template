@@ -17,8 +17,8 @@
 
 	<properties>
 		<eirslett.version>1.6</eirslett.version>
-		<npm.node.version>v8.9.0</npm.node.version>
-		<npm.version>5.5.1</npm.version>
+		<node.version>v8.11.4</node.version>
+		<npm.version>6.4.0</npm.version>
 	</properties>
 
 	<build>
@@ -35,7 +35,7 @@
 				<version>${eirslett.version}</version>
 
 				<configuration>
-					<nodeVersion>${npm.node.version}</nodeVersion>
+					<nodeVersion>${node.version}</nodeVersion>
 					<npmVersion>${npm.version}</npmVersion>
 					<nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
 					<npmDownloadRoot>http://registry.npmjs.org/npm/-/</npmDownloadRoot>

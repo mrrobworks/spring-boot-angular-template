@@ -20,6 +20,15 @@ export class UserService {
     return throwError(error);
   }
 
+  updateUser(templateUser: TemplateUser): Observable<TemplateUser> {
+    return this.http
+      .put<TemplateUserRaw>(
+        `${this.urlPrefix}/${templateUser.id}`,
+        templateUser
+      )
+      .pipe(catchError(UserService.errorHandler));
+  }
+
   getUsers(): Observable<Array<TemplateUser>> {
     return this.http
       .get<TemplateUserRaw[]>(`${this.urlPrefix}/list`)
