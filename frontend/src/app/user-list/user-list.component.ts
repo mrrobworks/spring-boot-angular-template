@@ -1,21 +1,27 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { TemplateUser } from '../models/template-user';
-import {UserDetailComponent} from '../user-detail/user-detail.component';
+import { UserDetailComponent } from '../user-detail/user-detail.component';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html'
 })
 export class UserListComponent implements OnInit {
-  @ViewChild(UserDetailComponent) userDetailComponent;
+  // @ViewChild(UserDetailComponent) userDetailComponent;
+
+  private userDetailComponent: UserDetailComponent;
+
+  @ViewChild(UserDetailComponent)
+  set content(userDetailComponent: UserDetailComponent) {
+    this.userDetailComponent = userDetailComponent;
+  }
+
   templateUsers: TemplateUser[];
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    //document.getElementById('preloader').classList.add('hide');
-    //jQuery('select').selectpicker();
     this.getAllUsers();
   }
 

@@ -1,7 +1,12 @@
-import { AfterViewInit, Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { TemplateUser } from '../models/template-user';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { TemplateRole } from '../models/template-role';
 import { RoleService } from '../services/role.service';
 
@@ -9,13 +14,14 @@ import { RoleService } from '../services/role.service';
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html'
 })
-export class UserDetailComponent implements AfterViewInit {
+export class UserDetailComponent implements OnInit {
   @Output() detailActionDoneEvent = new EventEmitter<boolean>();
   selectedTemplateUser: TemplateUser;
   form: FormGroup;
   templateRoles: TemplateRole[] = undefined;
   statusMessage: string = undefined;
   saveSuccessful = undefined;
+  refreshSelected = false;
 
   constructor(
     private userService: UserService,
@@ -23,29 +29,22 @@ export class UserDetailComponent implements AfterViewInit {
     private roleService: RoleService
   ) {}
 
-  ngAfterViewInit(): void {
-    //document.getElementById('preloader').classList.add('hide');
-    // jQuery('select').selectpicker();
-    /*jQuery('select').selectpicker({
-      style: 'btn form-control btn-sm',
-    });*/
-
-    this.roleService
-      .getRoles()
-      .subscribe(templateRoles => (this.templateRoles = templateRoles));
+  ngOnInit(): void {
+    this.roleService.getRoles().subscribe(templateRoles => {
+      this.templateRoles = templateRoles;
+    });
   }
 
   initComponent(selectedTemplateUser: TemplateUser) {
-    //document.getElementById('preloader').classList.add('hide');
-    //jQuery('select').selectpicker();
     this.saveSuccessful = undefined;
+    this.refreshSelected = false;
     this.selectedTemplateUser = selectedTemplateUser;
     this.initDetailForm();
   }
 
   public initDetailForm(): void {
     if (this.form !== undefined) {
-      //this.form.reset();
+      this.form.reset();
     }
 
     this.form = this.fb.group({
@@ -82,16 +81,20 @@ export class UserDetailComponent implements AfterViewInit {
     this.selectedTemplateUser = undefined;
   }
 
-  hasRole(role: TemplateRole): TemplateRole {
-    const templateRole = this.templateRoles.includes(role) ? role : undefined;
-    return role;
-  }
-
-  compareFn(role1: TemplateRole, role2: TemplateRole): boolean {
+  compareRoles(role1: TemplateRole, role2: TemplateRole): boolean {
     if (role1 === undefined || role2 === undefined) {
       return false;
     }
-    //return role1 && role2 ? role1.id === role2.id : role1 === role2;
     return role1.id === role2.id;
+  }
+
+  refreshSelect() {
+    if (!this.refreshSelected && this.selectedTemplateUser !== undefined) {
+      this.refreshSelected = true;
+      setTimeout(() => {
+        console.log('Refresh data for bootstrap-select selectpicker.');
+        jQuery('select').selectpicker('refresh');
+      }, 200);
+    }
   }
 }
