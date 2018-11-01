@@ -1,12 +1,5 @@
 package de.mrrobworks.springbootangular.backend.repository;
 
-import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
@@ -14,6 +7,11 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import de.mrrobworks.springbootangular.backend.domain.Person;
 import de.mrrobworks.springbootangular.backend.helper.DbUnitTestCase;
 import de.mrrobworks.springbootangular.backend.helper.EnableDatabaseManager;
+import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * Test-Class for Persons.
@@ -21,7 +19,6 @@ import de.mrrobworks.springbootangular.backend.helper.EnableDatabaseManager;
  * @author robert
  */
 @SpringBootTest
-@ExtendWith(SpringExtension.class)
 class PersonRepositoryTest extends EnableDatabaseManager implements DbUnitTestCase {
 
   @Autowired
