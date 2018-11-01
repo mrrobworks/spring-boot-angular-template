@@ -1,9 +1,6 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import 'rxjs/add/operator/finally';
-import { Output } from '@angular/core';
 import { LoginService } from '../services/login.service';
-import { TemplateUserFactory } from '../models/template-user-factory';
 import { AuthorizationService } from '../services/authorization.service';
 
 @Component({
@@ -11,14 +8,12 @@ import { AuthorizationService } from '../services/authorization.service';
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-  title = 'Spring-Boot 2 + Angular 6 Web-Template';
-  auth = false;
-  @Output() authenticated = new EventEmitter<boolean>();
-  templateUser = TemplateUserFactory.empty();
+  @Output()
+  private loginEvent = new EventEmitter<boolean>();
+
+  private currentUser;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
     private loginService: LoginService,
     private authService: AuthorizationService
   ) {}
@@ -29,24 +24,24 @@ export class LoginComponent implements OnInit {
 
   authenticate() {
     this.loginService
-      .getTemplateUser()
+      .authenticate()
       .finally(() => {
-        this.authenticated.emit(this.auth);
+        console.log('Authentication done.');
       })
       .subscribe(
         templateUser => {
-          this.templateUser = templateUser;
-          this.auth = templateUser['id'] ? true : false;
-          if (this.auth) {
-            sessionStorage.setItem(
-              'currentUser',
-              JSON.stringify(this.templateUser)
-            );
-            this.authService.initializePermissions();
-          }
+          console.log('Authentication success.');
+          this.currentUser = templateUser;
+          sessionStorage.setItem(
+            'currentUser',
+            JSON.stringify(this.currentUser)
+          );
+          this.authService.initializePermissions();
+          this.loginEvent.emit(true);
         },
-        () => {
-          this.auth = false;
+        error => {
+          console.log('Authentication fail.');
+          this.loginEvent.emit(false);
         }
       );
   }

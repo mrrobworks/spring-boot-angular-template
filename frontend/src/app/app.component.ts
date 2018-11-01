@@ -1,24 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import 'rxjs/add/operator/finally';
 import { TemplateUser } from './models/template-user';
+import { NavTopBarComponent } from './nav-top-bar/nav-top-bar.component';
+import { LoginComponent } from './login/login.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  title = 'Spring Boot 2 + Angular 5 Template';
-  auth = false;
-  currentUser: TemplateUser = undefined;
+  @ViewChild(NavTopBarComponent)
+  private navTopBarComponent: NavTopBarComponent;
+
+  @ViewChild(LoginComponent)
+  private loginComponent: LoginComponent;
+
+  currentUser: TemplateUser;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.currentUser =
-      this.auth === true
-        ? JSON.parse(sessionStorage.getItem('currentUser'))
-        : undefined;
+    this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
   }
 
-  authenticated(auth: boolean) {
-    this.auth = auth;
+  receiveLoginEvent(success: boolean) {
+    if (success) {
+      this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+      this.router.navigate(['/personlist']);
+    } else {
+      this.currentUser = null;
+    }
+    this.navTopBarComponent.enableOrDisableComponents();
+  }
+
+  receiveLogoutEvent() {
+    this.currentUser = null;
+    this.navTopBarComponent.enableOrDisableComponents();
   }
 }

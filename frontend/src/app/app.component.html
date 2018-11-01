@@ -1,9 +1,7 @@
-<app-login *ngIf="!auth" (authenticated)="authenticated($event)"></app-login>
+<app-nav-top-bar (logoutEvent)="receiveLogoutEvent()"></app-nav-top-bar>
 
+<app-login *ngIf="!currentUser" (loginEvent)="receiveLoginEvent($event)"></app-login>
 
-<app-nav-top-bar [auth]="auth" (authenticated)="authenticated($event)"
-                 *ngIf="auth"></app-nav-top-bar>
-
-<div class="container">
-  <router-outlet *ngIf="auth"></router-outlet>
+<div class="container-fluid py-3" *ngIf="currentUser" style="width:100%; height:100%;">
+  <router-outlet></router-outlet>
 </div>

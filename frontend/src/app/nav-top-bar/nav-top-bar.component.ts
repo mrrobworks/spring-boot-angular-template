@@ -1,31 +1,43 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import { TemplateUser } from '../models/template-user';
 
 @Component({
   selector: 'app-nav-top-bar',
   templateUrl: './nav-top-bar.component.html',
   styles: [
-    `.dropdown-menu a {
-    color: #ff0000 !important;
-  }`
+    `
+      .dropdown-menu a {
+        color: #ff0000 !important;
+      }
+    `
   ]
 })
 export class NavTopBarComponent implements OnInit {
-  @Output() authenticated = new EventEmitter<boolean>();
-  @Input() auth: boolean;
-  currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+  @Output()
+  private logoutEvent = new EventEmitter<boolean>();
+
+  currentUser: TemplateUser;
 
   constructor(private loginService: LoginService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.enableOrDisableComponents();
+  }
+
+  enableOrDisableComponents() {
+    this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+  }
 
   logout() {
     this.loginService
       .logout()
       .finally(() => {
-        this.auth = false;
-        this.authenticated.emit(this.auth);
-        sessionStorage.setItem('currentUser', undefined);
+        if (sessionStorage.getItem('currentUser') !== null) {
+          sessionStorage.removeItem('currentUser');
+        }
+        this.logoutEvent.emit();
+        console.log('Benutzer wurde erfolgreich abgemeldet.');
       })
       .subscribe();
   }

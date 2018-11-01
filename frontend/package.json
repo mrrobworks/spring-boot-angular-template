@@ -31,6 +31,7 @@
     "material-design-icons": "^3.0.1",
     "open-iconic": "^1.1.1",
     "popper.js": "^1.14.3",
+    "prettier": "^1.14.2",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.0.0-rc.0",
     "zone.js": "^0.8.26"
