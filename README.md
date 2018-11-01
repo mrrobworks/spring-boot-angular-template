@@ -1,13 +1,13 @@
 Spring-Boot-Angular-Template
 ----------------------------
-Template for a new Web-Project with OAuth 2.0 User Authentication (Google, Github). Spring-Boot 2 with Java 8 as Backend and Angular 6 as Frontend.
+Template for a new Web-Project with OAuth 2.0 User Authentication (Google). Spring-Boot 2 with Java 11 as Backend and Angular 7 with Bootstrap 4 as Frontend.
 
 Technology-Stack:
 -----------------
 * :leaves: Spring-Boot 2 (Spring AOP, Spring Web, Spring Data JPA, Spring Security)
-* :a: Angular 6 (TypeScript, HTML, CSS)
+* :a: Angular 7 (Bootstrap 4, TypeScript, HTML, CSS)
 * :lock: OAuth 2.0 Authentication
-* :coffee: [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)**
+* :coffee: [JDK 11](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)**
 * [Maven](https://maven.apache.org/download.cgi)**
 * Lombok
 * :droplet: Liquibase
@@ -21,7 +21,7 @@ Technology-Stack:
 Modules
 -------
 * backend - Spring-Boot 2
-* frontend - Angular 6
+* frontend - Angular 7
 * dbsetup - Liquibase Database-Setup with MariaDB as Database for the backend
 
 Installation-Instructions
@@ -118,10 +118,8 @@ TODOs
 - [x] User-Roles Access on custom sites / elements
 - [x] Angular / CSS / Bootstrap (Angular-Material Implemented)
 - [ ] Profile in OAuthSecurityConfiguration (Google, Github)
-- [ ] User-Role-assignment through webapplication
+- [x] User-Role-assignment through webapplication
 - [x] Save LoggedIn User to Session
 - [ ] CRUD Roles for Administrator of the Application
-- [x] Update from Angular from Version 5 to 6
-- [ ] Update from Sping Boot from Version 2.0 to 2.0.2
 - [ ] Building Docker-Image with Spring-Boot and Angular
 - [ ] Comment Function for Blog-Entries (after successful login with userid)
