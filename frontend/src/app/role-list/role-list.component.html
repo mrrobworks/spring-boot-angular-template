@@ -34,19 +34,21 @@
 </div>
 
 <div class="row" style="height:100%">
-  <div id="div-ag-grid" #divAgGrid style="width:100%; height:100%">
-    <ag-grid-angular id="ag-grid" class="ag-theme-balham" #agGrid style="width:100%; height:100%;"
-                     rowSelection="single"
-                     (gridReady)="agGridRoleList.onGridReady($event.api)"
-                     (gridSizeChanged)="agGridRoleList.resizeColumns($event.columnApi)"
-                     (modelUpdated)="agGridRoleList.resizeColumns($event.columnApi)"
-                     [columnDefs]="agGridRoleList.columnDefs"
-                     [rowData]="templateRoles"
-                     [gridOptions]="agGridRoleList.gridOptions"
-                     enableSorting="true"
-                     floatingFilter="true"
-                     domLayout="normal">
-    </ag-grid-angular>
+  <div class="col" style="width:100%; height:100%">
+    <div id="div-ag-grid" #divAgGrid style="width:100%; height:100%">
+      <ag-grid-angular id="ag-grid" class="ag-theme-balham" #agGrid style="width:100%; height:100%;"
+                       rowSelection="single"
+                       (gridReady)="agGridRoleList.onGridReady($event.api)"
+                       (gridSizeChanged)="agGridRoleList.resizeColumns($event.columnApi)"
+                       (modelUpdated)="agGridRoleList.resizeColumns($event.columnApi)"
+                       [columnDefs]="agGridRoleList.columnDefs"
+                       [rowData]="templateRoles"
+                       [gridOptions]="agGridRoleList.gridOptions"
+                       enableSorting="true"
+                       floatingFilter="true"
+                       domLayout="normal">
+      </ag-grid-angular>
+    </div>
   </div>
 </div>
 

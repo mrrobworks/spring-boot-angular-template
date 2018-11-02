@@ -1,35 +1,42 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to Spring-Boot 2 + Angular 6 Web-Template!
-  </h1>
-  <img width="150" alt="Angular Logo"
-       src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg== ">
-</div>
-
-<div class="container py-5">
-  <div class="row">
+<div class="container-fluid h-100 d-flex justify-content-center">
+  <div class="row my-auto">
     <div class="col-md-12">
-      <h2 class="text-center text-white mb-4">Bootstrap 4 Login Form</h2>
       <div class="row">
-        <div class="col-md-6 mx-auto">
-
+        <div class="col-md-12 mx-auto">
+          <div class="jumbotron shadow">
+            <h3 class="mb-1 text-center">
+              <span class="oi oi-lock-locked"></span>
+              &nbsp; Login for Spring-Boot-Angular-Template
+            </h3>
+          </div>
           <!-- form card login -->
-          <div class="card rounded-0">
-            <div class="card-header">
-              <h3 class="mb-0">Login</h3>
-            </div>
+          <div class="card rounded-1">
             <div class="card-body">
-              <span>Authentication through your Google-Account.</span>
-              <a href="/login" class="btn btn-success  btn-lg float-right" id="btnLogin">
-                <span class="oi oi-account-login"></span>
-                Login
-              </a>
-
+              <div class="row">
+                <div class="col-4">Choose your Account:</div>
+                <div class="col-8">
+                  <fieldset>
+                    <input type="radio" name="account" id="google" checked>
+                    <!-- TODO: Icons for Google and Github not shown with Font-Awesome -->
+                    <!--<i class="fa fa-google"></i>-->
+                    <label for="google">&nbsp;Google</label>&nbsp;
+                    <input type="radio" name="account" id="github">
+                    <!--<i class="fa fa-github"></i>-->
+                    <label for="github">&nbsp;Github</label>
+                  </fieldset>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <a href="/login" class="btn btn-primary btn-block">
+                    Login
+                  </a>
+                </div>
+              </div>
             </div>
             <!--/card-block-->
           </div>
           <!-- /form card login -->
-
         </div>
       </div>
       <!--/row-->
