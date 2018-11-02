@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import 'rxjs/add/operator/finally';
 import { LoginService } from '../services/login.service';
-import { AuthorizationService } from '../services/authorization.service';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +13,7 @@ export class LoginComponent implements OnInit {
   private currentUser;
 
   constructor(
-    private loginService: LoginService,
-    private authService: AuthorizationService
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
@@ -36,7 +34,6 @@ export class LoginComponent implements OnInit {
             'currentUser',
             JSON.stringify(this.currentUser)
           );
-          this.authService.initializePermissions();
           this.loginEvent.emit(true);
         },
         error => {
