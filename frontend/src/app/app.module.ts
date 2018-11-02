@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PersonListComponent } from './person-list/person-list.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { PersonListService } from './services/person-list.service';
 import { LoginComponent } from './login/login.component';
@@ -49,7 +50,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AgGridModule.withComponents([])
   ],
   providers: [
     PersonListService,

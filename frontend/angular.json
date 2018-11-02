@@ -21,7 +21,8 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
+              "src/ag-grid-kvwl.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/open-iconic/font/css/open-iconic-bootstrap.css"
             ],
@@ -130,7 +131,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "styleext": "css"
+      "styleext": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "app"

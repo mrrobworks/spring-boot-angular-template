@@ -5,38 +5,44 @@
 <div class="alert alert-danger" role=alert *ngIf="deleteSuccessful === false">{{statusMessage}}
 </div>
 
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#roleDetailModal"
-        data-whatever="@getbootstrap"
-        (click)="openRoleDetailDialog(DetailMode.NEW, TemplateRoleFactory.empty())">
-  <span class="oi oi-plus"></span>
-  New
-</button>
 
-<table class="table table-striped" [appShowIfPermission]="'ROLE_ADMIN'">
-  <thead class="thead-light">
-  <tr>
-    <th scope="col">ID</th>
-    <th scope="col">Description</th>
-    <th scope="col">Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let templateRole of templateRoles">
-    <td>{{templateRole.id}}</td>
-    <td>{{templateRole.description}}</td>
-    <td>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#roleDetailModal"
-              (click)="openRoleDetailDialog(DetailMode.EDIT, templateRole)">
-        <span class="oi oi-pencil"></span>
-      </button>&nbsp;
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#roleDeleteModal"
-              (click)="openRoleDeleteDialog(templateRole.id)">
-        <span class="oi oi-trash"></span>
-      </button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div [appShowIfPermission]="'ROLE_ADMIN'">
+  <div>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#roleDetailModal"
+            data-whatever="@getbootstrap"
+            (click)="openRoleDetailDialog(DetailMode.NEW)">
+      <span class="oi oi-plus"></span>
+    </button>
+    <!-- TODO: Access through method rowSelected causes unnecessary calls -->
+    <button [disabled]="!agGridRoleList.rowsSelected()" type="button" class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#roleDetailModal"
+            (click)="openRoleDetailDialog(DetailMode.EDIT)">
+      <span class="oi oi-pencil"></span>
+    </button>
+    <!-- TODO: Access through method rowSelected causes unnecessary calls -->
+    <button [disabled]="!agGridRoleList.rowsSelected()" type="button" class="btn btn-danger"
+            data-toggle="modal"
+            data-target="#roleDeleteModal"
+            (click)="openRoleDeleteDialog()">
+      <span class="oi oi-trash"></span>
+    </button>
+  </div>
+
+  <div id="div-ag-grid" #divAgGrid style="width:100%; height:100%">
+    <ag-grid-angular id="ag-grid" class="ag-theme-balham" #agGrid style="width:100%; height:400px"
+                     rowSelection="single"
+                     (gridReady)="agGridRoleList.onGridReady($event.api)"
+                     (gridSizeChanged)="agGridRoleList.resizeColumns($event.columnApi)"
+                     (modelUpdated)="agGridRoleList.resizeColumns($event.columnApi)"
+                     [columnDefs]="agGridRoleList.columnDefs"
+                     [rowData]="templateRoles"
+                     [gridOptions]="agGridRoleList.gridOptions"
+                     enableSorting="true"
+                     floatingFilter="true">
+    </ag-grid-angular>
+  </div>
+</div>
 
 <app-role-detail (detailActionDoneEvent)="detailActionDone($event)"></app-role-detail>
 
