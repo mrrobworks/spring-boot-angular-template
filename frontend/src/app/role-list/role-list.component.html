@@ -10,27 +10,38 @@
 
 <div class="row align-items-baseline" [appShowIfPermission]="'ROLE_ADMIN'">
   <div class="col">
-    <h1 class="display-4">Role List</h1>
+    <div class="template-title"><h4>Role List</h4></div>
   </div>
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#roleDetailModal"
-          data-whatever="@getbootstrap"
-          (click)="openRoleDetailDialog(DetailMode.NEW)">
-    <span class="oi oi-plus"></span>
-  </button>
-  <!-- TODO: Access through method rowSelected causes unnecessary calls -->
-  <button [disabled]="!agGridRoleList.rowsSelected()" type="button" class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#roleDetailModal"
-          (click)="openRoleDetailDialog(DetailMode.EDIT)">
-    <span class="oi oi-pencil"></span>
-  </button>
-  <!-- TODO: Access through method rowSelected causes unnecessary calls -->
-  <button [disabled]="!agGridRoleList.rowsSelected()" type="button" class="btn btn-danger"
-          data-toggle="modal"
-          data-target="#roleDeleteModal"
-          (click)="openRoleDeleteDialog()">
-    <span class="oi oi-trash"></span>
-  </button>
+  <div class="col button-sidebar">
+    <div class="row">
+      <div class="col-4">
+        <button type="button" class="btn btn-success button-title" data-toggle="modal"
+                data-target="#roleDetailModal"
+                data-whatever="@getbootstrap" (click)="openRoleDetailDialog(DetailMode.NEW)">
+          <!--<span class="oi oi-plus"></span>-->
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+      <!-- TODO: Access through method rowSelected causes unnecessary calls -->
+      <div class="col-4">
+        <button #btnEdit [disabled]="!agGridRoleList.rowsSelected()" type="button"
+                class="btn btn-primary button-title"
+                data-toggle="modal" data-target="#roleDetailModal"
+                (click)="openRoleDetailDialog(DetailMode.EDIT)">
+          <!--<span class="oi oi-pencil"></span>-->
+          <i class="fa fa-pen"></i>
+        </button>
+      </div>
+      <div class="col-4">
+        <!-- TODO: Access through method rowSelected causes unnecessary calls -->
+        <button [disabled]="!agGridRoleList.rowsSelected()" type="button" class="btn btn-danger button-title"
+                data-toggle="modal" data-target="#roleDeleteModal" (click)="openRoleDeleteDialog()">
+          <!--<span class="oi oi-trash"></span>-->
+          <i class="fa fa-trash-alt"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row" style="height:100%">
@@ -41,6 +52,7 @@
                        (gridReady)="agGridRoleList.onGridReady($event.api)"
                        (gridSizeChanged)="agGridRoleList.resizeColumns($event.columnApi)"
                        (modelUpdated)="agGridRoleList.resizeColumns($event.columnApi)"
+                       (rowDoubleClicked)="agGridRoleList.onRowDoubleClicked()"
                        [columnDefs]="agGridRoleList.columnDefs"
                        [rowData]="templateRoles"
                        [gridOptions]="agGridRoleList.gridOptions"

@@ -1,10 +1,44 @@
 @import '../node_modules/bootstrap-select/sass/bootstrap-select.scss';
 
-html, body {
-  height: 95%;
+html,
+body {
+  height: calc(100% - 60px);
   background-color: #ddd9d1;
 }
 
 .container-fluid {
   background-color: #ddd9d1;
 }
+
+.template-title {
+  padding-top: 9px;
+  padding-bottom: 0;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  border-left: 35px solid #4472c4;
+  border-bottom: 4px solid #4472c4;
+  background-color: #b4c6e7;
+  color: black;
+}
+
+.button-sidebar {
+  -ms-flex: 0 0 170px !important;
+  flex: 0 0 170px !important;
+  margin-right: 18px;
+  margin-left: -10px;
+}
+
+.button-title {
+  padding: 9px 14px !important;
+}
+
+.button-title:disabled {
+  background-color: gray !important;
+  border-color: gray !important;
+}
+
+//@media (max-width: 690px) {
+//  .my-sidebar {
+//    display: none;
+//  }
+//}

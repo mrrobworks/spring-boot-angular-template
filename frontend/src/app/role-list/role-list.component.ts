@@ -22,6 +22,9 @@ export class RoleListComponent implements OnInit {
   @ViewChild('divAgGrid')
   private divAgGrid: ElementRef;
 
+  @ViewChild('btnEdit')
+  private btnEdit: ElementRef;
+
   DetailMode = DetailMode;
   templateRoles: TemplateRole[];
   deleteSuccessful: boolean;
@@ -33,7 +36,7 @@ export class RoleListComponent implements OnInit {
 
   ngOnInit() {
     this.agGridRoleList = new class extends AgGridBase {
-      constructor(public roleListComponent: RoleListComponent) {
+      constructor(private roleListComponent: RoleListComponent) {
         super(roleListComponent.divAgGrid);
       }
 
@@ -48,6 +51,10 @@ export class RoleListComponent implements OnInit {
       onGridReady(api: GridApi): void {
         this.api = api;
         this.roleListComponent.loadRoleList();
+      }
+
+      onRowDoubleClicked(): void {
+        this.roleListComponent.btnEdit.nativeElement.click();
       }
     }(this);
   }

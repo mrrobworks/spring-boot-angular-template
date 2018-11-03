@@ -1,15 +1,17 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TemplateRole } from '../models/template-role';
 import { RoleService } from '../services/role.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DetailMode } from '../models/detail-mode';
+import { TemplateRoleFactory } from '../models/template-role-factory';
 
 @Component({
   selector: 'app-role-detail',
   templateUrl: './role-detail.component.html'
 })
-export class RoleDetailComponent {
-  @Output() detailActionDoneEvent = new EventEmitter<boolean>();
+export class RoleDetailComponent implements OnInit {
+  @Output()
+  detailActionDoneEvent = new EventEmitter<boolean>();
   form: FormGroup;
   header: string;
   statusMessage: string = undefined;
@@ -19,6 +21,10 @@ export class RoleDetailComponent {
   selectedTemplateRole: TemplateRole;
 
   constructor(private roleService: RoleService, private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.initComponent(DetailMode.UNDEFINED, TemplateRoleFactory.empty());
+  }
 
   initComponent(detailMode: DetailMode, selectedTemplateRole: TemplateRole) {
     this.saveSuccessful = undefined;

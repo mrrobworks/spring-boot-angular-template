@@ -21,12 +21,12 @@ export abstract class AgGridBase {
   private static defaultGridOptions(): GridOptions {
     const gridOptions: GridOptions = <GridOptions>{
       rowHeight: 32,
-      rowStyle: { background: '#e2efd9' }
+      rowStyle: { background: '#d9e2f3' }
     };
 
     gridOptions.getRowStyle = function(params) {
       if (params.node.rowIndex % 2 === 0) {
-        return { background: '#c5e0b3' };
+        return { background: '#b4c6e7' };
       }
     };
 
@@ -57,7 +57,7 @@ export abstract class AgGridBase {
     const lastColumn = allColumns[allColumns.length - 1] as Column;
 
     if (gridWidth > allColumnsSize) {
-      const offset = 31;
+      const offset = 0;
       lastColumn.setActualWidth(
         gridWidth - columnWidthWithoutLastColumn - offset
       );

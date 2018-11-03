@@ -3,7 +3,7 @@ $icons-path: '../node_modules/ag-grid-community/src/styles/icons/';
 $border-color: #adaba6;
 $font-size: 13px;
 $font-family: Arial;
-$background-color: #e2efd9;
+$background-color: #b4c6e7;
 $header-background-color: #dedad2;
 $row-height: 32px;
 $range-selection-background-color: rgba(255, 120, 120, 0.4);
@@ -17,7 +17,7 @@ $active: rgba(255, 255, 255, .4) !default;
 
 .ag-row-selected {
   color: white !important;
-  background-color: #70AD47 !important;
+  background-color: #4472c4 !important;
 }
 
 @import '../node_modules/ag-grid-community/src/styles/ag-theme-balham.scss';
