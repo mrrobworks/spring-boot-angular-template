@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// TODO: Replace JPA-Entity AppRole with AppRoleViewModel
 @RestController
 @RequestMapping("/backend/role")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

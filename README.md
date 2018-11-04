@@ -1,6 +1,9 @@
 Spring-Boot-Angular-Template
 ----------------------------
-Template for a new Web-Project with OAuth 2.0 User Authentication (Google). Spring-Boot 2 with Java 11 as Backend and Angular 7 with Bootstrap 4 as Frontend.
+Template for a new Web-Application with OAuth 2.0 User Authentication (Google). Spring-Boot 2 with
+Java 11 as Backend and Angular 7 with Bootstrap 4 as Frontend. A User with a Google-Account
+(no additional registration required) get access to the Web-Application and get at first the
+Default-Role ROLE_USER. The Role-Management is implemented in the Web-Application.
 
 Technology-Stack:
 -----------------
@@ -9,12 +12,13 @@ Technology-Stack:
 * :lock: OAuth 2.0 Authentication
 * :coffee: [JDK 11](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)**
 * [Maven](https://maven.apache.org/download.cgi)**
-* Lombok
+* [Lombok](https://projectlombok.org/download)**
 * :droplet: Liquibase
 * [MariaDB](https://mariadb.org/download/)**
 * JUnit 5
 * DBUnit 1.3 with HSQLDB
 * Logback (logback-spring.xml)
+* [Git](https://git-scm.com/downloads)**
 
 ** Need to be installed on the Operating System
 
@@ -87,12 +91,6 @@ $ sh WEBAPP-spring-boot-angular-template.sh
 
 * Open your Browser on `http://localhost:8081`
 
-Development-Requirements
-------------------------
-* [Spring Tool Suite](https://spring.io/tools/sts/all)
-* [Lombok](https://projectlombok.org/download)
-* [Git](https://git-scm.com/downloads)
-
 Authentication-Concept:
 -----------------------
 * User authenticate through username + password from a custom Google
@@ -106,12 +104,6 @@ JPA-AppUser-Object
 * AppUser-Object get Roles from the backend-db and can be added
 there.
 
-* Summary:
-- The authentication-process with username + password is handled with a
-Custom User Google Account, so no registration in the application is
-required.
-- The Role-Management is handled by the backend-frontend + backend-db.
-
 TODOs
 -----
 - [ ] Microservices from this Projekt for creating github-repositories
@@ -123,3 +115,6 @@ TODOs
 - [ ] CRUD Roles for Administrator of the Application
 - [ ] Building Docker-Image with Spring-Boot and Angular
 - [ ] Comment Function for Blog-Entries (after successful login with userid)
+- [ ] Create schema.sql and data.sql for script based data initialization
+(spring.jpa.hibernate.ddl-auto=none / spring.datasource.initialize=true)
+- [ ] Create ViewModel-Beans for each JPA-Model-Entity-Bean

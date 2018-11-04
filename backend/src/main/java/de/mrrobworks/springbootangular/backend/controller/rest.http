@@ -1,0 +1,11 @@
+# HTTP request file for IntelliJ Ultimate
+
+GET {{host-url}}
+Content-Type: application/json
+
+###
+
+GET {{host-url}}/backend/person/findallpersons
+Content-Type: application/json
+
+###

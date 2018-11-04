@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// TODO: Replace JPA-Entity AppUser with AppUserViewModel
 @RestController
 @RequestMapping("/backend/user")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
