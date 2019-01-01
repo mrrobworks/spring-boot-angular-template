@@ -17,7 +17,7 @@
 
 	<properties>
 		<eirslett.version>1.6</eirslett.version>
-		<node.version>v10.13.0</node.version>
+		<node.version>v10.15.0</node.version>
 		<npm.version>6.4.1</npm.version>
 	</properties>
 
@@ -50,12 +50,12 @@
 					</execution>
 
 					<execution>
-						<id>npm-install-no-optional</id>
+						<id>npm-install</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>install --no-optional</arguments>
+							<arguments>install</arguments>
 						</configuration>
 					</execution>
 
