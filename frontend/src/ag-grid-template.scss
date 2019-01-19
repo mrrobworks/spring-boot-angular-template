@@ -1,4 +1,4 @@
-$icons-path: '../node_modules/ag-grid-community/src/styles/icons/';
+$icons-path: '../node_modules/ag-grid-community/src/styles/ag-theme-balham/icons/';
 
 $border-color: #adaba6;
 $font-size: 13px;
@@ -20,5 +20,5 @@ $active: rgba(255, 255, 255, .4) !default;
   background-color: #4472c4 !important;
 }
 
-@import '../node_modules/ag-grid-community/src/styles/ag-theme-balham.scss';
+@import '../node_modules/ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham.scss';
 @import '../node_modules/ag-grid-community/src/styles/ag-grid.scss';

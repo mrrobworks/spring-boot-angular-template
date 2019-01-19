@@ -17,7 +17,7 @@
   <description>Backend with Spring Boot</description>
 
   <properties>
-    <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
+    <spring.boot.version>2.1.2.RELEASE</spring.boot.version>
     <dbunit.spring.version>1.3.0</dbunit.spring.version>
     <dbunit.version>2.5.4</dbunit.version>
     <springfox-swagger2.version>2.9.2</springfox-swagger2.version>

@@ -18,7 +18,7 @@
 	<properties>
 		<eirslett.version>1.6</eirslett.version>
 		<node.version>v10.15.0</node.version>
-		<npm.version>6.4.1</npm.version>
+		<npm.version>6.6.0</npm.version>
 	</properties>
 
 	<build>
