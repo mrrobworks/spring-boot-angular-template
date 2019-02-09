@@ -37,30 +37,25 @@ $ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
 $ cd spring-boot-angular-template
 ```
 
-**Step 2:** Install the application with:
-```bash
-$ mvn clean install
-```
+**Step 2:** Open a webbrowser and go to [https://console.developers.google.com](https://console.developers.google.com)
 
-**Step 3:** Open a webbrowser and go to [https://console.developers.google.com](https://console.developers.google.com)
+**Step 3:** ![select a project](./backend/src/main/resources/images/select-a-project.png) in the upper navigation-bar.
 
-**Step 4:** ![select a project](./backend/src/main/resources/images/select-a-project.png) in the upper navigation-bar.
-
-**Step 5:** Create a ![new project](./backend/src/main/resources/images/new-project.png) and type in following:
+**Step 4:** Create a ![new project](./backend/src/main/resources/images/new-project.png) and type in following:
 
 ![new project dialog](./backend/src/main/resources/images/new-project-dialog.png)
 
-**Step 6:** Go to the left sidemenu an select ![credentials](./backend/src/main/resources/images/credentials.png)
+**Step 5:** Go to the left sidemenu an select ![credentials](./backend/src/main/resources/images/credentials.png)
 
-**Step 7:** Select
+**Step 6:** Select
 
 ![create credentials](./backend/src/main/resources/images/create-credentials.png)
 
-**Step 8:** Type in following:
+**Step 7:** Type in following:
 
 ![create oauth client id](./backend/src/main/resources/images/create-oauth-client-id.png)
 
-**Step 9:** Copy your generated `client ID` and `client secret`
+**Step 8:** Copy your generated `client ID` and `client secret`
 
 ![oauth client](./backend/src/main/resources/images/oauth-client.png)
 
@@ -71,7 +66,12 @@ security.oauth2.client.client-id=<CLIENT-ID>
 security.oauth2.client.client-secret=<CLIENT-SECRET>
 ```
 
-**Step 10:** Back to the Terminal type following:
+**Step 9:** Back to the Terminal install the application with:
+```bash
+$ mvn clean install
+```
+
+**Step 10:** Than type following:
 ```bash
 $ cd backend
 $ docker-compose up
