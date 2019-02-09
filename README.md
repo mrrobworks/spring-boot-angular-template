@@ -9,6 +9,7 @@ Technology-Stack:
 -----------------
 * :leaves: Spring-Boot 2 (Spring AOP, Spring Web, Spring Data JPA, Spring Security)
 * :a: Angular 7 (Bootstrap 4, TypeScript, HTML, CSS)
+* :whale: Docker
 * :lock: OAuth 2.0 Authentication
 * :coffee: [JDK 11](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)**
 * [Maven](https://maven.apache.org/download.cgi)**
@@ -30,66 +31,50 @@ Modules
 
 Installation-Instructions
 -------------------------
-In the Command-Line ($) type:
+Registration of the spring-boot-angular-template in Google for OAuth 2.0:
+
+Step 1: Go to [https://console.developers.google.com](https://console.developers.google.com)
+
+Step 2: ![select a project](./backend/src/main/resources/images/select-a-project.png) in the upper navigation-bar.
+
+Step 3: Create a ![new project](./backend/src/main/resources/images/new-project.png) and type in following:
+
+![new project dialog](./backend/src/main/resources/images/new-project-dialog.png)
+
+Step 4: Go to the left sidemenu an select ![credentials](./backend/src/main/resources/images/credentials.png)
+
+Step 5: Select
+
+![create credentials](./backend/src/main/resources/images/create-credentials.png)
+
+Step 6: Type in following:
+
+![create oauth client id](./backend/src/main/resources/images/create-oauth-client-id.png)
+
+Step 7: Copy your generated `client-ID` and `client-secret`
+
+![oauth client](./backend/src/main/resources/images/oauth-client.png)
+
+and paste it in `./backend/src/main/resources/application.properties`
+
+```
+security.oauth2.client.client-id=<CLIENT-ID>
+security.oauth2.client.client-secret=<CLIENT-SECRET>
+```
+
+Install now the application from the Top-Folder with:
 
 ```bash
-$ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
-$ mysql -uroot -p<PASSWORD>
-	$ create database spring_boot_angular_db;
-	$ quit;
-$ cd spring-boot-angular-template
 $ mvn clean install
-$ cd dbsetup/target
 ```
 
-* Unzip the file `spring-boot-angular-template-dbsetup-0.0.1-SNAPSHOT-install.zip` and go to the unzipped directory
-* Edit the file `application-external.properties` with your custom values:
+Go to the `backend`-Folder and type:
 
-```properties
-spring.datasource.username=<ROOT>
-spring.datasource.password=<PASSWORD>
+```
+docker-compose up
 ```
 
-* Start the DB-Setup with
-
-```bash
-$ sh DBSETUP-spring-boot-angular-template.sh
-```
-
-Now the registration of the spring-boot-angular-template in Google:
-* Go to [https://console.developers.google.com](https://console.developers.google.com)
-* Create a new project with the name `spring-boot-angular-template`
-* Go to the left sidemenu an select `APIs & Services -> Credentials`
-* Select `Create credentials -> OAuth client ID`
-* Press the Button `Configure consent screen`
-* In the Textfield `Product name shown to users` type `spring-boot-angular-template` and than press the Button `Save`
-* Select `Application type -> Web application` an as name `spring-boot-angular-template` 
-* For the `Authorized JavaScript origins` type `http://localhost:8081` and for the `Authorized redirect URIs` type `http://localhost:8081/login` and `http://localhost:4200/login`. Than press the `Create`-Button.
-* Copy your generated `client-ID` and `client-secret`
-
-* Go to the backen/target Folder
-
-```bash
-$ cd ../../backend/target
-```
-
-* Unzip the file `spring-boot-angular-template-backend-0.0.1-SNAPSHOT-install.zip` and go to the unzipped directory
-* Edit the file `application-external.properties` with your custom values:
-
-```properties
-spring.datasource.username=root
-spring.datasource.password=<PASSWORD>
-security.oauth2.client.client-id=<CLIENTID> 
-security.oauth2.client.client-secret=<CLIENTSECRET>
-```
-
-* Start the Web-Application with
-
-```bash
-$ sh WEBAPP-spring-boot-angular-template.sh
-```
-
-* Open your Browser on `http://localhost:8081`
+* Open your Browser `http://localhost:8081`
 
 Authentication-Concept:
 -----------------------
