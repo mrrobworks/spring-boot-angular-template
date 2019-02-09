@@ -1,6 +1,6 @@
 Spring-Boot-Angular-Template
 ----------------------------
-Template for a new Web-Application with OAuth 2.0 User Authentication (Google). Spring-Boot 2 with
+Template for a new Web-Application with OAuth 2.0 User Authentication and Docker. Spring-Boot 2 with
 Java 11 as Backend and Angular 7 with Bootstrap 4 as Frontend. A User with a Google-Account
 (no additional registration required) get access to the Web-Application and get at first the
 Default-Role ROLE_USER. The Role-Management is implemented in the Web-Application.
@@ -9,13 +9,13 @@ Technology-Stack:
 -----------------
 * :leaves: Spring-Boot 2 (Spring AOP, Spring Web, Spring Data JPA, Spring Security)
 * :a: Angular 7 (Bootstrap 4, TypeScript, HTML, CSS)
-* :whale: Docker
+* :whale: [Docker](https://www.docker.com/get-started)**
 * :lock: OAuth 2.0 Authentication
 * :coffee: [JDK 11](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)**
 * [Maven](https://maven.apache.org/download.cgi)**
 * [Lombok](https://projectlombok.org/download)**
 * :droplet: Liquibase
-* [MariaDB](https://mariadb.org/download/)**
+* MariaDB
 * JUnit 5
 * DBUnit 1.3 with HSQLDB
 * Logback (logback-spring.xml)
@@ -31,28 +31,36 @@ Modules
 
 Installation-Instructions
 -------------------------
-Registration of the spring-boot-angular-template in Google for OAuth 2.0:
+**Step 1:** Open a Terminal and type:
+```bash
+$ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
+$ cd spring-boot-angular-template
+```
 
-**Step 1:**
-Go to [https://console.developers.google.com](https://console.developers.google.com)
+**Step 2:** Install the application with:
+```bash
+$ mvn clean install
+```
 
-**Step 2:** ![select a project](./backend/src/main/resources/images/select-a-project.png) in the upper navigation-bar.
+**Step 3:** Open a webbrowser and go to [https://console.developers.google.com](https://console.developers.google.com)
 
-**Step 3:** Create a ![new project](./backend/src/main/resources/images/new-project.png) and type in following:
+**Step 4:** ![select a project](./backend/src/main/resources/images/select-a-project.png) in the upper navigation-bar.
+
+**Step 5:** Create a ![new project](./backend/src/main/resources/images/new-project.png) and type in following:
 
 ![new project dialog](./backend/src/main/resources/images/new-project-dialog.png)
 
-**Step 4:** Go to the left sidemenu an select ![credentials](./backend/src/main/resources/images/credentials.png)
+**Step 6:** Go to the left sidemenu an select ![credentials](./backend/src/main/resources/images/credentials.png)
 
-**Step 5:** Select
+**Step 7:** Select
 
 ![create credentials](./backend/src/main/resources/images/create-credentials.png)
 
-**Step 6:** Type in following:
+**Step 8:** Type in following:
 
 ![create oauth client id](./backend/src/main/resources/images/create-oauth-client-id.png)
 
-**Step 7:** Copy your generated `client-ID` and `client-secret`
+**Step 9:** Copy your generated `client ID` and `client secret`
 
 ![oauth client](./backend/src/main/resources/images/oauth-client.png)
 
@@ -63,19 +71,13 @@ security.oauth2.client.client-id=<CLIENT-ID>
 security.oauth2.client.client-secret=<CLIENT-SECRET>
 ```
 
-**Step 8:** Install now the application from the Top-Folder with:
-
+**Step 10:** Back to the Terminal type following:
 ```bash
-$ mvn clean install
-```
-
-**Step 9:** Go to the `backend`-Folder and type:
-
-```bash
+$ cd backend
 $ docker-compose up
 ```
 
-**Step 10:** Open your Browser `http://localhost:8081`
+**Step 11:** In your Webbrowser type `http://localhost:8081` and the webapplication shows up.
 
 Authentication-Concept:
 -----------------------
