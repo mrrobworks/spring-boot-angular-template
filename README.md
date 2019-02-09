@@ -33,25 +33,26 @@ Installation-Instructions
 -------------------------
 Registration of the spring-boot-angular-template in Google for OAuth 2.0:
 
-Step 1: Go to [https://console.developers.google.com](https://console.developers.google.com)
+**Step 1:**
+Go to [https://console.developers.google.com](https://console.developers.google.com)
 
-Step 2: ![select a project](./backend/src/main/resources/images/select-a-project.png) in the upper navigation-bar.
+**Step 2:** ![select a project](./backend/src/main/resources/images/select-a-project.png) in the upper navigation-bar.
 
-Step 3: Create a ![new project](./backend/src/main/resources/images/new-project.png) and type in following:
+**Step 3:** Create a ![new project](./backend/src/main/resources/images/new-project.png) and type in following:
 
 ![new project dialog](./backend/src/main/resources/images/new-project-dialog.png)
 
-Step 4: Go to the left sidemenu an select ![credentials](./backend/src/main/resources/images/credentials.png)
+**Step 4:** Go to the left sidemenu an select ![credentials](./backend/src/main/resources/images/credentials.png)
 
-Step 5: Select
+**Step 5:** Select
 
 ![create credentials](./backend/src/main/resources/images/create-credentials.png)
 
-Step 6: Type in following:
+**Step 6:** Type in following:
 
 ![create oauth client id](./backend/src/main/resources/images/create-oauth-client-id.png)
 
-Step 7: Copy your generated `client-ID` and `client-secret`
+**Step 7:** Copy your generated `client-ID` and `client-secret`
 
 ![oauth client](./backend/src/main/resources/images/oauth-client.png)
 
@@ -62,19 +63,19 @@ security.oauth2.client.client-id=<CLIENT-ID>
 security.oauth2.client.client-secret=<CLIENT-SECRET>
 ```
 
-Install now the application from the Top-Folder with:
+**Step 8:** Install now the application from the Top-Folder with:
 
 ```bash
 $ mvn clean install
 ```
 
-Go to the `backend`-Folder and type:
+**Step 9:** Go to the `backend`-Folder and type:
 
-```
-docker-compose up
+```bash
+$ docker-compose up
 ```
 
-* Open your Browser `http://localhost:8081`
+**Step 10:** Open your Browser `http://localhost:8081`
 
 Authentication-Concept:
 -----------------------
@@ -98,7 +99,7 @@ TODOs
 - [x] User-Role-assignment through webapplication
 - [x] Save LoggedIn User to Session
 - [ ] CRUD Roles for Administrator of the Application
-- [ ] Building Docker-Image with Spring-Boot and Angular
+- [x] Building Docker-Image with Spring-Boot and Angular
 - [ ] Comment Function for Blog-Entries (after successful login with userid)
 - [ ] Create schema.sql and data.sql for script based data initialization
 (spring.jpa.hibernate.ddl-auto=none / spring.datasource.initialize=true)
