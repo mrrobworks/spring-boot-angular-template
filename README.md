@@ -1,9 +1,9 @@
 Spring-Boot-Angular-Template
 ----------------------------
-Template for a new Web-Application with OAuth 2.0 User Authentication and Docker. Spring-Boot 2 with
-Java 11 as Backend and Angular 7 with Bootstrap 4 as Frontend. A User with a Google-Account
-(no additional registration required) get access to the Web-Application and get at first the
-Default-Role ROLE_USER. The Role-Management is implemented in the Web-Application.
+Template for a new Web-Project with OAuth 2.0 User Authentication and Docker. Spring-Boot 2 with Java 11 and a
+PostgreSQL Database as Backend. Angular 7 with Bootstrap 4 as Frontend. A User with a Google-Account (no additional
+registration required) get access to the Web-Application and get at first the Default-Role ROLE_USER. The
+Role-Management is implemented in the Web-Application.
 
 Technology-Stack:
 -----------------
@@ -13,9 +13,9 @@ Technology-Stack:
 * :lock: OAuth 2.0 Authentication
 * :coffee: [JDK 11](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)**
 * [Maven](https://maven.apache.org/download.cgi)**
-* [Lombok](https://projectlombok.org/download)**
+* :elephant: PostgreSQL
 * :droplet: Liquibase
-* MariaDB
+* [Lombok](https://projectlombok.org/download)**
 * JUnit 5
 * DBUnit 1.3 with HSQLDB
 * Logback (logback-spring.xml)
@@ -27,7 +27,7 @@ Modules
 -------
 * backend - Spring-Boot 2
 * frontend - Angular 7
-* dbsetup - Liquibase Database-Setup with MariaDB as Database for the backend
+* dbsetup - Liquibase Database-Setup with PostgreSQL as Database for the backend
 
 Installation-Instructions
 -------------------------
