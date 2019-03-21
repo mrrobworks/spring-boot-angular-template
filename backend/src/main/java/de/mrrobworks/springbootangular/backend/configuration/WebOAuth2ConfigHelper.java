@@ -34,14 +34,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebOAuth2ConfigHelper {
 
-  @NonNull
-  private WebOAuth2AuthoritiesExtractor webOAuth2AuthoritiesExtractor;
-
-  @NonNull
-  private WebOAuth2PrincipalExtractor webOAuth2PrincipalExtractor;
-
-  @NonNull
-  private WebOAuth2AuthenticationSuccessHandler webOAuth2AuthSuccessHandler;
+  private final @NonNull WebOAuth2AuthoritiesExtractor webOAuth2AuthoritiesExtractor;
+  private final @NonNull WebOAuth2PrincipalExtractor webOAuth2PrincipalExtractor;
+  private final @NonNull WebOAuth2AuthenticationSuccessHandler webOAuth2AuthSuccessHandler;
 
   // TODO: throw BadCredentialsException if login failed
   private static String getUserId(Map<String, Object> map) {
@@ -61,8 +56,7 @@ public class WebOAuth2ConfigHelper {
   @RequiredArgsConstructor(onConstructor = @__(@Autowired))
   private static class WebOAuth2AuthoritiesExtractor implements AuthoritiesExtractor {
 
-    @NonNull
-    private final AppUserService appUserService;
+    private final @NonNull AppUserService appUserService;
 
     @Override
     public List<GrantedAuthority> extractAuthorities(Map<String, Object> map) {
@@ -81,11 +75,8 @@ public class WebOAuth2ConfigHelper {
   @RequiredArgsConstructor(onConstructor = @__(@Autowired))
   private static class WebOAuth2PrincipalExtractor implements PrincipalExtractor {
 
-    @NonNull
-    private final AppUserService appUserService;
-
-    @NonNull
-    private final AppRoleService appRoleService;
+    private final @NonNull AppUserService appUserService;
+    private final @NonNull AppRoleService appRoleService;
 
     @Override
     public Object extractPrincipal(Map<String, Object> map) {

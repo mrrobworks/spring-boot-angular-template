@@ -20,8 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController {
 
-  @NonNull
-  private PersonService service;
+  private final @NonNull PersonService service;
 
   @GetMapping(value = "/findallpersons")
   public ResponseEntity<List<Person>> findAllPersons() {

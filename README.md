@@ -117,6 +117,6 @@ javax.validation.constraints.\*, org.hibernate.validator.constraints.\*)
 - [ ] Using var for local variables
 - [ ] Using EntityGraph for JPA (instead FetchType.EAGER)
 - [ ] Add Swagger Documentation to REST-Controllers
-
+- [ ] application.properties change to application.yml
 
 

@@ -3,6 +3,7 @@ package de.mrrobworks.springbootangular.backend.configuration;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.Filter;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,11 +38,8 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
   static final String GOOGLE_LOGIN_URL = "/login";
   static final String GITHUB_LOGIN_URL = "/login/github";
 
-  @NonNull
-  private final WebOAuth2ConfigHelper webOAuth2ConfigHelper;
-
-  @NonNull
-  private final OAuth2ClientContext oauth2ClientContext;
+  private final @NonNull WebOAuth2ConfigHelper webOAuth2ConfigHelper;
+  private final @NonNull OAuth2ClientContext oauth2ClientContext;
 
   @Override
   public void configure(WebSecurity web) {
@@ -116,8 +114,7 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
 
   private class WebOAuth2AuthProcessingFilter extends OAuth2ClientAuthenticationProcessingFilter {
 
-    @NonNull
-    private ClientResources clientResources;
+    private final @NonNull ClientResources clientResources;
 
     WebOAuth2AuthProcessingFilter(String defaultFilterProcessesUrl,
         ClientResources clientResources) {
@@ -142,6 +139,7 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
     }
   }
 
+  @Getter
   private final class ClientResources {
 
     @NestedConfigurationProperty
@@ -149,13 +147,5 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
 
     @NestedConfigurationProperty
     private ResourceServerProperties resource = new ResourceServerProperties();
-
-    public AuthorizationCodeResourceDetails getClient() {
-      return client;
-    }
-
-    public ResourceServerProperties getResource() {
-      return resource;
-    }
   }
 }

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/backend/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AppUserController {
 
-  @NonNull private AppUserService appUserService;
+  private final @NonNull AppUserService appUserService;
 
   @RequestMapping("/info")
   public ResponseEntity<AppUser> user(@AuthenticationPrincipal AppUser user) {

@@ -25,8 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/backend/role", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AppRoleController {
 
-  @NonNull
-  private AppRoleService appRoleService;
+  private final @NonNull AppRoleService appRoleService;
 
   @GetMapping("/{id}")
   public ResponseEntity<AppRole> getAppRole(@PathVariable String id) {
