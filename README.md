@@ -106,3 +106,15 @@ TODOs
 - [ ] Create schema.sql and data.sql for script based data initialization
 (spring.jpa.hibernate.ddl-auto=none / spring.datasource.initialize=true)
 - [ ] Create ViewModel-Beans for each JPA-Model-Entity-Bean
+- [ ] Remove DB-Unit, instead use Mockito
+- [ ] WebMvcTest for REST-Controller (mockMvc)
+- [ ] Swagger with OAuth2 or BasicAuth
+- [ ] Add spring-boot-devtools
+- [ ] Changing return types of REST-Controllers to ResponseEntity
+- [ ] Validation Rules in backend-model classes (Java Bean Validation API, JSR-303,
+javax.validation.constraints.\*, org.hibernate.validator.constraints.\*)
+- [ ] H2 embedded database in scope runtime for development, postgres for production / docker
+
+
+
+
