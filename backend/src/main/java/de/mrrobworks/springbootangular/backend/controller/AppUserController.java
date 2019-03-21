@@ -2,17 +2,14 @@ package de.mrrobworks.springbootangular.backend.controller;
 
 import de.mrrobworks.springbootangular.backend.domain.AppUser;
 import de.mrrobworks.springbootangular.backend.service.AppUserService;
-
-import java.util.List;
-
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,29 +20,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/backend/user")
+@CorsConfiguration
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Api(
-    value = "AppUserController REST Endpoint",
-    description = "Contains CRUD Operations for AppUser-Objects.")
-public class AppUserController implements CorsConfiguration {
+@RequestMapping(value = "/backend/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public class AppUserController {
 
   @NonNull private AppUserService appUserService;
 
   @RequestMapping("/info")
-  public AppUser user(@AuthenticationPrincipal AppUser user) {
-    return user;
+  public ResponseEntity<AppUser> user(@AuthenticationPrincipal AppUser user) {
+    return ResponseEntity.ok(user);
   }
 
   @ApiOperation(value = "Get a list of application users.")
   @GetMapping("/list")
-  public List<AppUser> getAppUsers() {
-    return appUserService.getAllAppUsers();
+  public ResponseEntity<List<AppUser>> getAppUsers() {
+    return ResponseEntity.ok(appUserService.getAllAppUsers());
   }
 
-  // TODO: Valid-Annotation for JSR-303 Validation Rules in Model Class
   @PutMapping("/{id}")
-  public void updateUser(@RequestBody @Valid AppUser appUser, @PathVariable("id") String id, Errors errors) {
+  public void updateUser(@RequestBody @Valid AppUser appUser, @PathVariable("id") String id,
+      Errors errors) {
     appUserService.save(appUser);
   }
 }

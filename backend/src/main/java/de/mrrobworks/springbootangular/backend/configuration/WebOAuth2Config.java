@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -17,9 +18,12 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.filter.CompositeFilter;
@@ -28,16 +32,16 @@ import org.springframework.web.filter.CompositeFilter;
 @EnableOAuth2Client
 @EnableWebSecurity
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
 
   static final String GOOGLE_LOGIN_URL = "/login";
   static final String GITHUB_LOGIN_URL = "/login/github";
 
   @NonNull
-  private final OAuth2ClientContext oauth2ClientContext;
+  private final WebOAuth2ConfigHelper webOAuth2ConfigHelper;
 
   @NonNull
-  private final WebOAuth2ConfigHelper webOAuth2ConfigHelper;
+  private final OAuth2ClientContext oauth2ClientContext;
 
   @Override
   public void configure(WebSecurity web) {
@@ -67,60 +71,78 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   private Filter ssoFilter() {
-    final CompositeFilter filter = new CompositeFilter();
+    final CompositeFilter compositeFilter = new CompositeFilter();
     final List<Filter> filters = new ArrayList<>();
-    filters.add(googleOAuth2ProcessingFilter());
-    filters.add(githubOAuth2ProcessingFilter());
-    filter.setFilters(filters);
-    return filter;
+    filters.add(googleOAuth2AuthProcessingFilter());
+    filters.add(githubOAuth2AuthProcessingFilter());
+    compositeFilter.setFilters(filters);
+    return compositeFilter;
   }
 
-  @Bean
-  Filter googleOAuth2ProcessingFilter() {
-    return new WebOAuth2ProcessingFilter(GOOGLE_LOGIN_URL, oauth2ClientContext,
-        webOAuth2ConfigHelper, google());
-//    return WebOAuth2ProcessingFilter.builder()
-//        .defaultFilterProcessesUrl("/login")
-//        .client(new ClientResources())
-//        .oauth2ClientContext(oauth2ClientContext)
-//        .webOAuth2ConfigHelper(webOAuth2ConfigHelper)
-//        .build();
+  private Filter googleOAuth2AuthProcessingFilter() {
+    final WebOAuth2AuthProcessingFilter webOAuth2AuthProcessingFilter = new WebOAuth2AuthProcessingFilter(
+        GOOGLE_LOGIN_URL, googleClientResource());
+    webOAuth2AuthProcessingFilter.init();
+    return webOAuth2AuthProcessingFilter;
   }
 
-  @Bean
-  Filter githubOAuth2ProcessingFilter() {
-    return new WebOAuth2ProcessingFilter(GITHUB_LOGIN_URL, oauth2ClientContext,
-        webOAuth2ConfigHelper, github());
-//    return WebOAuth2ProcessingFilter.builder()
-//        .defaultFilterProcessesUrl("/login/github")
-//        .client(new ClientResources())
-//        .oauth2ClientContext(oauth2ClientContext)
-//        .webOAuth2ConfigHelper(webOAuth2ConfigHelper)
-//        .build();
+  private Filter githubOAuth2AuthProcessingFilter() {
+    final WebOAuth2AuthProcessingFilter webOAuth2AuthProcessingFilter = new WebOAuth2AuthProcessingFilter(
+        GITHUB_LOGIN_URL, githubClientResource());
+    webOAuth2AuthProcessingFilter.init();
+    return webOAuth2AuthProcessingFilter;
   }
 
   @Bean
   @ConfigurationProperties("google")
-  ClientResources google() {
+  ClientResources googleClientResource() {
     return new ClientResources();
   }
 
   @Bean
   @ConfigurationProperties("github")
-  ClientResources github() {
+  ClientResources githubClientResource() {
     return new ClientResources();
   }
 
   @Bean
   FilterRegistrationBean<OAuth2ClientContextFilter> oauth2ClientFilterRegistration(
       OAuth2ClientContextFilter filter) {
-    FilterRegistrationBean<OAuth2ClientContextFilter> registration = new FilterRegistrationBean<>();
+    final FilterRegistrationBean<OAuth2ClientContextFilter> registration = new FilterRegistrationBean<>();
     registration.setFilter(filter);
     registration.setOrder(-100);
     return registration;
   }
 
-  class ClientResources {
+  private class WebOAuth2AuthProcessingFilter extends OAuth2ClientAuthenticationProcessingFilter {
+
+    @NonNull
+    private ClientResources clientResources;
+
+    WebOAuth2AuthProcessingFilter(String defaultFilterProcessesUrl,
+        ClientResources clientResources) {
+      super(defaultFilterProcessesUrl);
+      this.clientResources = clientResources;
+    }
+
+    void init() {
+      setAuthenticationSuccessHandler(webOAuth2ConfigHelper.getWebOAuth2AuthSuccessHandler());
+      setRestTemplate(new OAuth2RestTemplate(clientResources.getClient(), oauth2ClientContext));
+      setTokenServices(tokenServices());
+    }
+
+    private ResourceServerTokenServices tokenServices() {
+      final UserInfoTokenServices tokenServices = new UserInfoTokenServices(
+          clientResources.getResource().getUserInfoUri(),
+          clientResources.getClient().getClientId());
+      tokenServices.setPrincipalExtractor(webOAuth2ConfigHelper.getWebOAuth2PrincipalExtractor());
+      tokenServices
+          .setAuthoritiesExtractor(webOAuth2ConfigHelper.getWebOAuth2AuthoritiesExtractor());
+      return tokenServices;
+    }
+  }
+
+  private final class ClientResources {
 
     @NestedConfigurationProperty
     private AuthorizationCodeResourceDetails client = new AuthorizationCodeResourceDetails();

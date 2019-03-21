@@ -7,17 +7,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * Aspects for Logging.
- * 
- * @author robert
- */
 @Aspect
 @Component
 @Slf4j
 public class LoggingAspect {
 
-  @Around("execution(* de.mrrobworks.springbootangular.backend.controller.PersonController.*(..))")
+  @Around("execution(* de.mrrobworks.springbootangular.backend.controller.*.*(..))")
   public Object logTime(final ProceedingJoinPoint joinPoint) throws Throwable {
     final Object ret;
     final long startTime = System.currentTimeMillis();

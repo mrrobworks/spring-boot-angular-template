@@ -17,15 +17,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id") // End Lombok
+@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "app_user") // End JPA
+@Table(name = "app_user")
 public class AppUser implements Serializable {
 
   @Id
   private String id;
 
-  // TODO: Fetch.EAGER replace with @EntityGraph
   @JsonIgnoreProperties("users")
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "app_user_role",

@@ -41,16 +41,17 @@ public class WebOAuth2ConfigHelper {
   private WebOAuth2PrincipalExtractor webOAuth2PrincipalExtractor;
 
   @NonNull
-  private WebOAuth2AuthenticationSuccessHandler webOAuth2AuthenticationSuccessHandler;
+  private WebOAuth2AuthenticationSuccessHandler webOAuth2AuthSuccessHandler;
 
+  // TODO: throw BadCredentialsException if login failed
   private static String getUserId(Map<String, Object> map) {
     final HttpServletRequest currentRequest = ((ServletRequestAttributes) RequestContextHolder
         .currentRequestAttributes()).getRequest();
     final String requestURI = currentRequest.getRequestURI();
     String userId = null;
-    if (requestURI.equals(WebSecurityConfig.GOOGLE_LOGIN_URL)) {
+    if (requestURI.equals(WebOAuth2Config.GOOGLE_LOGIN_URL)) {
       userId = String.valueOf(map.get("sub"));
-    } else if (requestURI.equals(WebSecurityConfig.GITHUB_LOGIN_URL)) {
+    } else if (requestURI.equals(WebOAuth2Config.GITHUB_LOGIN_URL)) {
       userId = String.valueOf(map.get("id"));
     }
     return userId;
@@ -67,7 +68,7 @@ public class WebOAuth2ConfigHelper {
     public List<GrantedAuthority> extractAuthorities(Map<String, Object> map) {
       final String userId = getUserId(map);
       log.info("Extract authorities for {}", userId);
-      final Optional<AppUser> appUser = appUserService.getByGoogleId(userId);
+      final Optional<AppUser> appUser = appUserService.getByUserId(userId);
       if (appUser.isEmpty()) {
         return Collections.emptyList();
       }
@@ -90,7 +91,7 @@ public class WebOAuth2ConfigHelper {
     public Object extractPrincipal(Map<String, Object> map) {
       final String userId = getUserId(map);
       log.info("Extract Principal for {}", userId);
-      final Optional<AppUser> appUser = appUserService.getByGoogleId(userId);
+      final Optional<AppUser> appUser = appUserService.getByUserId(userId);
       return appUser.orElseGet(() -> createAppUser(userId));
     }
 
@@ -99,7 +100,7 @@ public class WebOAuth2ConfigHelper {
       appUser.setId(userId);
       final List<AppRole> appUserRoles = new ArrayList<>();
       final Map<GrantedAuthority, AppRole> appRoles = appRoleService.getMappedAppRoles();
-      final List<GrantedAuthority> authorities = AppUserAuthorityUtils.createAuthorities(appUser);
+      final List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
       for (final GrantedAuthority grantedAuthority : authorities) {
         appUserRoles.add(appRoles.get(grantedAuthority));
       }

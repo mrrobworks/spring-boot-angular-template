@@ -7,31 +7,27 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * REST-Controller for {@link PersonService}.
- *
- * @author robert
- */
-// TODO: Replace JPA-Entity Person with a PersonViewModel
 @Slf4j
 @RestController
+@CorsConfiguration
 @RequestMapping("/backend/person")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class PersonController implements CorsConfiguration {
+public class PersonController {
 
   @NonNull
   private PersonService service;
 
   @GetMapping(value = "/findallpersons")
-  public List<Person> findAllPersons() {
+  public ResponseEntity<List<Person>> findAllPersons() {
     final var auth = SecurityContextHolder.getContext().getAuthentication();
     log.info("Auth-name: {}", auth.getName());
     log.info("Auth-authorities: {}", auth.getAuthorities());
-    return service.findAllPersons();
+    return ResponseEntity.ok(service.findAllPersons());
   }
 }

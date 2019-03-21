@@ -12,18 +12,15 @@ import lombok.Getter;
 
 /**
  * Class provides all {@link JpaRepository} from the {@code backend}-Module.
- * 
+ *
  * <pre>
  *  Usage:
- *  {@code 
+ *  {@code
  *      &#64;Autowired
  *      private DbProvider dbProvider;
  *      ...
  *      dbProvider.getXXXRepository}
  * </pre>
- * 
- * 
- * @author robert
  */
 @Getter
 @Component

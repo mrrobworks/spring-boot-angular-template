@@ -114,7 +114,9 @@ TODOs
 - [ ] Validation Rules in backend-model classes (Java Bean Validation API, JSR-303,
 javax.validation.constraints.\*, org.hibernate.validator.constraints.\*)
 - [ ] H2 embedded database in scope runtime for development, postgres for production / docker
-
+- [ ] Using var for local variables
+- [ ] Using EntityGraph for JPA (instead FetchType.EAGER)
+- [ ] Add Swagger Documentation to REST-Controllers
 
 
 

@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,16 +17,17 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id") // End Lombok
+@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "app_role") // End JPA
+@Table(name = "app_role")
 public class AppRole implements GrantedAuthority, Serializable {
 
   @Id
   private String id;
+
+  @Size(min = 5, message = "Description must be at least 5 characters long")
   private String description;
 
-  // TODO: Fetch.EAGER replace with @EntityGraph
   @JsonIgnoreProperties("roles")
   @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
   private List<AppUser> users = new ArrayList<>();

@@ -1,5 +1,7 @@
 package de.mrrobworks.springbootangular.backend.service;
 
+import de.mrrobworks.springbootangular.backend.domain.AppRole;
+import de.mrrobworks.springbootangular.backend.repository.AppRoleRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
-import de.mrrobworks.springbootangular.backend.domain.AppRole;
-import de.mrrobworks.springbootangular.backend.repository.AppRoleRepository;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -21,7 +21,6 @@ public class AppRoleServiceImpl implements AppRoleService {
 
   @Override
   public AppRole getAppRole(@NonNull final String id) {
-    // TODO: orElseThrow EntityNotFoundExcption. Best Practise?
     return appRoleRepository.findById(id).orElse(null);
   }
 

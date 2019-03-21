@@ -17,7 +17,7 @@ public class AppUserServiceImpl implements AppUserService {
   private AppUserRepository appUserRepository;
 
   @Override
-  public Optional<AppUser> getByGoogleId(String id) {
+  public Optional<AppUser> getByUserId(String id) {
     return appUserRepository.findById(id);
   }
 
