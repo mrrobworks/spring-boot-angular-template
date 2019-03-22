@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: changeit_ref
+    url: jdbc:postgresql://db:5432/spring_boot_angular_db_ref
+    username: postgres_ref

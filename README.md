@@ -59,11 +59,13 @@ $ cd spring-boot-angular-template
 
 ![oauth client](./backend/src/main/resources/images/oauth-client.png)
 
-and paste it in `./backend/src/main/resources/application.properties`
+and paste it in `./backend/src/main/resources/application.yml`
 
 ```
-security.oauth2.client.client-id=<CLIENT-ID>
-security.oauth2.client.client-secret=<CLIENT-SECRET>
+github:
+  client:
+    client-id: [GOOGLE-CLIENT-ID]
+    client-secret: [GOOGLE-CLIENT-SECRET]
 ```
 
 **Step 9:** Back to the Terminal install the application with:
@@ -71,13 +73,25 @@ security.oauth2.client.client-secret=<CLIENT-SECRET>
 $ mvn clean install
 ```
 
-**Step 10:** Than type following:
+Start the application
+---------------------
+
+**Step 1:** In the project-root directory type following:
 ```bash
-$ cd backend
-$ docker-compose up
+$  docker-compose -f docker-compose.yml -f docker-compose.ref.yml up
 ```
 
-**Step 11:** In your Webbrowser type `http://localhost:8081` and the webapplication shows up.
+**Step 2:** In your Webbrowser type `http://localhost:8091` and the webapplication shows up.
+
+
+Development
+-----------
+**Step 1:** In the project-root directory type following:
+```bash
+$  docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+```
+This starts the PostgresSQL database in a Docker-Container.
+
 
 Authentication-Concept:
 -----------------------
@@ -97,7 +111,7 @@ TODOs
 - [ ] Microservices from this Projekt for creating github-repositories
 - [x] User-Roles Access on custom sites / elements
 - [x] Angular / CSS / Bootstrap (Angular-Material Implemented)
-- [ ] Profile in OAuthSecurityConfiguration (Google, Github)
+- [x] Profile in OAuthSecurityConfiguration (Google, Github)
 - [x] User-Role-assignment through webapplication
 - [x] Save LoggedIn User to Session
 - [ ] CRUD Roles for Administrator of the Application
@@ -118,5 +132,7 @@ javax.validation.constraints.\*, org.hibernate.validator.constraints.\*)
 - [ ] Using EntityGraph for JPA (instead FetchType.EAGER)
 - [ ] Add Swagger Documentation to REST-Controllers
 - [ ] application.properties change to application.yml
-
-
+- [ ] Update README.md with actual installation instructions for development and how to setup
+Intellij / Docker. Add Port 8091 to Images.
+- [ ] application-external.properties to yml and add installation instructions to README.md
+- [ ] Login-Site Radio-Button Google and Github link to /login and /login/github

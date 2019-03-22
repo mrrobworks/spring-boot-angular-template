@@ -91,7 +91,9 @@ public class WebOAuth2ConfigHelper {
       appUser.setId(userId);
       final List<AppRole> appUserRoles = new ArrayList<>();
       final Map<GrantedAuthority, AppRole> appRoles = appRoleService.getMappedAppRoles();
-      final List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+      // TODO: For Test reasons: New users get the Role ROLE_ADMIN.
+      final List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_ADMIN");
+      // final List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
       for (final GrantedAuthority grantedAuthority : authorities) {
         appUserRoles.add(appRoles.get(grantedAuthority));
       }

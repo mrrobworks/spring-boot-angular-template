@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: changeit_dev
+    url: jdbc:postgresql://localhost:54321/spring_boot_angular_db_dev
+    username: postgres_dev
