@@ -9,6 +9,3 @@ services:
       POSTGRES_DB: spring_boot_angular_db_dev
     ports:
       - "54321:5432"
-    expose:
-      - "54321"
-      - "5432"

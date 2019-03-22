@@ -1,3 +1,4 @@
+# From: https://github.com/eficode/wait-for/blob/master/wait-for
 #!/bin/sh
 
 TIMEOUT=15
