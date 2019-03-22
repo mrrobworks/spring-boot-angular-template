@@ -1,0 +1,24 @@
+version: '3'
+services:
+  spring-boot-angular-template:
+    image: mrrobworks/spring-boot-angular-template:0.0.1-SNAPSHOT
+    container_name: spring-boot-angular-template
+    volumes:
+      - ./wait-for.sh:/tmp/wait-for.sh
+    command: ["sh", "./wait-for.sh", "db:5432", "-t", "20", "--", "java", "-jar", "-Dspring.profiles.active=ref", "app.jar"]
+    ports:
+      - "8091:8081"
+    networks:
+      - mynetwork
+    depends_on:
+      - db
+  db:
+    environment:
+      POSTGRES_USER: postgres_ref
+      POSTGRES_PASSWORD: changeit_ref
+      POSTGRES_DB: spring_boot_angular_db_ref
+    ports:
+      - "54331:5432"
+    expose:
+      - "54331"
+      - "5432"

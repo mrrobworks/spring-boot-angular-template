@@ -1,17 +1,5 @@
 version: '3'
 services:
-  spring-boot-angular-template:
-    image: mrrobworks/spring-boot-angular-template:0.0.1-SNAPSHOT
-    container_name: spring-boot-angular-template
-    volumes:
-      - ./wait-for.sh:/tmp/wait-for.sh
-    command: ["sh", "./wait-for.sh", "db:5432", "-t", "20", "--", "java", "-jar", "app.jar"]
-    ports:
-      - "8081:8081"
-    networks:
-      - mynetwork
-    depends_on:
-      - db
   db:
     image: "postgres:11.2-alpine"
     container_name: spring-boot-angular-db
@@ -19,16 +7,7 @@ services:
       - ../dbsetup/src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
       - ../dbsetup/src/main/resources/db/data.sql:/docker-entrypoint-initdb.d/02_data.sql
     restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: changeit
-      POSTGRES_DB: spring_boot_angular_db
     networks:
       - mynetwork
-    ports:
-      - "54321:5432"
-    expose:
-      - "5432"
-      - "54321"
 networks:
   mynetwork: {}

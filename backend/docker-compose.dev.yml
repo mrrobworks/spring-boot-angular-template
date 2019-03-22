@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    container_name: spring-boot-angular-db
+    environment:
+      DEBUG: 'true'
+      POSTGRES_USER: postgres_dev
+      POSTGRES_PASSWORD: changeit_dev
+      POSTGRES_DB: spring_boot_angular_db_dev
+    ports:
+      - "54321:5432"
+    expose:
+      - "54321"
+      - "5432"
