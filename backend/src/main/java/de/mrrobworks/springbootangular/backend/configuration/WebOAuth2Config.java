@@ -35,7 +35,7 @@ import org.springframework.web.filter.CompositeFilter;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
 
-  static final String GOOGLE_LOGIN_URL = "/login";
+  static final String GOOGLE_LOGIN_URL = "/login/google";
   static final String GITHUB_LOGIN_URL = "/login/github";
 
   private final @NonNull WebOAuth2ConfigHelper webOAuth2ConfigHelper;

@@ -1,0 +1,174 @@
+= Spring-Boot-Angular-Template
+
+Template for a new Web-Project with OAuth 2.0 User Authentication and Docker. Spring-Boot 2 with Java 11 and a
+PostgreSQL Database as Backend. Angular 7 with Bootstrap 4 as Frontend. A User with a Google or Github-Account
+get access through O2Auth to the Web-Application, so no additional registration is required. A new user get the
+Default-Role ROLE_USER. The Role-Management is implemented in the Web-Application, so additional Roles
+like ROLE_ADMIN for administration access can be assigned to a user.
+
+== Technology-Stack:
+
+* :leaves: Spring-Boot 2 (Spring AOP, Spring Web, Spring Data JPA, Spring Security)
+* :a: Angular 7 (Bootstrap 4, TypeScript, HTML, CSS)
+* :whale: https://www.docker.com/get-started[Docker]pass:[**]
+* :lock: OAuth 2.0 Authentication
+* :coffee: https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11]pass:[**]
+* https://maven.apache.org/download.cgi[Maven]pass:[***]
+* :elephant: PostgreSQL
+* :droplet: Liquibase
+* https://projectlombok.org/download[Lombok]pass:[***]
+* JUnit 5
+* DBUnit with HSQLDB
+* Logback (logback-spring.xml)
+* https://git-scm.com/downloads[Git]pass:[***]
+
+pass:[**] Need to be installed on the operation system
+
+pass:[***] Need to be installed on the operation system for development purposes
+
+== Getting Started
+After you have installed the software mentioned above, some configuration need to be to do.
+
+=== Prerequisites
+* Under the Docker-Settings, share the drive in which you will later git clone the
+spring-boot-angular-template.git. This is necessary for accessing the sql-files for setting up the
+database.
+
+=== Installing
+*Step 1:* Open a Terminal and type:
+```bash
+$ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
+$ cd spring-boot-angular-template
+```
+
+*Step 2:* Open a webbrowser and go to https://console.developers.google.com[https://console.developers.google.com]
+
+*Step 3:* Press the Menu `Select a project` in the upper navigation-bar.
+
+*Step 4:* Press the Menu-Item `New Project` and type in following:
+
+image:https://user-images.githubusercontent.com/37511144/54868468-07513200-4d8d-11e9-98e1-de5b22a18899.png[new project dialog]
+
+*Step 5:* In the left sidemenu select `Credentials`
+
+*Step 6:* Select `OAuth client ID`
+
+image:https://user-images.githubusercontent.com/37511144/54868416-7ed29180-4d8c-11e9-9969-15f1a1f87d59.png[create credentials]
+
+*Step 7:* Type in following:
+
+image:https://user-images.githubusercontent.com/37511144/54868440-c8bb7780-4d8c-11e9-9e74-073940271a51.png[create oauth client id]
+
+*Step 8:* Copy your generated `client ID` and `client secret`
+
+image:https://user-images.githubusercontent.com/37511144/54868470-13d58a80-4d8d-11e9-8b66-628f66cf5bee.png[oauth client]
+
+and paste it in `./backend/src/main/resources/application.yml`
+
+```
+google:
+  client:
+    client-id: [GOOGLE-CLIENT-ID]
+    client-secret: [GOOGLE-CLIENT-SECRET]
+```
+
+*Step 9:* Back to the Terminal install the application with:
+```bash
+$ mvn clean install
+```
+=== Run the application
+
+Now you can simply run the application with following steps:
+
+*Step 1:* In the project-root directory type following:
+```bash
+$  docker-compose -f docker-compose.yml -f docker-compose.ref.yml up
+```
+
+*Step 2:* In your Webbrowser type `http://localhost:8091` and the webapplication shows up.
+
+image:https://user-images.githubusercontent.com/37511144/54868460-edafea80-4d8c-11e9-829a-92912f192c29.png[spring-boot-angular-login]
+
+=== Development
+
+For development purposes, you can run the application inside an IDE.
+
+To start the PostgreSQL database in a Docker-Container, open a terminal, change the location to
+the project-root directory and type following:
+```bash
+$  docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+```
+
+If you develop with https://www.jetbrains.com/idea/[IntelliJ IDEA] there are also some
+https://github.com/mrrobworks/spring-boot-angular-template/tree/master/.idea/runConfigurations[Run-Configurations]
+in the Project-Repository. Start the Run-Configurations _docker-compose-DEV_, _backend-spring-boot-DEV_
+and _frontend-angular-DEV_ in IntellJ and you are ready to go. Open a webbrowser, type `http://localhost:4200`
+and the webapplication shows up.
+
+=== More Installing
+
+If you want to add an additional O2Auth for Github, do following:
+
+*Step 1:* Open a webbrowser and go to https://github.com/settings/profile[https://github.com/settings/profile]
+
+*Step 2:* Press on the left navigation side menu the Menu-Item `Developer-Settings`
+
+*Step 3:* In the _Developer Settings_ dialog press the button `Register a new application`
+
+image:https://user-images.githubusercontent.com/37511144/54868426-a9244f00-4d8c-11e9-81f8-5550819da14e.png[github-developer-settings]
+
+*Step 4:* In the _Register a new OAuth application_ dialog type in following:
+
+image:https://user-images.githubusercontent.com/37511144/54868432-bb9e8880-4d8c-11e9-926f-fbca57e7f8dd.png[github-register-oauth]
+
+*Step 5:* Copy your generated `Client ID` and `Client Secret`
+
+image:https://user-images.githubusercontent.com/37511144/54868423-97db4280-4d8c-11e9-9d96-2e760e716ddc.png[github-client-id-secret]
+
+and paste it in `./backend/src/main/resources/application.yml`
+
+```
+github:
+  client:
+    client-id: [GITHUB-CLIENT-ID]
+    client-secret: [GITHUB-CLIENT-SECRET]
+```
+
+*Step 6:* Open a Terminal, go the project root-directory and install the application with:
+```bash
+$ mvn clean install
+```
+
+Unfortunately github is not allowing adding more than one _Homepage URL_ and _Authorization callback URL_.
+So for development purposes the Google-O2Auth should be prefered.
+
+== TODOs
+- [ ] Microservices from this Projekt for creating github-repositories
+- [x] User-Roles Access on custom sites / elements
+- [x] Angular / CSS / Bootstrap (Angular-Material Implemented)
+- [x] Profile in OAuthSecurityConfiguration (Google, Github)
+- [x] User-Role-assignment through webapplication
+- [x] Save LoggedIn User to Session
+- [ ] CRUD Roles for Administrator of the Application
+- [x] Building Docker-Image with Spring-Boot and Angular
+- [ ] Comment Function for Blog-Entries (after successful login with userid)
+- [ ] Create schema.sql and data.sql for script based data initialization
+(spring.jpa.hibernate.ddl-auto=none / spring.datasource.initialize=true)
+- [ ] Create ViewModel-Beans for each JPA-Model-Entity-Bean
+- [ ] Remove DB-Unit, instead use Mockito
+- [ ] WebMvcTest for REST-Controller (mockMvc)
+- [ ] Swagger with OAuth2 or BasicAuth
+- [ ] Add spring-boot-devtools
+- [ ] Changing return types of REST-Controllers to ResponseEntity
+- [ ] Validation Rules in backend-model classes (Java Bean Validation API, JSR-303,
+javax.validation.constraints.\*, org.hibernate.validator.constraints.\*)
+- [ ] H2 embedded database in scope runtime for development, postgres for production / docker
+- [ ] Using var for local variables
+- [ ] Using EntityGraph for JPA (instead FetchType.EAGER)
+- [ ] Add Swagger Documentation to REST-Controllers
+- [ ] application.properties change to application.yml
+- [ ] Update README.md with actual installation instructions for development and how to setup
+Intellij / Docker. Add Port 8091 to Images.
+- [ ] application-external.properties to yml and add installation instructions to README.md
+- [ ] Login-Site Radio-Button Google and Github link to /login and /login/github
+- [ ] Fix .gitignore file
