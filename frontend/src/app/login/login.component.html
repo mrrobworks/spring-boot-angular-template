@@ -15,20 +15,21 @@
               <div class="row">
                 <div class="col-4">Choose your Account:</div>
                 <div class="col-8">
-                  <fieldset>
-                    <input type="radio" name="account" id="google" checked>
-                    <!-- TODO: Icons for Google and Github not shown with Font-Awesome -->
-                    <!--<i class="fa fa-google"></i>-->
-                    <label for="google">&nbsp;Google</label>&nbsp;
-                    <input type="radio" name="account" id="github">
-                    <!--<i class="fa fa-github"></i>-->
-                    <label for="github">&nbsp;Github</label>
-                  </fieldset>
+                  <span *ngFor="let account of loginAccounts">
+                    <input type="radio"
+                           id="{{account.value + 'id'}}"
+                           name="{{account.value}}"
+                           [value]="account"
+                           [(ngModel)]="selectedLoginAccount"
+                           (ngModelChange)="loginAccountChangeHandler(account)">
+                    <label for="{{account.value + 'id'}}">{{account.value}}</label>
+                    <span>&nbsp;&nbsp;</span>
+                  </span>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <a href="/login/google" class="btn btn-primary btn-block">
+                  <a [href]="selectedLoginAccount.link" class="btn btn-primary btn-block">
                     Login
                   </a>
                 </div>

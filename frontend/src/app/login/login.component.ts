@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import 'rxjs/add/operator/finally';
 import { LoginService } from '../services/login.service';
+import { LoginAccount } from '../models/login-account';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +13,17 @@ export class LoginComponent implements OnInit {
 
   private currentUser;
 
-  constructor(
-    private loginService: LoginService
-  ) {}
+  selectedLoginAccount: LoginAccount;
+  public loginAccounts: Array<LoginAccount> = [
+    new LoginAccount('Google', '/login/google'),
+    new LoginAccount('Github', '/login/github')
+  ];
+
+  constructor(private loginService: LoginService) {}
 
   ngOnInit() {
     this.authenticate();
+    this.selectedLoginAccount = this.loginAccounts[0];
   }
 
   authenticate() {
@@ -41,5 +47,10 @@ export class LoginComponent implements OnInit {
           this.loginEvent.emit(false);
         }
       );
+  }
+
+  loginAccountChangeHandler(loginAccount: LoginAccount) {
+    console.log('Selected Account: ' + this.selectedLoginAccount.value);
+    this.selectedLoginAccount = loginAccount;
   }
 }
