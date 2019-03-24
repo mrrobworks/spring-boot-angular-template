@@ -1,5 +1,3 @@
-server:
-  port: 8081
 spring:
   profiles:
     active: dev
@@ -11,6 +9,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
         temp:
           use_jdbc_metadata_defaults: false
+server:
+  port: 8081
 google:
   client:
     client-id: [GOOGLE-CLIENT-ID]
