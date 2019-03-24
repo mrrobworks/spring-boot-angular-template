@@ -5,8 +5,8 @@ import org.hibernate.dialect.HSQLDialect;
 /**
  * Workaround.
  *
- * @see https://stackoverflow.com/questions/12054422/unsuccessful-alter-table-xxx-drop-constraint-yyy-in-hibernate-jpa-hsqldb-standa
- * @author robert
+ * @see <a href="https://stackoverflow.com/questions/12054422/unsuccessful-alter-table-xxx-drop-constraint-yyy-in-hibernate-jpa-hsqldb-standa">Description
+ * found here</a>
  */
 public class ImprovedHSQLDialect extends HSQLDialect {
 

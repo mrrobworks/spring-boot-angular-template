@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: test
+  datasource:
+    driver-class-name: org.hsqldb.jdbcDriver
+    url: jdbc:hsqldb:mem:testdb
+    username: sa
+    password: sa
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: de.mrrobworks.springbootangular.backend.helper.ImprovedHSQLDialect
+    generate-ddl: true
+    show-sql: true

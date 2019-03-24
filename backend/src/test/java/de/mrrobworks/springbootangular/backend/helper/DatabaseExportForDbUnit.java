@@ -15,16 +15,15 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 /**
  * Helper Class to create Test-XML-Files for DbUnit-Tests. Hint: Not in Spring-Boot-Context, just a
  * Helper.
- *
- * @author robert
  */
 class DatabaseExportForDbUnit {
 
   private Connection con;
 
   private DatabaseExportForDbUnit() throws SQLException {
-    con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/spring_boot_angular_db",
-        "root", "<PASSWORD>");
+    con = DriverManager
+        .getConnection("jdbc:postgresql://localhost:54321/spring_boot_angular_db_dev",
+            "postgres_dev", "changeit_dev");
   }
 
   private void writeToXmlFile(final String tableName, final String sql, final String fileName)

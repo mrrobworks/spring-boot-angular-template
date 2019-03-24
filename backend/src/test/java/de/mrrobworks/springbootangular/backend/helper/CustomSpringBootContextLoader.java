@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootContextLoader;
  * {@link org.hsqldb.util.DatabaseManagerSwing} in a Spring-Boot-Context.
  *
  * @see DbUnitTestCase
- * @author robert
  */
 public class CustomSpringBootContextLoader extends SpringBootContextLoader {
 
