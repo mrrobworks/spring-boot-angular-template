@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: changeit
+    url: jdbc:postgresql://localhost:5432/spring_boot_angular_db
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        temp:
+          use_jdbc_metadata_defaults: false
+
+server:
+  port: 8081
+google:
+  client:
+    client-id: [GOOGLE-CLIENT-ID]
+    client-secret: [GOOGLE-CLIENT-SECRET]
+    access-token-uri: https://www.googleapis.com/oauth2/v4/token
+    client-authentication-scheme: form
+    scope: https://www.googleapis.com/auth/userinfo.profile
+    user-authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+  resource:
+    user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+github:
+  client:
+    client-id: [GITHUB-CLIENT-ID]
+    client-secret: [GITHUB-CLIENT-SECRET]
+    access-token-uri: https://github.com/login/oauth/access_token
+    client-authentication-scheme: form
+    user-authorization-uri: https://github.com/login/oauth/authorize
+  resource:
+    user-info-uri: https://api.github.com/user
