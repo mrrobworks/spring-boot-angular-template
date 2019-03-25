@@ -1,5 +1,7 @@
 = Spring-Boot-Angular-Template
 
+image:https://travis-ci.com/mrrobworks/spring-boot-angular-template.svg?branch=master["Build Status", link="https://travis-ci.com/mrrobworks/spring-boot-angular-template"]
+
 Template for a new Web-Project with OAuth 2.0 User Authentication and Docker. Spring-Boot 2 with Java 11 and a
 PostgreSQL database as Backend. Angular 7 with Bootstrap 4 as Frontend. A User with a Google or Github-Account
 get access through O2Auth to the Web-Application, so no additional registration is required. A new user get the
