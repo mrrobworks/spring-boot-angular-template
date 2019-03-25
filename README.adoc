@@ -1,41 +1,56 @@
 = Spring-Boot-Angular-Template
 
 Template for a new Web-Project with OAuth 2.0 User Authentication and Docker. Spring-Boot 2 with Java 11 and a
-PostgreSQL Database as Backend. Angular 7 with Bootstrap 4 as Frontend. A User with a Google or Github-Account
+PostgreSQL database as Backend. Angular 7 with Bootstrap 4 as Frontend. A User with a Google or Github-Account
 get access through O2Auth to the Web-Application, so no additional registration is required. A new user get the
-Default-Role ROLE_USER. The Role-Management is implemented in the Web-Application, so additional Roles
-like ROLE_ADMIN for administration access can be assigned to a user.
+Default-Role _ROLE_USER_. The Role-Management is implemented in the Web-Application, so additional Roles
+like _ROLE_ADMIN_ for administrative access can be assigned to a user.
+
+.Login-Screen
+image:https://user-images.githubusercontent.com/37511144/54868460-edafea80-4d8c-11e9-829a-92912f192c29.png[spring-boot-angular-login]
 
 == Technology-Stack:
 
 * :leaves: Spring-Boot 2 (Spring AOP, Spring Web, Spring Data JPA, Spring Security)
 * :a: Angular 7 (Bootstrap 4, TypeScript, HTML, CSS)
-* :whale: https://www.docker.com/get-started[Docker]pass:[**]
+* :whale: https://www.docker.com/get-started[Docker] pass:[*]
 * :lock: OAuth 2.0 Authentication
-* :coffee: https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11]pass:[**]
-* https://maven.apache.org/download.cgi[Maven]pass:[***]
+* :coffee: https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11] pass:[^]
+* https://maven.apache.org/download.cgi[Maven] pass:[^]
 * :elephant: PostgreSQL
 * :droplet: Liquibase
-* https://projectlombok.org/download[Lombok]pass:[***]
+* https://projectlombok.org/download[Lombok] pass:[^]
 * JUnit 5
 * DBUnit with HSQLDB
-* Logback (logback-spring.xml)
-* https://git-scm.com/downloads[Git]pass:[***]
+* https://git-scm.com/downloads[Git] pass:[*]
 
-pass:[**] Need to be installed on the operation system
+pass:[*] Need to be installed on the OS to startup the application
 
-pass:[***] Need to be installed on the operation system for development purposes
+pass:[^] Need to be installed on the OS for development purposes
 
 == Getting Started
-After you have installed the software mentioned above, some configuration need to be to do.
+To get the application running, some configuration need to be to do.
 
 === Prerequisites
-* Under the Docker-Settings, share the drive in which you will later git clone the
-spring-boot-angular-template.git. This is necessary for accessing the sql-files for setting up the
+*Step 1*: For running commands we need a terminal. If you are running a bash-shell on a Linux-Distrubtion
+or Mac-OS everything should be fine. The Windows _Powershell_ and _CMD_ could make some problems and
+the build-process fails. My recommendation is to install the
+https://docs.microsoft.com/de-de/windows/wsl/install-win10[Windows Subsystem for Linux (WSL)]
+in Windows 10 and using the bash-shell from it.
+
+*Step 2:* Install  https://www.docker.com/get-started[Docker] and https://git-scm.com/downloads[Git] on your OS. This is
+necessary to running the commands `git` and `docker-compose` in the terminal.
+
+*Step 3:* Under the Docker-Settings, share the drive in which you will later git clone the
+_spring-boot-angular-template.git_. This is necessary for accessing the sql-files for setting up the
 database.
 
+*Step 4:*
+If you are running Windows 10 and using WSL with a terminal, then follow the instructions described in
+this https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly[Blog-Post].
+
 === Installing
-*Step 1:* Open a Terminal and type:
+*Step 1:* Open a terminal and type:
 ```bash
 $ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
 $ cd spring-boot-angular-template
@@ -74,8 +89,9 @@ google:
 
 *Step 9:* Back to the Terminal install the application with:
 ```bash
-$ mvn clean install
+$ ./mvnw clean install
 ```
+
 === Run the application
 
 Now you can simply run the application with following steps:
@@ -87,11 +103,20 @@ $  docker-compose -f docker-compose.yml -f docker-compose.ref.yml up
 
 *Step 2:* In your Webbrowser type `http://localhost:8091` and the webapplication shows up.
 
-image:https://user-images.githubusercontent.com/37511144/54868460-edafea80-4d8c-11e9-829a-92912f192c29.png[spring-boot-angular-login]
-
 === Development
 
-For development purposes, you can run the application inside an IDE.
+For Development, some additional software need to be installed.
+
+*Step 1:*  Install https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11],
+https://maven.apache.org/download.cgi[Maven] and https://nodejs.org/en/[Node.js]
+
+*Step 2:* Open a terminal and type:
+```bash
+$ npm install -g @angular/cli
+```
+to install the https://cli.angular.io/[Angular-CLI]
+
+*Step 3:* Open your IDE and install https://projectlombok.org/download[Lombok] as a Plugin.
 
 To start the PostgreSQL database in a Docker-Container, open a terminal, change the location to
 the project-root directory and type following:
@@ -136,12 +161,47 @@ github:
 
 *Step 6:* Open a Terminal, go the project root-directory and install the application with:
 ```bash
-$ mvn clean install
+$ ./mvnw clean install
 ```
 
 Unfortunately github is not allowing adding more than one _Homepage URL_ and _Authorization callback URL_.
 So for development purposes the Google-O2Auth should be prefered.
 
+=== Troubleshooting
+
+*Trouble 1:* When installing the application with `./mvnw clean install` and you getting a error like this:
+```
+[ERROR] Get https://registry-1.docker.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+[WARNING] An attempt failed, will retry 1 more times
+org.apache.maven.plugin.MojoExecutionException: Could not build image
+```
+then restart the Docker deamon and the error should be gone.
+
+*Trouble 2:* Using CMD or Powershell in Windows and install the application with `mvnw.cmd clean install` it
+appears following:
+
+```
+[INFO] > cd bin && ng build --prod
+[INFO]
+[ERROR] 'ng' is not recognized as an internal or external command,
+[ERROR] operable program or batch file.
+```
+
+This is usually a problem when installing the application with CMD or Powershell. The command `ng`
+from the Angular-CLI is not recognized correctly. You need to install _Node.js_ and _Angular-CLI_
+and then set the corresponding Windows-Evironment-Path variables. Also you can change in frontend/package.json
+the following:
+
+```
+"scripts": {
+    "ng": "ng",
+    "start": "ng serve --proxy-config proxy.conf.json",
+    "build": "ng build --prod",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  }
+```
 == TODOs
 - [ ] Microservices from this Projekt for creating github-repositories
 - [x] User-Roles Access on custom sites / elements
@@ -172,3 +232,4 @@ Intellij / Docker. Add Port 8091 to Images.
 - [ ] application-external.properties to yml and add installation instructions to README.md
 - [ ] Login-Site Radio-Button Google and Github link to /login and /login/github
 - [ ] Fix .gitignore file
+- [ ] DB-Setup in backend or module dbsetup
