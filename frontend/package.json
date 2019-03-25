@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build --prod",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "ng": "cd bin && ng",
+    "start": "cd bin && ng serve --proxy-config proxy.conf.json",
+    "build": "cd bin && ng build --prod",
+    "test": "cd bin && ng test",
+    "lint": "cd bin && ng lint",
+    "e2e": "cd bin && ng e2e"
   },
   "private": true,
   "dependencies": {

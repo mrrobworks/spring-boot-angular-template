@@ -19,7 +19,8 @@
 		<eirslett.version>1.6</eirslett.version>
 		<node.version>v10.15.0</node.version>
 		<npm.version>6.6.0</npm.version>
-	</properties>
+    <angular-cli.version>@7.2.2</angular-cli.version>
+  </properties>
 
 	<build>
 		<resources>
@@ -48,6 +49,16 @@
 							<goal>install-node-and-npm</goal>
 						</goals>
 					</execution>
+
+          <execution>
+            <id>npm-angular-cli-install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>install -g @angular/cli${angular-cli.version}</arguments>
+            </configuration>
+          </execution>
 
 					<execution>
 						<id>npm-install</id>
