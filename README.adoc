@@ -1,7 +1,7 @@
 = Spring-Boot-Angular-Template image:https://travis-ci.com/mrrobworks/spring-boot-angular-template.svg?branch=master["Build Status", link="https://travis-ci.com/mrrobworks/spring-boot-angular-template"]
 
 Template to create a OAuth2 secured dockerized Spring Boot Application with Angular Frontend.
-A user with a Google- or Github-Account get access to the Application using O2Auth-Authentication, so
+A user with a Google- or Github-Account get access to the Application using OAuth2-Authentication, so
 no additional User Registration is required. A new user get the Default-Role _ROLE_USER_. Additional Roles,
 like _ROLE_ADMIN_ for administrative access, can be assigned to a user through the Role-Management.
 The data get stored in a PostgreSQL database inside a Docker-Container.
@@ -132,7 +132,7 @@ and the webapplication shows up.
 
 === More Installing
 
-If you want to add an additional O2Auth for Github, do following:
+If you want to add an additional OAuth2 for Github, do following:
 
 *Step 1:* Open a webbrowser and go to https://github.com/settings/profile[https://github.com/settings/profile]
 
@@ -165,7 +165,7 @@ $ ./mvnw clean install
 ```
 
 Unfortunately github is not allowing adding more than one _Homepage URL_ and _Authorization callback URL_.
-So for development purposes the Google-O2Auth should be prefered.
+So for development purposes the Google-OAuth2 should be prefered.
 
 === Troubleshooting
 
@@ -189,7 +189,7 @@ appears following:
 
 This is usually a problem when installing the application with CMD or Powershell. The command `ng`
 from the Angular-CLI is not recognized correctly. You need to install _Node.js_ and _Angular-CLI_
-and then set the corresponding Windows-Evironment-Path variables. Also you can change in frontend/package.json
+and then set the corresponding Windows-Evironment-Path variables. Also you can change in `frontend/package.json`
 the following:
 
 ```
