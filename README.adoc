@@ -10,9 +10,8 @@ The data get stored in a PostgreSQL database inside a Docker-Container.
 image:https://user-images.githubusercontent.com/37511144/54868460-edafea80-4d8c-11e9-829a-92912f192c29.png[spring-boot-angular-login]
 
 == Technology-Stack image:http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat["StackShare", link="https://stackshare.io/mrrobworks/spring-boot-angular-template-stack"]
-++++
-<a frameborder="0" data-theme="light" data-layers="1,2,3,4" data-stack-embed="true" href="https://embed.stackshare.io/stacks/embed/9d023f5f3421827de6f813df15d548"/></a><script async src="https://cdn1.stackshare.io/javascripts/client-code.js" charset="utf-8"></script>
-++++
+image:https://user-images.githubusercontent.com/37511144/55079435-733cde80-509c-11e9-80ff-f3d4e093dbd4.png[spring-boot-angular-template-stack]
+
 
 Need to be installed on the OS to startup the application:
 
