@@ -9,30 +9,29 @@ The data get stored in a PostgreSQL database inside a Docker-Container.
 .Login-Screen
 image:https://user-images.githubusercontent.com/37511144/54868460-edafea80-4d8c-11e9-829a-92912f192c29.png[spring-boot-angular-login]
 
-== Technology-Stack:
+== Technology-Stack image:http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat["StackShare", link="https://stackshare.io/mrrobworks/spring-boot-angular-template-stack"]
+++++
+<a frameborder="0" data-theme="light" data-layers="1,2,3,4" data-stack-embed="true" href="https://embed.stackshare.io/stacks/embed/9d023f5f3421827de6f813df15d548"/></a><script async src="https://cdn1.stackshare.io/javascripts/client-code.js" charset="utf-8"></script>
+++++
 
-* :leaves: Spring-Boot 2 (Spring Data JPA, Spring Security, Spring Web, Spring AOP)
-* :a: Angular 7 (Bootstrap 4, https://nodejs.org/en/[Node.js] ^, https://cli.angular.io/[Angular-CLI] ^, TypeScript, HTML, CSS)
-* :whale: https://www.docker.com/get-started[Docker] pass:[*]
-* :lock: OAuth 2.0 Authentication
-* :coffee: https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11] pass:[^]
-* https://maven.apache.org/download.cgi[Maven] pass:[^]
-* :elephant: PostgreSQL
-* :droplet: Liquibase
-* https://projectlombok.org/download[Lombok] pass:[^]
-* https://git-scm.com/downloads[Git] pass:[*]
-* JUnit 5
-* DBUnit with HSQLDB
+Need to be installed on the OS to startup the application:
 
-pass:[*] Need to be installed on the OS to startup the application
+* :whale: https://www.docker.com/get-started[Docker]
+* https://git-scm.com/downloads[Git]
 
-pass:[^] Need to be installed on the OS for development purposes
+Need to be installed on the OS for development purposes:
+
+* :coffee:  https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11]
+* https://maven.apache.org/download.cgi[Maven]
+* :hot_pepper: https://projectlombok.org/download[Lombok]
+* https://nodejs.org/en/[Node.js]
+* https://cli.angular.io/[Angular-CLI]
 
 == Getting Started
 To get the application running, some configuration need to be to do.
 
 === Prerequisites
-*Step 1*: For running commands we need a terminal. If you are running a bash-shell on a Linux-Distrubtion
+*Step 1*: For executing commands we need a terminal. If you are running a bash-shell on a Linux-Distrubtion
 or Mac-OS everything should be fine. The Windows _Powershell_ and _CMD_ could make some problems and
 the build-process fails. My recommendation is to install the
 https://docs.microsoft.com/de-de/windows/wsl/install-win10[Windows Subsystem for Linux (WSL)]
@@ -87,6 +86,9 @@ google:
     client-secret: [GOOGLE-CLIENT-SECRET]
 ```
 
+For an additional Github-OAuth2-Configuration you can jump now to the Section <<more-installing>> and
+ignore following _Step 9_.
+
 *Step 9:* Back to the Terminal install the application with:
 ```bash
 $ ./mvnw clean install
@@ -130,6 +132,7 @@ in the Project-Repository. Start the Run-Configurations _docker-compose-DEV_, _b
 and _frontend-angular-DEV_ in IntellJ and you are ready to go. Open a webbrowser, type `http://localhost:4200`
 and the webapplication shows up.
 
+[[more-installing]]
 === More Installing
 
 If you want to add an additional OAuth2 for Github, do following:
