@@ -12,7 +12,6 @@ image:https://user-images.githubusercontent.com/37511144/54868460-edafea80-4d8c-
 == Technology-Stack image:http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat["StackShare", link="https://stackshare.io/mrrobworks/spring-boot-angular-template-stack"]
 image:https://user-images.githubusercontent.com/37511144/55079435-733cde80-509c-11e9-80ff-f3d4e093dbd4.png[spring-boot-angular-template-stack]
 
-
 Need to be installed on the OS to startup the application:
 
 * :whale: https://www.docker.com/get-started[Docker]
