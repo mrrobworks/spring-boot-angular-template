@@ -1,3 +1,5 @@
+:icons: font
+
 = Spring-Boot-Angular-Template image:https://travis-ci.com/mrrobworks/spring-boot-angular-template.svg?branch=master["Build Status", link="https://travis-ci.com/mrrobworks/spring-boot-angular-template"]
 
 Template to create a OAuth2 secured dockerized Spring Boot Application with Angular Frontend.
@@ -46,51 +48,70 @@ database.
 If you are running Windows 10 and using WSL with a terminal, then follow the instructions described in
 this https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly[Blog-Post].
 
+=== Google OAuth2
+
+At first we need to register the application on Google to use their OAuth2-Authentication.
+
+*Step 1:* Open a webbrowser and go to https://console.developers.google.com[https://console.developers.google.com]
+
+*Step 2:* Press the Menu `Select a project` in the upper navigation-bar.
+
+*Step 3:* Press the Menu-Item `New Project` and type in following:
+
+image:https://user-images.githubusercontent.com/37511144/54868468-07513200-4d8d-11e9-98e1-de5b22a18899.png[new project dialog]
+
+*Step 4:* In the left sidemenu select `Credentials`
+
+*Step 5:* Select `OAuth client ID`
+
+image:https://user-images.githubusercontent.com/37511144/54868416-7ed29180-4d8c-11e9-9969-15f1a1f87d59.png[create credentials]
+
+*Step 6:* Type in following:
+
+image:https://user-images.githubusercontent.com/37511144/55275019-eb471680-52df-11e9-85c3-a7e549762505.png[create oauth client id]
+
+*Step 7:* Copy your generated `client ID` and `client secret`
+
+image:https://user-images.githubusercontent.com/37511144/54868470-13d58a80-4d8d-11e9-8b66-628f66cf5bee.png[oauth client]
+
+=== Github OAuth2
+
+Next we need to register the application on Github to use their OAuth2-Authentication.
+
+*Step 1:* In your webbrowser go to https://github.com/settings/profile[https://github.com/settings/profile]
+
+*Step 2:* Press on the left navigation side menu the Menu-Item `Developer-Settings`
+
+*Step 3:* In the _Developer Settings_ dialog press the button `Register a new application`
+
+image:https://user-images.githubusercontent.com/37511144/54868426-a9244f00-4d8c-11e9-81f8-5550819da14e.png[github-developer-settings]
+
+*Step 4:* In the _Register a new OAuth application_ dialog type in following:
+
+image:https://user-images.githubusercontent.com/37511144/54868432-bb9e8880-4d8c-11e9-926f-fbca57e7f8dd.png[github-register-oauth]
+
+*Step 5:* Copy your generated `Client ID` and `Client Secret`
+
+image:https://user-images.githubusercontent.com/37511144/54868423-97db4280-4d8c-11e9-9d96-2e760e716ddc.png[github-client-id-secret]
+
+NOTE: Unfortunately github is not allowing adding more than one _Homepage URL_ and _Authorization callback URL_.
+So for development purposes using the Google-OAuth2 should be prefered.
+
 === Installing
+
 *Step 1:* Open a terminal and type:
 ```bash
 $ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
 $ cd spring-boot-angular-template
 ```
 
-*Step 2:* Open a webbrowser and go to https://console.developers.google.com[https://console.developers.google.com]
-
-*Step 3:* Press the Menu `Select a project` in the upper navigation-bar.
-
-*Step 4:* Press the Menu-Item `New Project` and type in following:
-
-image:https://user-images.githubusercontent.com/37511144/54868468-07513200-4d8d-11e9-98e1-de5b22a18899.png[new project dialog]
-
-*Step 5:* In the left sidemenu select `Credentials`
-
-*Step 6:* Select `OAuth client ID`
-
-image:https://user-images.githubusercontent.com/37511144/54868416-7ed29180-4d8c-11e9-9969-15f1a1f87d59.png[create credentials]
-
-*Step 7:* Type in following:
-
-image:https://user-images.githubusercontent.com/37511144/54868440-c8bb7780-4d8c-11e9-9e74-073940271a51.png[create oauth client id]
-
-*Step 8:* Copy your generated `client ID` and `client secret`
-
-image:https://user-images.githubusercontent.com/37511144/54868470-13d58a80-4d8d-11e9-8b66-628f66cf5bee.png[oauth client]
-
-and paste it in `./backend/src/main/resources/application.yml`
-
-```
-google:
-  client:
-    client-id: [GOOGLE-CLIENT-ID]
-    client-secret: [GOOGLE-CLIENT-SECRET]
-```
-
-For an additional Github-OAuth2-Configuration you can jump now to the Section <<more-installing>> and
-ignore following _Step 9_.
-
-*Step 9:* Back to the Terminal install the application with:
+*Step 2:* Install the application with:
 ```bash
-$ ./mvnw clean install
+$ ./mvnw clean install -Dgoogle.client.id=[google-client-id] -Dgoogle.client.secret=[google-client-secret] -Dgithub.client.id=[github-client-id] -Dgithub.client.secret=[github-client-secret]
 ```
+
+Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied
+values.
 
 === Run the application
 
@@ -129,44 +150,6 @@ https://github.com/mrrobworks/spring-boot-angular-template/tree/master/.idea/run
 in the Project-Repository. Start the Run-Configurations _docker-compose-DEV_, _backend-spring-boot-DEV_
 and _frontend-angular-DEV_ in IntellJ and you are ready to go. Open a webbrowser, type `http://localhost:4200`
 and the webapplication shows up.
-
-[[more-installing]]
-=== More Installing
-
-If you want to add an additional OAuth2 for Github, do following:
-
-*Step 1:* Open a webbrowser and go to https://github.com/settings/profile[https://github.com/settings/profile]
-
-*Step 2:* Press on the left navigation side menu the Menu-Item `Developer-Settings`
-
-*Step 3:* In the _Developer Settings_ dialog press the button `Register a new application`
-
-image:https://user-images.githubusercontent.com/37511144/54868426-a9244f00-4d8c-11e9-81f8-5550819da14e.png[github-developer-settings]
-
-*Step 4:* In the _Register a new OAuth application_ dialog type in following:
-
-image:https://user-images.githubusercontent.com/37511144/54868432-bb9e8880-4d8c-11e9-926f-fbca57e7f8dd.png[github-register-oauth]
-
-*Step 5:* Copy your generated `Client ID` and `Client Secret`
-
-image:https://user-images.githubusercontent.com/37511144/54868423-97db4280-4d8c-11e9-9d96-2e760e716ddc.png[github-client-id-secret]
-
-and paste it in `./backend/src/main/resources/application.yml`
-
-```
-github:
-  client:
-    client-id: [GITHUB-CLIENT-ID]
-    client-secret: [GITHUB-CLIENT-SECRET]
-```
-
-*Step 6:* Open a Terminal, go the project root-directory and install the application with:
-```bash
-$ ./mvnw clean install
-```
-
-Unfortunately github is not allowing adding more than one _Homepage URL_ and _Authorization callback URL_.
-So for development purposes the Google-OAuth2 should be prefered.
 
 === Troubleshooting
 
