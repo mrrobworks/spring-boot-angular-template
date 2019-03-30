@@ -105,9 +105,13 @@ $ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
 $ cd spring-boot-angular-template
 ```
 
-*Step 2:* Install the application with:
+*Step 2:* Install the application with the command:
 ```bash
-$ ./mvnw clean install -Dgoogle.client.id=[google-client-id] -Dgoogle.client.secret=[google-client-secret] -Dgithub.client.id=[github-client-id] -Dgithub.client.secret=[github-client-secret]
+$ ./mvnw clean install \
+-Dgoogle.client.id=[google-client-id] \
+-Dgoogle.client.secret=[google-client-secret] \
+-Dgithub.client.id=[github-client-id] \
+-Dgithub.client.secret=[github-client-secret]
 ```
 
 Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied
