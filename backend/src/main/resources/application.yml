@@ -13,8 +13,6 @@ server:
   port: 8081
 google:
   client:
-    client-id: @google.client.id@
-    client-secret: @google.client.secret@
     access-token-uri: https://www.googleapis.com/oauth2/v4/token
     client-authentication-scheme: form
     scope: https://www.googleapis.com/auth/userinfo.profile
@@ -23,8 +21,6 @@ google:
     user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
 github:
   client:
-    client-id: @github.client.id@
-    client-secret: @github.client.secret@
     access-token-uri: https://github.com/login/oauth/access_token
     client-authentication-scheme: form
     user-authorization-uri: https://github.com/login/oauth/authorize

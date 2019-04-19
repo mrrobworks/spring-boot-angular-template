@@ -6,6 +6,11 @@ services:
     volumes:
       - ./wait-for.sh:/tmp/wait-for.sh
     command: ["sh", "./wait-for.sh", "db:5432", "-t", "20", "--", "java", "-jar", "-Dspring.profiles.active=ref", "app.jar"]
+    environment:
+      GOOGLE_CLIENT_ID: [google-client-id]
+      GOOGLE_CLIENT_SECRET: [google-client-secret]
+      GITHUB_CLIENT_ID: [github-client-id]
+      GITHUB_CLIENT_SECRET: [github-client-secret]
     ports:
       - "8091:8081"
     networks:

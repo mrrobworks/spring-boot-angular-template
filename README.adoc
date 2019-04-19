@@ -17,10 +17,10 @@ image:https://user-images.githubusercontent.com/37511144/55079435-733cde80-509c-
 Need to be installed on the OS to startup the application:
 
 * :whale: https://www.docker.com/get-started[Docker]
-* https://git-scm.com/downloads[Git]
 
 Need to be installed on the OS for development purposes:
 
+* https://git-scm.com/downloads[Git]
 * :coffee:  https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11]
 * https://maven.apache.org/download.cgi[Maven]
 * :hot_pepper: https://projectlombok.org/download[Lombok]
@@ -31,87 +31,92 @@ Need to be installed on the OS for development purposes:
 To get the application running, some configuration need to be to do.
 
 === Prerequisites
-*Step 1*: For executing commands we need a terminal. If you are running a bash-shell on a Linux-Distrubtion
-or Mac-OS everything should be fine. The Windows _Powershell_ and _CMD_ could make some problems and
-the build-process fails. My recommendation is to install the
-https://docs.microsoft.com/de-de/windows/wsl/install-win10[Windows Subsystem for Linux (WSL)]
-in Windows 10 and using the bash-shell from it.
+*Step 1:* Install  https://www.docker.com/get-started[Docker] on your OS. This is necessary to running the command
+`docker-compose` in a terminal.
 
-*Step 2:* Install  https://www.docker.com/get-started[Docker] and https://git-scm.com/downloads[Git] on your OS. This is
-necessary to running the commands `git` and `docker-compose` in the terminal.
+*Step 2:* After Docker is installed, go to the Docker-Settings and share the drive in which you will later download the
+http://???[latest Release] of the Spring-Boot-Angular-Template.
 
-*Step 3:* Under the Docker-Settings, share the drive in which you will later git clone the
-_spring-boot-angular-template.git_. This is necessary for accessing the sql-files for setting up the
-database.
+image:https://user-images.githubusercontent.com/37511144/56428525-fcbc8680-62bf-11e9-9299-8782ad98bac9.png[docker-share]
 
-*Step 4:*
-If you are running Windows 10 and using WSL with a terminal, then follow the instructions described in
-this https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly[Blog-Post].
+This is necessary for accessing the SQL-Files for setting up the database.
 
-=== Google OAuth2
+=== Obtaining API-Keys
 
-At first we need to register the application on Google to use their OAuth2-Authentication.
+To use the O2Auth-Authentication from Google or Github, we need to register this application to obtain the appropiate
+Client-ID and Client-Secret.
 
-*Step 1:* Open a webbrowser and go to https://console.developers.google.com[https://console.developers.google.com]
+'''
 
-*Step 2:* Press the Menu `Select a project` in the upper navigation-bar.
+image:https://user-images.githubusercontent.com/37511144/55681624-ab5be100-5928-11e9-82bf-e5e352485c17.png[google,width=250]
 
-*Step 3:* Press the Menu-Item `New Project` and type in following:
+*Step 1:* Open a webbrowser and go to https://cloud.google.com/console/project[Google Cloud Console]
 
-image:https://user-images.githubusercontent.com/37511144/54868468-07513200-4d8d-11e9-98e1-de5b22a18899.png[new project dialog]
+*Step 2:* Click on the Button `Create Project`
 
-*Step 4:* In the left sidemenu select `Credentials`
+*Step 3:* In the following `New Project`-Dialog set following:
 
-*Step 5:* Select `OAuth client ID`
+image:https://user-images.githubusercontent.com/37511144/56429206-676ec180-62c2-11e9-8d9d-bd04703aefd4.png[new-project-dialog]
 
-image:https://user-images.githubusercontent.com/37511144/54868416-7ed29180-4d8c-11e9-9969-15f1a1f87d59.png[create credentials]
+After that Click on the `Create`-Button
 
-*Step 6:* Type in following:
+*Step 4:* On the top left click on the Button with the three stripes to open the left-side Navigation-Menu. Select
+`APIs & Services` -> `Credentials`
+
+*Step 5:* In the Credentials-View click on the Button `Create credentials` and than select the Menu-Item `OAuth client ID`.
+
+*Step 6:* In the Create OAuth client ID Dialaog Type type in following:
 
 image:https://user-images.githubusercontent.com/37511144/55275019-eb471680-52df-11e9-85c3-a7e549762505.png[create oauth client id]
 
-*Step 7:* Copy your generated `client ID` and `client secret`
+After that click on the `Create`-Button
 
-image:https://user-images.githubusercontent.com/37511144/54868470-13d58a80-4d8d-11e9-8b66-628f66cf5bee.png[oauth client]
+*Step 7:* A dialog appears with a generated `client ID` and `client secret` which you need to copy for later usage.
 
-=== Github OAuth2
+'''
 
-Next we need to register the application on Github to use their OAuth2-Authentication.
+image:https://user-images.githubusercontent.com/37511144/55681693-96cc1880-5929-11e9-980e-986a753386ae.png[github,width=250]
 
-*Step 1:* In your webbrowser go to https://github.com/settings/profile[https://github.com/settings/profile]
+*Step 1:* In your webbrowser go to https://github.com/settings/profile[Account Settings]
 
 *Step 2:* Press on the left navigation side menu the Menu-Item `Developer-Settings`
 
-*Step 3:* In the _Developer Settings_ dialog press the button `Register a new application`
-
-image:https://user-images.githubusercontent.com/37511144/54868426-a9244f00-4d8c-11e9-81f8-5550819da14e.png[github-developer-settings]
+*Step 3:* Select on the left navigation side menu `OAuth Apps` and click on the Button `Register a new application`.
 
 *Step 4:* In the _Register a new OAuth application_ dialog type in following:
 
 image:https://user-images.githubusercontent.com/37511144/54868432-bb9e8880-4d8c-11e9-926f-fbca57e7f8dd.png[github-register-oauth]
 
-*Step 5:* Copy your generated `Client ID` and `Client Secret`
+Click than on the button `Register application`
 
-image:https://user-images.githubusercontent.com/37511144/54868423-97db4280-4d8c-11e9-9d96-2e760e716ddc.png[github-client-id-secret]
+*Step 5:* Copy your generated `Client ID` and `Client Secret`
 
 NOTE: Unfortunately github is not allowing adding more than one _Homepage URL_ and _Authorization callback URL_.
 So for development purposes using the Google-OAuth2 should be prefered.
 
 === Installing
 
-*Step 1:* Open a terminal and type:
+*Step 1:* Download the https://github.com/mrrobworks/spring-boot-angular-template/releases/download/v0.1/spring-boot-angular-template.tar.gz[lastest Release]
+to your working-directory and unzip the file with following commands:
+
 ```bash
-$ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
+$ wget https://github.com/mrrobworks/spring-boot-angular-template/releases/download/v0.1/spring-boot-angular-template.tar.gz
+$ tar -xvzf spring-boot-angular-template.tar.gz
 $ cd spring-boot-angular-template
 ```
 
-*Step 2:* Install the application with the command:
+*Step 3:* Load the docker-image to your local repository with:
+
 ```bash
-$ ./mvnw clean install \
--Dgoogle.client.id=[google-client-id] \
--Dgoogle.client.secret=[google-client-secret] \
--Dgithub.client.id=[github-client-id] \
--Dgithub.client.secret=[github-client-secret]
+docker load < spring-boot-angular-template-docker-image.tar
+```
+
+*Step 4:* In the file `docker-compose.ref.yml` change following
+```
+GOOGLE_CLIENT_ID: [google-client-id]
+GOOGLE_CLIENT_SECRET: [google-client-secret]
+GITHUB_CLIENT_ID: [github-client-id]
+GITHUB_CLIENT_SECRET: [github-client-secret]
 ```
 
 Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied
@@ -129,6 +134,17 @@ $  docker-compose -f docker-compose.yml -f docker-compose.ref.yml up
 *Step 2:* In your Webbrowser type `http://localhost:8091` and the webapplication shows up.
 
 === Development
+
+For the Development some Prerequisites are recommended:
+
+*Step 1:* For executing commands we need a terminal. If you are running a bash-shell on a Linux-Distrubtion
+or Mac-OS everything should be fine. The Windows _Powershell_ and _CMD_ could make some problems and
+the build-process fails. My recommendation is to install the
+https://docs.microsoft.com/de-de/windows/wsl/install-win10[Windows Subsystem for Linux (WSL)]
+in Windows 10 and using the bash-shell from it.
+
+*Step 2:* If you are running Windows 10 and using WSL with a terminal, then follow the instructions described in
+this https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly[Blog-Post].
 
 For Development some additional software need to be installed.
 
@@ -154,6 +170,20 @@ https://github.com/mrrobworks/spring-boot-angular-template/tree/master/.idea/run
 in the Project-Repository. Start the Run-Configurations _docker-compose-DEV_, _backend-spring-boot-DEV_
 and _frontend-angular-DEV_ in IntellJ and you are ready to go. Open a webbrowser, type `http://localhost:4200`
 and the webapplication shows up.
+
+*Step 1:* Open a terminal and type:
+```bash
+$ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
+$ cd spring-boot-angular-template
+```
+
+*Step 2:* Install the application with the command:
+```bash
+$ ./mvnw clean install
+```
+
+Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied
+values.
 
 === Troubleshooting
 

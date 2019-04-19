@@ -1,6 +1,14 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
+    username: postgres_ref
     password: changeit_ref
     url: jdbc:postgresql://db:5432/spring_boot_angular_db_ref
-    username: postgres_ref
+google:
+  client:
+    client-id: ${GOOGLE_CLIENT_ID}
+    client-secret: ${GOOGLE_CLIENT_SECRET}
+github:
+  client:
+    client-id: ${GITHUB_CLIENT_ID}
+    client-secret: ${GITHUB_CLIENT_SECRET}
