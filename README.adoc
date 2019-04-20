@@ -1,8 +1,17 @@
 :icons: font
 
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
 = Spring-Boot-Angular-Template image:https://travis-ci.com/mrrobworks/spring-boot-angular-template.svg?branch=master["Build Status", link="https://travis-ci.com/mrrobworks/spring-boot-angular-template"]
 
-Template to create a OAuth2 secured dockerized Spring Boot Application with Angular Frontend.
+Starter Template to create a *OAuth2* secured *dockerized Spring Boot* Application with *Angular* Frontend.
+
 A user with a Google- or Github-Account get access to the Application using OAuth2-Authentication, so
 no additional User Registration is required. A new user get the Default-Role _ROLE_USER_. Additional Roles,
 like _ROLE_ADMIN_ for administrative access, can be assigned to a user through the Role-Management.
@@ -14,33 +23,28 @@ image:https://user-images.githubusercontent.com/37511144/54868460-edafea80-4d8c-
 == Technology-Stack image:http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat["StackShare", link="https://stackshare.io/mrrobworks/spring-boot-angular-template-stack"]
 image:https://user-images.githubusercontent.com/37511144/55079435-733cde80-509c-11e9-80ff-f3d4e093dbd4.png[spring-boot-angular-template-stack]
 
-Need to be installed on the OS to startup the application:
+Need to be installed on the OS to startup the application: :whale: https://www.docker.com/get-started[Docker]
 
-* :whale: https://www.docker.com/get-started[Docker]
-
-Need to be installed on the OS for development purposes:
-
-* https://git-scm.com/downloads[Git]
-* :coffee:  https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11]
-* https://maven.apache.org/download.cgi[Maven]
-* :hot_pepper: https://projectlombok.org/download[Lombok]
-* https://nodejs.org/en/[Node.js]
-* https://cli.angular.io/[Angular-CLI]
+Need to be installed on the OS for development purposes: https://git-scm.com/downloads[Git],
+:coffee:  https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11],
+https://maven.apache.org/download.cgi[Maven],
+:hot_pepper: https://projectlombok.org/download[Lombok],
+https://nodejs.org/en/[Node.js],
+https://cli.angular.io/[Angular-CLI]
 
 == Getting Started
 To get the application running, some configuration need to be to do.
 
 === Prerequisites
-*Step 1:* Install  https://www.docker.com/get-started[Docker] on your OS. This is necessary to running the command
-`docker-compose` in a terminal.
+*Step 1:* Install  https://www.docker.com/get-started[Docker] on your OS. Direct Download Links:
+https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe[Docker for Windows],
+https://download.docker.com/mac/stable/Docker.dmg[Docker for Mac-OS]
 
-*Step 2:* After Docker is installed, go to the Docker-Settings and share the drive in which you will later download the
-http://???[latest Release] of the Spring-Boot-Angular-Template.
+*Step 2:* After Docker is installed, go to the _Docker-Settings_ and share the drive in which you will later download the
+https://github.com/mrrobworks/spring-boot-angular-template/releases/download/v0.1-alpha/spring-boot-angular-template.tar.gz[latest Release]
+of the Spring-Boot-Angular-Template. This is necessary for accessing the SQL-Files for setting up the database.
 
-image:https://user-images.githubusercontent.com/37511144/56428525-fcbc8680-62bf-11e9-9299-8782ad98bac9.png[docker-share]
-
-This is necessary for accessing the SQL-Files for setting up the database.
-
+[[obtaining-api-keys]]
 === Obtaining API-Keys
 
 To use the O2Auth-Authentication from Google or Github, we need to register this application to obtain the appropiate
@@ -50,68 +54,64 @@ Client-ID and Client-Secret.
 
 image:https://user-images.githubusercontent.com/37511144/55681624-ab5be100-5928-11e9-82bf-e5e352485c17.png[google,width=250]
 
-*Step 1:* Open a webbrowser and go to https://cloud.google.com/console/project[Google Cloud Console]
+*Step 1:* Visit the https://cloud.google.com/console/project[Google Cloud Console]
 
-*Step 2:* Click on the Button `Create Project`
+*Step 2:* Click on the Button *Create Project*
 
-*Step 3:* In the following `New Project`-Dialog set following:
+*Step 3:* In the following _New Project_-Dialog set as _Project name_ *spring_boot_angular_template* and click on the Button
+*Create*
 
-image:https://user-images.githubusercontent.com/37511144/56429206-676ec180-62c2-11e9-8d9d-bd04703aefd4.png[new-project-dialog]
+*Step 4:* On the top left, click on the Button with the *three horizontal stripes* to open the left-side Navigation-Menu. Select
+*APIs & Services -> Credentials*
 
-After that Click on the `Create`-Button
+*Step 5:* In the _Credentials-View_ click on the Button *Create credentials* and than select the Menu-Item *OAuth client ID*.
 
-*Step 4:* On the top left click on the Button with the three stripes to open the left-side Navigation-Menu. Select
-`APIs & Services` -> `Credentials`
-
-*Step 5:* In the Credentials-View click on the Button `Create credentials` and than select the Menu-Item `OAuth client ID`.
-
-*Step 6:* In the Create OAuth client ID Dialaog Type type in following:
+*Step 6:* In the Create _OAuth client ID_-Dialog type in following:
 
 image:https://user-images.githubusercontent.com/37511144/55275019-eb471680-52df-11e9-85c3-a7e549762505.png[create oauth client id]
 
-After that click on the `Create`-Button
+Click than on the *Create*-Button.
 
-*Step 7:* A dialog appears with a generated `client ID` and `client secret` which you need to copy for later usage.
+*Step 7:* A dialog appears with a generated _client ID_ and _client secret_ which you need to copy for later usage.
 
 '''
 
 image:https://user-images.githubusercontent.com/37511144/55681693-96cc1880-5929-11e9-980e-986a753386ae.png[github,width=250]
 
-*Step 1:* In your webbrowser go to https://github.com/settings/profile[Account Settings]
+*Step 1:* Visit the https://github.com/settings/profile[Github Account Settings]
 
-*Step 2:* Press on the left navigation side menu the Menu-Item `Developer-Settings`
+*Step 2:* Press on the left navigation side menu the Menu-Item *Developer-Settings*
 
-*Step 3:* Select on the left navigation side menu `OAuth Apps` and click on the Button `Register a new application`.
+*Step 3:* In the Developer-Settings, select on the left navigation side menu *OAuth Apps* and click on the Button *Register a new application*.
 
-*Step 4:* In the _Register a new OAuth application_ dialog type in following:
+*Step 4:* In the _Register a new OAuth application_-Dialog type in following:
 
 image:https://user-images.githubusercontent.com/37511144/54868432-bb9e8880-4d8c-11e9-926f-fbca57e7f8dd.png[github-register-oauth]
 
-Click than on the button `Register application`
+Click than on the button *Register application*
 
-*Step 5:* Copy your generated `Client ID` and `Client Secret`
+*Step 5:* A dialog appears with a generated _Client ID_ and _Client Secret_ which you need to copy for later usage.
 
 NOTE: Unfortunately github is not allowing adding more than one _Homepage URL_ and _Authorization callback URL_.
 So for development purposes using the Google-OAuth2 should be prefered.
 
 === Installing
 
-*Step 1:* Download the https://github.com/mrrobworks/spring-boot-angular-template/releases/download/v0.1/spring-boot-angular-template.tar.gz[lastest Release]
+*Step 1:* Download the https://github.com/mrrobworks/spring-boot-angular-template/releases/download/v0.1-alpha/spring-boot-angular-template.tar.gz[latest Release]
 to your working-directory and unzip the file with following commands:
 
 ```bash
-$ wget https://github.com/mrrobworks/spring-boot-angular-template/releases/download/v0.1/spring-boot-angular-template.tar.gz
+$ wget https://github.com/mrrobworks/spring-boot-angular-template/releases/download/v0.1-alpha/spring-boot-angular-template.tar.gz
 $ tar -xvzf spring-boot-angular-template.tar.gz
-$ cd spring-boot-angular-template
 ```
 
-*Step 3:* Load the docker-image to your local repository with:
+*Step 2:* Load the Docker-Image to your Local Docker Registry with:
 
 ```bash
-docker load < spring-boot-angular-template-docker-image.tar
+$ docker load < docker-image.tar
 ```
 
-*Step 4:* In the file `docker-compose.ref.yml` change following
+*Step 3:* In the file `docker-compose.ref.yml` search for the following entries:
 ```
 GOOGLE_CLIENT_ID: [google-client-id]
 GOOGLE_CLIENT_SECRET: [google-client-secret]
@@ -120,35 +120,32 @@ GITHUB_CLIENT_SECRET: [github-client-secret]
 ```
 
 Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied
-values.
+values from the <<obtaining-api-keys>>-Section.
 
 === Run the application
 
 Now you can simply run the application with following steps:
 
-*Step 1:* In the project-root directory type following:
+*Step 1:* Type following:
 ```bash
-$  docker-compose -f docker-compose.yml -f docker-compose.ref.yml up
+$ docker-compose -f docker-compose.yml -f docker-compose.ref.yml up
 ```
 
 *Step 2:* In your Webbrowser type `http://localhost:8091` and the webapplication shows up.
 
 === Development
 
-For the Development some Prerequisites are recommended:
-
-*Step 1:* For executing commands we need a terminal. If you are running a bash-shell on a Linux-Distrubtion
-or Mac-OS everything should be fine. The Windows _Powershell_ and _CMD_ could make some problems and
+Before development getting started, we need a terminal for executing commands. If you are running a bash-shell on a
+Linux-Distrubtion or Mac-OS everything should be fine. The Windows _Powershell_ and _CMD_ could make some problems and
 the build-process fails. My recommendation is to install the
 https://docs.microsoft.com/de-de/windows/wsl/install-win10[Windows Subsystem for Linux (WSL)]
-in Windows 10 and using the bash-shell from it.
+in Windows 10 and using the bash-shell from it. For further use of Docker in WSL follow the instructions described in this
+https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly[Blog-Post].
 
-*Step 2:* If you are running Windows 10 and using WSL with a terminal, then follow the instructions described in
-this https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly[Blog-Post].
+Now we need to install some additional software:
 
-For Development some additional software need to be installed.
-
-*Step 1:*  Install https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11],
+*Step 1:* Install https://git-scm.com/downloads[Git],
+https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11],
 https://maven.apache.org/download.cgi[Maven] and https://nodejs.org/en/[Node.js] on your OS.
 
 *Step 2:* Open a terminal and type
@@ -158,6 +155,34 @@ $ npm install -g @angular/cli
 to install the https://cli.angular.io/[Angular-CLI]
 
 *Step 3:* Open your IDE and install https://projectlombok.org/download[Lombok] as a Plugin.
+
+Now we can download and install the Spring-Boot-Angular-Template for development:
+
+*Step 1:* Git-Clone the Spring-Boot-Angular-Template to your working directory with:
+```bash
+$ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
+$ cd spring-boot-angular-template
+```
+*Step 2:* In the `application.dev.yml` you will find following:
+
+```
+google:
+  client:
+    client-id: [google-client-id]
+    client-secret: [google-client-secret]
+github:
+  client:
+    client-id: [github-client-id]
+    client-secret: [google-client-secret]
+```
+
+Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied
+values from the <<obtaining-api-keys>>-Section.
+
+*Step 3:* Install the application with the command:
+```bash
+$ ./mvnw clean install
+```
 
 To start the PostgreSQL database in a Docker-Container, open a terminal, change the location to
 the project-root directory and type following:
@@ -170,20 +195,6 @@ https://github.com/mrrobworks/spring-boot-angular-template/tree/master/.idea/run
 in the Project-Repository. Start the Run-Configurations _docker-compose-DEV_, _backend-spring-boot-DEV_
 and _frontend-angular-DEV_ in IntellJ and you are ready to go. Open a webbrowser, type `http://localhost:4200`
 and the webapplication shows up.
-
-*Step 1:* Open a terminal and type:
-```bash
-$ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
-$ cd spring-boot-angular-template
-```
-
-*Step 2:* Install the application with the command:
-```bash
-$ ./mvnw clean install
-```
-
-Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied
-values.
 
 === Troubleshooting
 
