@@ -86,11 +86,11 @@ image:https://user-images.githubusercontent.com/37511144/55681693-96cc1880-5929-
 
 *Step 4:* In the _Register a new OAuth application_-Dialog type in following:
 
-image:https://user-images.githubusercontent.com/37511144/54868432-bb9e8880-4d8c-11e9-926f-fbca57e7f8dd.png[github-register-oauth]
+image:https://user-images.githubusercontent.com/37511144/56457063-baee1780-6375-11e9-8c7a-50a4470a8c9b.png[github-register-new-oauth-application]
 
 Click than on the button *Register application*
 
-*Step 5:* A dialog appears with a generated _Client ID_ and _Client Secret_ which you need to copy for later usage.
+*Step 5:* In the following view copy the generated _Client ID_ and _Client Secret_ for later usage.
 
 NOTE: Unfortunately github is not allowing adding more than one _Homepage URL_ and _Authorization callback URL_.
 So for development purposes using the Google-OAuth2 should be prefered.
