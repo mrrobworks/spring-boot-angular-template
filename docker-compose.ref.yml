@@ -1,7 +1,7 @@
 version: '3'
 services:
   spring-boot-angular-template:
-    image: mrrobworks/spring-boot-angular-template:0.1-alpha
+    image: mrrobworks/spring-boot-angular-template:0.2-SNAPSHOT
     container_name: spring-boot-angular-template-service
     volumes:
       - ./wait-for.sh:/tmp/wait-for.sh
@@ -17,6 +17,8 @@ services:
       - mynetwork
     depends_on:
       - db
+  flyway:
+    command: -url=jdbc:postgresql://db:5432/spring_boot_angular_db_ref -schemas=public -user=postgres_ref -password=changeit_ref -connectRetries=60 migrate
   db:
     environment:
       POSTGRES_USER: postgres_ref

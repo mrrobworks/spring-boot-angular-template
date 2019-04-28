@@ -13,7 +13,7 @@
 
   <groupId>de.mrrobworks</groupId>
   <artifactId>spring-boot-angular-template</artifactId>
-  <version>0.1-alpha</version>
+  <version>0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>spring-boot-angular-template</name>
@@ -28,7 +28,6 @@
   <modules>
     <module>frontend</module>
     <module>backend</module>
-    <module>dbsetup</module>
   </modules>
 
 </project>

@@ -5,7 +5,7 @@
     <scripts>
       <script value="start" />
     </scripts>
-    <node-interpreter value="project" />
+    <node-interpreter value="wsl://UBUNTU@/usr/bin/node" />
     <envs />
     <method v="2" />
   </configuration>

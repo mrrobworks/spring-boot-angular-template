@@ -1,11 +1,17 @@
 version: '3'
 services:
-  db:
-    image: "postgres:latest"
-    container_name: spring-boot-angular-db
+  flyway:
+    image: boxfuse/flyway:6.0-alpine
+    container_name: spring-boot-angular-template-flyway
     volumes:
-      - ./dbsetup/src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
-      - ./dbsetup/src/main/resources/db/data.sql:/docker-entrypoint-initdb.d/02_data.sql
+      - ./backend/src/main/resources/db/migration/:/flyway/sql
+    networks:
+      - mynetwork
+    depends_on:
+      - db
+  db:
+    image: postgres:11.2-alpine
+    container_name: spring-boot-angular-template-db
     restart: always
     networks:
       - mynetwork
