@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import 'rxjs/add/operator/finally';
 import { LoginService } from '../services/login.service';
-import { LoginAccount } from '../models/login-account';
+import { SelectItem } from "primeng/api";
 
 @Component({
   selector: 'app-login',
@@ -13,17 +13,18 @@ export class LoginComponent implements OnInit {
 
   private currentUser;
 
-  selectedLoginAccount: LoginAccount;
-  public loginAccounts: Array<LoginAccount> = [
-    new LoginAccount('Google', '/login/google'),
-    new LoginAccount('Github', '/login/github')
+  selectedAccount : string;
+
+  public loginAccounts: Array<SelectItem> = [
+    { label: 'Google', value: '/login/google', icon: 'fab fa-google' },
+    { label: 'Github', value: '/login/github', icon: 'fab fa-github' }
   ];
 
   constructor(private loginService: LoginService) {}
 
   ngOnInit() {
     this.authenticate();
-    this.selectedLoginAccount = this.loginAccounts[0];
+    this.selectedAccount = this.loginAccounts[0].value;
   }
 
   authenticate() {
@@ -47,10 +48,5 @@ export class LoginComponent implements OnInit {
           this.loginEvent.emit(false);
         }
       );
-  }
-
-  loginAccountChangeHandler(loginAccount: LoginAccount) {
-    console.log('Selected Account: ' + this.selectedLoginAccount.value);
-    this.selectedLoginAccount = loginAccount;
   }
 }

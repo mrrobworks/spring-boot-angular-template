@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { PersonListComponent } from './person-list/person-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AgGridModule } from 'ag-grid-angular';
+import { ButtonModule } from 'primeng/button';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { PersonListService } from './services/person-list.service';
 import { LoginComponent } from './login/login.component';
@@ -51,7 +53,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    SelectButtonModule
   ],
   providers: [
     PersonListService,

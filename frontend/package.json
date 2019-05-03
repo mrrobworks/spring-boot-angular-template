@@ -34,6 +34,8 @@
     "open-iconic": "^1.1.1",
     "popper.js": "^1.15.0",
     "prettier": "^1.17.0",
+    "primeicons": "^1.0.0",
+    "primeng": "^7.1.2",
     "rxjs": "^6.5.1",
     "rxjs-compat": "^6.5.1",
     "zone.js": "^0.9.0"

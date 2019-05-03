@@ -6,30 +6,22 @@
           <div class="jumbotron shadow">
             <h3 class="mb-1 text-center">
               <span class="oi oi-lock-locked"></span>
-              &nbsp; Login for Spring-Boot-Angular-Template
+              &nbsp; Log in to Spring Boot Angular Template
             </h3>
           </div>
           <!-- form card login -->
           <div class="card rounded-1">
             <div class="card-body">
               <div class="row">
-                <div class="col-4">Choose your Account:</div>
-                <div class="col-8">
-                  <span *ngFor="let account of loginAccounts">
-                    <input type="radio"
-                           id="{{account.value + 'id'}}"
-                           name="{{account.value}}"
-                           [value]="account"
-                           [(ngModel)]="selectedLoginAccount"
-                           (ngModelChange)="loginAccountChangeHandler(account)">
-                    <label for="{{account.value + 'id'}}">{{account.value}}</label>
-                    <span>&nbsp;&nbsp;</span>
-                  </span>
+                <div class="col-12"><h6>Choose your Account:</h6></div>
+                <div class="col-12">
+                  <p-selectButton [options]="loginAccounts" [(ngModel)]="selectedAccount"></p-selectButton>
                 </div>
               </div>
+              <hr>
               <div class="row">
                 <div class="col">
-                  <a [href]="selectedLoginAccount.link" class="btn btn-primary btn-block">
+                  <a [href]="selectedAccount" class="btn btn-primary btn-block">
                     Login
                   </a>
                 </div>

@@ -18,7 +18,7 @@ like _ROLE_ADMIN_ for administrative access, can be assigned to a user through t
 The data get stored in a PostgreSQL database inside a Docker-Container.
 
 .Login-Screen
-image:https://user-images.githubusercontent.com/37511144/54868460-edafea80-4d8c-11e9-829a-92912f192c29.png[spring-boot-angular-login]
+image:https://user-images.githubusercontent.com/37511144/57142263-678bb880-6dbc-11e9-924d-14ab1ed2c710.png[spring-boot-angular-login]
 
 == Technology-Stack image:http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat["StackShare", link="https://stackshare.io/mrrobworks/spring-boot-angular-template-stack"]
 image:https://user-images.githubusercontent.com/37511144/56864782-bf927b80-69c6-11e9-9779-d12c6dbdf1b4.png[spring-boot-angular-template-stack]
