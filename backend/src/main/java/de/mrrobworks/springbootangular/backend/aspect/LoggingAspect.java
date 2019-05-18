@@ -18,7 +18,7 @@ public class LoggingAspect {
     final long startTime = System.currentTimeMillis();
     ret = joinPoint.proceed();
     final long seconds = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - startTime);
-    log.info("#Methode {} dauerte {} sec.", joinPoint.getSignature(), seconds);
+    log.info("Method {} took {} sec.", joinPoint.getSignature(), seconds);
     return ret;
   }
 }

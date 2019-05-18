@@ -16,10 +16,10 @@
 	<description>Frontend with Angular</description>
 
 	<properties>
-		<eirslett.version>1.6</eirslett.version>
+		<eirslett.version>1.7.6</eirslett.version>
 		<node.version>v10.15.3</node.version>
 		<npm.version>6.9.0</npm.version>
-    <angular-cli.version>@7.3.8</angular-cli.version>
+    <angular-cli.version>@7.3.9</angular-cli.version>
   </properties>
 
 	<build>
@@ -50,6 +50,7 @@
 						</goals>
 					</execution>
 
+          <!-- sudo chown -R $USER:$GROUP /usr/lib/node_modules/ -->
           <execution>
             <id>npm-angular-cli-install</id>
             <goals>

@@ -3,7 +3,6 @@ services:
   flyway:
     command: -url=jdbc:postgresql://db:5432/spring_boot_angular_db_dev -schemas=public -user=postgres_dev -password=changeit_dev -connectRetries=60 migrate
   db:
-    container_name: spring-boot-angular-db
     environment:
       DEBUG: 'true'
       POSTGRES_USER: postgres_dev
