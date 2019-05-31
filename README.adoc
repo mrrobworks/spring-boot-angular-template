@@ -10,7 +10,7 @@ endif::[]
 
 = Spring-Boot-Angular-Template image:https://travis-ci.com/mrrobworks/spring-boot-angular-template.svg?branch=master["Build Status", link="https://travis-ci.com/mrrobworks/spring-boot-angular-template"]
 
-Starter Template to create a *OAuth2* secured *dockerized Spring Boot* Application with *Angular* Frontend.
+Starter Template to create a *OAuth2* secured *dockerized Spring Boot 2* Application with *Angular 8* Frontend.
 
 A user with a Google- or Github-Account get access to the Application using OAuth2-Authentication, so
 no additional User Registration is required. A new user get the Default-Role _ROLE_USER_. Additional Roles,
@@ -23,7 +23,8 @@ image:https://user-images.githubusercontent.com/37511144/57142263-678bb880-6dbc-
 == Technology-Stack image:http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat["StackShare", link="https://stackshare.io/mrrobworks/spring-boot-angular-template-stack"]
 image:https://user-images.githubusercontent.com/37511144/56864782-bf927b80-69c6-11e9-9779-d12c6dbdf1b4.png[spring-boot-angular-template-stack]
 
-Need to be installed on the OS to startup the application: https://www.docker.com/get-started[Docker]
+Need to be installed on the OS to startup the application:
+https://www.docker.com/get-started[Docker]
 
 Need to be installed on the OS for development purposes: https://git-scm.com/downloads[Git],
 https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[JDK 11],
@@ -244,7 +245,7 @@ the following:
 - [ ] Swagger with OAuth2 or BasicAuth?
 - [ ] Add spring-boot-devtools?
 - [ ] Create ViewModel-Beans for each JPA-Model-Entity-Bean?
-- [ ] Microservices from this project for creating github-repositories
+- [x] Microservices from this project for creating github-repositories
 - [x] Remove Maven-Module dbsetup and move sql-Files to backend
 - [x] Replace Liquibase with Flyway
 - [x] Changing return types of REST-Controllers to ResponseEntity

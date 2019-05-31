@@ -8,7 +8,8 @@
     "build": "./node_modules/.bin/ng build --prod",
     "test": "./node_modules/.bin/ng test",
     "lint": "./node_modules/.bin/ng lint",
-    "e2e": "./node_modules/.bin/ng e2e"
+    "e2e": "./node_modules/.bin/ng e2e",
+    "clean:dist": "./node_modules/.bin/rimraf dist"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +36,7 @@
     "prettier": "^1.17.1",
     "primeicons": "^1.0.0",
     "primeng": "^7.1.3",
+    "rimraf": "^2.6.3",
     "rxjs": "^6.5.2",
     "zone.js": "~0.9.1"
   },

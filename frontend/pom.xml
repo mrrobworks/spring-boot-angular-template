@@ -50,7 +50,7 @@
 						</goals>
 					</execution>
 
-          <!-- sudo chown -R $USER:$GROUP /usr/lib/node_modules/ -->
+          <!-- https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally -->
           <execution>
             <id>npm-angular-cli-install</id>
             <goals>
@@ -70,6 +70,16 @@
 							<arguments>install</arguments>
 						</configuration>
 					</execution>
+
+          <execution>
+            <id>rimraf-dist</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run clean:dist</arguments>
+            </configuration>
+          </execution>
 
 					<execution>
 						<id>npm-run-build</id>
