@@ -1,12 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Person} from '../models/person';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Person } from '../models/person';
 
 @Injectable()
 export class PersonListService {
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   persons: Person[] = [];
 
@@ -24,6 +23,6 @@ export class PersonListService {
   findAllPersons(): Observable<Person[]> {
     const url = '/backend/person/findallpersons';
     const headers = new HttpHeaders().set('Accept', 'application/json');
-    return this.http.get<Person[]>(url, {headers});
+    return this.http.get<Person[]>(url, { headers });
   }
 }

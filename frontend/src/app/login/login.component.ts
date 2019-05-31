@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import 'rxjs/add/operator/finally';
 import { LoginService } from '../services/login.service';
-import { SelectItem } from "primeng/api";
+import { SelectItem } from 'primeng/api';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   private currentUser;
 
-  selectedAccount : string;
+  selectedAccount: string;
 
   public loginAccounts: Array<SelectItem> = [
     { label: 'Google', value: '/login/google', icon: 'fab fa-google' },
@@ -30,9 +30,11 @@ export class LoginComponent implements OnInit {
   authenticate() {
     this.loginService
       .authenticate()
-      .finally(() => {
-        console.log('Authentication done.');
-      })
+      .pipe(
+        finalize(() => {
+          console.log('Authentication done.');
+        })
+      )
       .subscribe(
         templateUser => {
           console.log('Authentication success.');

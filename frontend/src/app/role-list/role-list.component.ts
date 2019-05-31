@@ -13,16 +13,16 @@ import { TemplateRoleFactory } from '../models/template-role-factory';
   templateUrl: './role-list.component.html'
 })
 export class RoleListComponent implements OnInit {
-  @ViewChild(RoleDetailComponent)
+  @ViewChild(RoleDetailComponent, { static: true })
   roleDetailComponent;
 
-  @ViewChild(RoleDeleteComponent)
+  @ViewChild(RoleDeleteComponent, { static: true })
   roleDeleteComponent;
 
-  @ViewChild('divAgGrid')
+  @ViewChild('divAgGrid', { static: true })
   private divAgGrid: ElementRef;
 
-  @ViewChild('btnEdit')
+  @ViewChild('btnEdit', { static: true })
   private btnEdit: ElementRef;
 
   DetailMode = DetailMode;
@@ -35,7 +35,7 @@ export class RoleListComponent implements OnInit {
   constructor(private roleService: RoleService) {}
 
   ngOnInit() {
-    this.agGridRoleList = new class extends AgGridBase {
+    this.agGridRoleList = new (class extends AgGridBase {
       constructor(private roleListComponent: RoleListComponent) {
         super(roleListComponent.divAgGrid);
       }
@@ -56,7 +56,7 @@ export class RoleListComponent implements OnInit {
       onRowDoubleClicked(): void {
         this.roleListComponent.btnEdit.nativeElement.click();
       }
-    }(this);
+    })(this);
   }
 
   private loadRoleList() {

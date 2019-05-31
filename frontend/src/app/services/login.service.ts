@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { TemplateUser } from '../models/template-user';
-import { Observable } from 'rxjs/Observable';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { TemplateUserRaw } from '../models/template-user-raw';
 import { TemplateUserFactory } from '../models/template-user-factory';
-import { throwError } from 'rxjs';
 
 @Injectable()
 export class LoginService {

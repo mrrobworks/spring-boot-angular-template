@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { TemplateRoleRaw } from '../models/template-role-raw';
 import { TemplateRole } from '../models/template-role';
@@ -18,27 +18,23 @@ export class RoleService {
   }
 
   getRole(id: String): Observable<TemplateRole> {
-    return this.http
-      .get<TemplateRoleRaw>(`${this.urlPrefix}/${id}`)
-      .pipe(
-        retry(3),
-        map(templateRoleRaw => TemplateRoleFactory.fromObject(templateRoleRaw)),
-        catchError(RoleService.errorHandler)
-      );
+    return this.http.get<TemplateRoleRaw>(`${this.urlPrefix}/${id}`).pipe(
+      retry(3),
+      map(templateRoleRaw => TemplateRoleFactory.fromObject(templateRoleRaw)),
+      catchError(RoleService.errorHandler)
+    );
   }
 
   getRoles(): Observable<Array<TemplateRole>> {
-    return this.http
-      .get<TemplateRoleRaw[]>(`${this.urlPrefix}/list`)
-      .pipe(
-        retry(3),
-        map(templateRolesRaw =>
-          templateRolesRaw.map(oneTemplateRoleRaw =>
-            TemplateRoleFactory.fromObject(oneTemplateRoleRaw)
-          )
-        ),
-        catchError(RoleService.errorHandler)
-      );
+    return this.http.get<TemplateRoleRaw[]>(`${this.urlPrefix}/list`).pipe(
+      retry(3),
+      map(templateRolesRaw =>
+        templateRolesRaw.map(oneTemplateRoleRaw =>
+          TemplateRoleFactory.fromObject(oneTemplateRoleRaw)
+        )
+      ),
+      catchError(RoleService.errorHandler)
+    );
   }
 
   addRole(templateRole: TemplateRole): Observable<TemplateRole> {

@@ -12,7 +12,7 @@ export class UserListComponent implements OnInit {
 
   private userDetailComponent: UserDetailComponent;
 
-  @ViewChild(UserDetailComponent)
+  @ViewChild(UserDetailComponent, { static: true })
   set content(userDetailComponent: UserDetailComponent) {
     this.userDetailComponent = userDetailComponent;
   }

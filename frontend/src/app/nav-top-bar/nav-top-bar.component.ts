@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { TemplateUser } from '../models/template-user';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-top-bar',
@@ -32,13 +33,15 @@ export class NavTopBarComponent implements OnInit {
   logout() {
     this.loginService
       .logout()
-      .finally(() => {
-        if (sessionStorage.getItem('currentUser') !== null) {
-          sessionStorage.removeItem('currentUser');
-        }
-        this.logoutEvent.emit();
-        console.log('Benutzer wurde erfolgreich abgemeldet.');
-      })
+      .pipe(
+        finalize(() => {
+          if (sessionStorage.getItem('currentUser') !== null) {
+            sessionStorage.removeItem('currentUser');
+          }
+          this.logoutEvent.emit();
+          console.log('Benutzer wurde erfolgreich abgemeldet.');
+        })
+      )
       .subscribe();
   }
 }

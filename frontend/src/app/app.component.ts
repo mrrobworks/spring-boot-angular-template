@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import 'rxjs/add/operator/finally';
 import { TemplateUser } from './models/template-user';
 import { NavTopBarComponent } from './nav-top-bar/nav-top-bar.component';
 import { LoginComponent } from './login/login.component';
@@ -10,10 +9,10 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  @ViewChild(NavTopBarComponent)
+  @ViewChild(NavTopBarComponent, { static: true })
   private navTopBarComponent: NavTopBarComponent;
 
-  @ViewChild(LoginComponent)
+  @ViewChild(LoginComponent, { static: false })
   private loginComponent: LoginComponent;
 
   currentUser: TemplateUser;

@@ -13,7 +13,7 @@ import { RoleService } from '../services/role.service';
 })
 export class RoleDeleteComponent {
   @Output() deleteActionDoneEvent = new EventEmitter<any>();
-  @ViewChild('disposeModal') disposeModal: ElementRef;
+  @ViewChild('disposeModal', { static: true }) disposeModal: ElementRef;
   templateRoleId: string;
 
   constructor(private roleService: RoleService) {}

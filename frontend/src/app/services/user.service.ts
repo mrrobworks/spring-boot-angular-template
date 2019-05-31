@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, retry } from 'rxjs/operators';
@@ -30,16 +30,14 @@ export class UserService {
   }
 
   getUsers(): Observable<Array<TemplateUser>> {
-    return this.http
-      .get<TemplateUserRaw[]>(`${this.urlPrefix}/list`)
-      .pipe(
-        retry(3),
-        map(rawTemplateUsers =>
-          rawTemplateUsers.map(oneRawTemplateUser =>
-            TemplateUserFactory.fromObject(oneRawTemplateUser)
-          )
-        ),
-        catchError(UserService.errorHandler)
-      );
+    return this.http.get<TemplateUserRaw[]>(`${this.urlPrefix}/list`).pipe(
+      retry(3),
+      map(rawTemplateUsers =>
+        rawTemplateUsers.map(oneRawTemplateUser =>
+          TemplateUserFactory.fromObject(oneRawTemplateUser)
+        )
+      ),
+      catchError(UserService.errorHandler)
+    );
   }
 }
