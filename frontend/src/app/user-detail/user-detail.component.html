@@ -25,12 +25,17 @@
 
           <div class="form-group">
             <label for="roles" class="col-form-label">Roles:</label>
-            <select multiple [compareWith]="compareRoles" [formControl]="form.controls.roles"
-                    id="roles" class="form-control selectpicker">
-              <option *ngFor="let role of templateRoles" [ngValue]="role">{{role.id}}</option>
-            </select>
-            <!-- Workaround: Force reload of bootstrap-select selectpicker -->
-            {{refreshSelect()}}
+            <ng-select id="roles"
+                       [items]="templateRoles"
+                       bindLabel="id"
+                       labelForId="id"
+                       [multiple]="true"
+                       placeholder="Select role:"
+                       clearAllText="Delete"
+                       [compareWith]="compareRoles"
+                       formControlName="roles">
+            </ng-select>
+
           </div>
 
           <input type="submit" class="btn btn-primary" value="Save" [disabled]="!form.valid">

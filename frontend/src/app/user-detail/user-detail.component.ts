@@ -1,14 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { TemplateUser } from '../models/template-user';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import { TemplateRole } from '../models/template-role';
-import { RoleService } from '../services/role.service';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {UserService} from '../services/user.service';
+import {TemplateUser} from '../models/template-user';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {TemplateRole} from '../models/template-role';
+import {RoleService} from '../services/role.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -27,7 +22,8 @@ export class UserDetailComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     private roleService: RoleService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.roleService.getRoles().subscribe(templateRoles => {
@@ -49,7 +45,7 @@ export class UserDetailComponent implements OnInit {
 
     this.form = this.fb.group({
       id: new FormControl(
-        { value: this.selectedTemplateUser.id, disabled: true },
+        {value: this.selectedTemplateUser.id, disabled: true},
         Validators.required
       ),
       roles: [this.selectedTemplateUser.roles]
@@ -58,7 +54,8 @@ export class UserDetailComponent implements OnInit {
 
   save(model: TemplateUser) {
     this.userService.updateUser(model).subscribe(
-      value => {},
+      value => {
+      },
       error => {
         this.saveSuccessful = false;
         this.statusMessage = `Failure. User ${
@@ -85,16 +82,7 @@ export class UserDetailComponent implements OnInit {
     if (role1 === undefined || role2 === undefined) {
       return false;
     }
+    //return role1 && role2 ? role1.id === role2.id : role1 === role2;
     return role1.id === role2.id;
-  }
-
-  refreshSelect() {
-    if (!this.refreshSelected && this.selectedTemplateUser !== undefined) {
-      this.refreshSelected = true;
-      setTimeout(() => {
-        console.log('Refresh data for bootstrap-select selectpicker.');
-        jQuery('select').selectpicker('refresh');
-      }, 200);
-    }
   }
 }
