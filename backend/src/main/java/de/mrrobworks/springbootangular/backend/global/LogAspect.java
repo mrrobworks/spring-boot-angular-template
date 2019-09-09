@@ -1,7 +1,9 @@
 package de.mrrobworks.springbootangular.backend.global;
 
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
@@ -11,15 +13,22 @@ import java.util.concurrent.TimeUnit;
 @Aspect
 @Component
 @Slf4j
-public class LoggingAspect {
+public class LogAspect {
 
-  @Around("execution(* de.mrrobworks.springbootangular.backend.controller.*.*(..))")
+  @Around("execution(* de.mrrobworks.springbootangular.backend.*.*ServiceImpl.*(..))")
   public Object logTime(final ProceedingJoinPoint joinPoint) throws Throwable {
     final Object ret;
     final long startTime = System.currentTimeMillis();
     ret = joinPoint.proceed();
     final long seconds = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - startTime);
-    log.info("Method {} took {} sec.", joinPoint.getSignature(), seconds);
+    log.info("Method \"{}\" took {} sec.", joinPoint.getSignature(), seconds);
     return ret;
+  }
+
+  @AfterThrowing(
+      value = "execution(* de.mrrobworks.springbootangular.backend.*.*ServiceImpl.*(..))",
+      throwing = "e")
+  public void logException(JoinPoint joinPoint, Throwable e) {
+    log.error(joinPoint + " -> " + e.getMessage(), e);
   }
 }
