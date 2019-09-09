@@ -1,23 +1,16 @@
-package de.mrrobworks.springbootangular.backend.controller;
+package de.mrrobworks.springbootangular.backend.approle;
 
-import de.mrrobworks.springbootangular.backend.domain.AppRole;
-import de.mrrobworks.springbootangular.backend.service.AppRoleService;
-import java.util.List;
-import javax.validation.Valid;
+import de.mrrobworks.springbootangular.backend.global.CorsConfiguration;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CorsConfiguration
@@ -38,8 +31,8 @@ public class AppRoleController {
   }
 
   @PutMapping("/{id}")
-  public void updateRole(@RequestBody @Valid AppRole appRole, @PathVariable("id") String id,
-      Errors errors) {
+  public void updateRole(
+      @RequestBody @Valid AppRole appRole, @PathVariable("id") String id, Errors errors) {
     appRoleService.save(appRole);
   }
 

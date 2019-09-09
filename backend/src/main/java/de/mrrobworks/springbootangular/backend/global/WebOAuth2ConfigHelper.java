@@ -1,18 +1,9 @@
-package de.mrrobworks.springbootangular.backend.configuration;
+package de.mrrobworks.springbootangular.backend.global;
 
-import de.mrrobworks.springbootangular.backend.domain.AppRole;
-import de.mrrobworks.springbootangular.backend.domain.AppUser;
-import de.mrrobworks.springbootangular.backend.service.AppRoleService;
-import de.mrrobworks.springbootangular.backend.service.AppUserService;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import de.mrrobworks.springbootangular.backend.approle.AppRole;
+import de.mrrobworks.springbootangular.backend.approle.AppRoleService;
+import de.mrrobworks.springbootangular.backend.appuser.AppUser;
+import de.mrrobworks.springbootangular.backend.appuser.AppUserService;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +19,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
+
 @Slf4j
 @Getter
 @Component
@@ -40,8 +37,8 @@ public class WebOAuth2ConfigHelper {
 
   // TODO: throw BadCredentialsException if login failed
   private static String getUserId(Map<String, Object> map) {
-    final HttpServletRequest currentRequest = ((ServletRequestAttributes) RequestContextHolder
-        .currentRequestAttributes()).getRequest();
+    final HttpServletRequest currentRequest =
+        ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
     final String requestURI = currentRequest.getRequestURI();
     String userId = null;
     if (requestURI.equals(WebOAuth2Config.GOOGLE_LOGIN_URL)) {
@@ -105,11 +102,13 @@ public class WebOAuth2ConfigHelper {
   }
 
   @Component
-  private static class WebOAuth2AuthenticationSuccessHandler extends
-      SimpleUrlAuthenticationSuccessHandler {
+  private static class WebOAuth2AuthenticationSuccessHandler
+      extends SimpleUrlAuthenticationSuccessHandler {
 
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-        Authentication authentication) throws IOException, ServletException {
+    @Override
+    public void onAuthenticationSuccess(
+        HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+        throws IOException, ServletException {
       this.setDefaultTargetUrl("/");
       super.onAuthenticationSuccess(request, response, authentication);
     }

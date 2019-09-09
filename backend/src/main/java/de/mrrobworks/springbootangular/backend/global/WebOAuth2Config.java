@@ -1,8 +1,5 @@
-package de.mrrobworks.springbootangular.backend.configuration;
+package de.mrrobworks.springbootangular.backend.global;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.Filter;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +26,10 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.filter.CompositeFilter;
 
+import javax.servlet.Filter;
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @EnableOAuth2Client
 @EnableWebSecurity
@@ -43,27 +44,26 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(WebSecurity web) {
-    web.ignoring().antMatchers(
-        "/",
-        "/**.html",
-        "/**.js",
-        "/**.css",
-        "/v2/api-docs",
-        "/swagger-resources/**",
-        "/configuration/**",
-        "/webjars/**");
+    web.ignoring()
+        .antMatchers(
+            "/",
+            "/**.html",
+            "/**.js",
+            "/**.css",
+            "/v2/api-docs",
+            "/swagger-resources/**",
+            "/configuration/**",
+            "/webjars/**");
   }
 
   @Override
   public void configure(HttpSecurity http) throws Exception {
-    http
-        .authorizeRequests()
-        .antMatchers("/backend/**").authenticated()
-
+    http.authorizeRequests()
+        .antMatchers("/backend/**")
+        .authenticated()
         .and()
         .csrf()
         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-
         .and()
         .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
   }
@@ -78,15 +78,15 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
   }
 
   private Filter googleOAuth2AuthProcessingFilter() {
-    final WebOAuth2AuthProcessingFilter webOAuth2AuthProcessingFilter = new WebOAuth2AuthProcessingFilter(
-        GOOGLE_LOGIN_URL, googleClientResource());
+    final WebOAuth2AuthProcessingFilter webOAuth2AuthProcessingFilter =
+        new WebOAuth2AuthProcessingFilter(GOOGLE_LOGIN_URL, googleClientResource());
     webOAuth2AuthProcessingFilter.init();
     return webOAuth2AuthProcessingFilter;
   }
 
   private Filter githubOAuth2AuthProcessingFilter() {
-    final WebOAuth2AuthProcessingFilter webOAuth2AuthProcessingFilter = new WebOAuth2AuthProcessingFilter(
-        GITHUB_LOGIN_URL, githubClientResource());
+    final WebOAuth2AuthProcessingFilter webOAuth2AuthProcessingFilter =
+        new WebOAuth2AuthProcessingFilter(GITHUB_LOGIN_URL, githubClientResource());
     webOAuth2AuthProcessingFilter.init();
     return webOAuth2AuthProcessingFilter;
   }
@@ -106,7 +106,8 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
   @Bean
   FilterRegistrationBean<OAuth2ClientContextFilter> oauth2ClientFilterRegistration(
       OAuth2ClientContextFilter filter) {
-    final FilterRegistrationBean<OAuth2ClientContextFilter> registration = new FilterRegistrationBean<>();
+    final FilterRegistrationBean<OAuth2ClientContextFilter> registration =
+        new FilterRegistrationBean<>();
     registration.setFilter(filter);
     registration.setOrder(-100);
     return registration;
@@ -116,8 +117,8 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
 
     private final @NonNull ClientResources clientResources;
 
-    WebOAuth2AuthProcessingFilter(String defaultFilterProcessesUrl,
-        ClientResources clientResources) {
+    WebOAuth2AuthProcessingFilter(
+        String defaultFilterProcessesUrl, ClientResources clientResources) {
       super(defaultFilterProcessesUrl);
       this.clientResources = clientResources;
     }
@@ -129,12 +130,13 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
     }
 
     private ResourceServerTokenServices tokenServices() {
-      final UserInfoTokenServices tokenServices = new UserInfoTokenServices(
-          clientResources.getResource().getUserInfoUri(),
-          clientResources.getClient().getClientId());
+      final UserInfoTokenServices tokenServices =
+          new UserInfoTokenServices(
+              clientResources.getResource().getUserInfoUri(),
+              clientResources.getClient().getClientId());
       tokenServices.setPrincipalExtractor(webOAuth2ConfigHelper.getWebOAuth2PrincipalExtractor());
-      tokenServices
-          .setAuthoritiesExtractor(webOAuth2ConfigHelper.getWebOAuth2AuthoritiesExtractor());
+      tokenServices.setAuthoritiesExtractor(
+          webOAuth2ConfigHelper.getWebOAuth2AuthoritiesExtractor());
       return tokenServices;
     }
   }

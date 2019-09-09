@@ -1,14 +1,14 @@
-package de.mrrobworks.springbootangular.backend.configuration;
+package de.mrrobworks.springbootangular.backend.global;
 
+import de.mrrobworks.springbootangular.backend.approle.AppRoleRepository;
+import de.mrrobworks.springbootangular.backend.appuser.AppUserRepository;
+import de.mrrobworks.springbootangular.backend.person.PersonRepository;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
-import de.mrrobworks.springbootangular.backend.repository.AppRoleRepository;
-import de.mrrobworks.springbootangular.backend.repository.AppUserRepository;
-import de.mrrobworks.springbootangular.backend.repository.PersonRepository;
-import lombok.Getter;
 
 /**
  * Class provides all {@link JpaRepository} from the {@code backend}-Module.
@@ -27,12 +27,9 @@ import lombok.Getter;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DbProvider {
 
-  @NonNull
-  private PersonRepository personRepository;
+  @NonNull private PersonRepository personRepository;
 
-  @NonNull
-  private AppUserRepository appUserRepository;
+  @NonNull private AppUserRepository appUserRepository;
 
-  @NonNull
-  private AppRoleRepository appRoleRepository;
+  @NonNull private AppRoleRepository appRoleRepository;
 }

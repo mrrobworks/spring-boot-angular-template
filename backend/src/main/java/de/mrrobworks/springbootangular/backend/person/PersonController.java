@@ -1,8 +1,6 @@
-package de.mrrobworks.springbootangular.backend.controller;
+package de.mrrobworks.springbootangular.backend.person;
 
-import de.mrrobworks.springbootangular.backend.domain.Person;
-import de.mrrobworks.springbootangular.backend.service.PersonService;
-import java.util.List;
+import de.mrrobworks.springbootangular.backend.global.CorsConfiguration;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Slf4j
 @RestController

@@ -1,20 +1,18 @@
-package de.mrrobworks.springbootangular.backend.service;
+package de.mrrobworks.springbootangular.backend.appuser;
 
-import java.util.List;
-import java.util.Optional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import de.mrrobworks.springbootangular.backend.domain.AppUser;
-import de.mrrobworks.springbootangular.backend.repository.AppUserRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AppUserServiceImpl implements AppUserService {
 
-  @NonNull
-  private AppUserRepository appUserRepository;
+  @NonNull private AppUserRepository appUserRepository;
 
   @Override
   public Optional<AppUser> getByUserId(String id) {
