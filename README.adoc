@@ -232,6 +232,17 @@ the following:
     "e2e": "ng e2e"
   }
 ```
+
+*Trouble 3:* Resolving EACCES permissions errors when installing packages globally
+
+```
+[INFO] Running 'npm install -g @angular/cli@8.0.0' in /mnt/c/opt/workspace/intellij/spring-boot-angular-template/frontend
+[ERROR] npm ERR! path /mnt/c/opt/workspace/intellij/spring-boot-angular-template/frontend/lib/node_modules/@angular/cli/node_modules/normalize-package-data[ERROR] npm ERR! code EACCES[ERROR] npm ERR! errno -13
+[ERROR] npm ERR! syscall rename[ERROR] npm ERR! Error: EACCES: permission denied, rename '/mnt/c/opt/workspace/intellij/spring-boot-angular-template/frontend/lib/node_modules/@angular/cli/node_modules/normalize-package-data' -> '/mnt/c/opt/workspace/intellij/spring-boot-angular-template/frontend/lib/node_modules/@angular/cli/node_modules/.normalize-package-data.DELETE'
+```
+
+Follow the instructions from https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally[here].
+
 == TODOs
 - [ ] Fix .gitignore-File
 - [ ] Using var for local-variables
