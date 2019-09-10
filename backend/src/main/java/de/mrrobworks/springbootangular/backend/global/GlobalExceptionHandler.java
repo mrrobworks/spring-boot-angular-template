@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Slf4j
-@ControllerAdvice("de.mrrobworks.springbootangular.backend")
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
   @ExceptionHandler

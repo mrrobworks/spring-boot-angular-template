@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface AppUserService {
 
-  Optional<AppUser> getByUserId(String id);
+  Optional<AppUser> getAppUser(String id);
 
   AppUser createAppUser(String userId);
 

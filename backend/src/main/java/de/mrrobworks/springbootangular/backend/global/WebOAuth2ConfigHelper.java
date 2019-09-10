@@ -43,11 +43,14 @@ public class WebOAuth2ConfigHelper {
         ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
     final String requestURI = currentRequest.getRequestURI();
     String userId = null;
+
     if (requestURI.equals(WebOAuth2Config.GOOGLE_LOGIN_URL)) {
       userId = String.valueOf(map.get("sub"));
     } else if (requestURI.equals(WebOAuth2Config.GITHUB_LOGIN_URL)) {
       userId = String.valueOf(map.get("id"));
     }
+
+    log.info("Identified User-Id \"{}\"", userId);
     return userId;
   }
 
@@ -59,16 +62,16 @@ public class WebOAuth2ConfigHelper {
 
     @Override
     public List<GrantedAuthority> extractAuthorities(Map<String, Object> map) {
+      log.info("Extract Authorities");
       final String userId = getUserId(map);
-      log.info("Extract authorities for {}", userId);
-      Optional<AppUser> appUser = appUserService.getByUserId(userId);
-      if (appUser.isEmpty()) {
+
+      Optional<AppUser> optionalAppUser = appUserService.getAppUser(userId);
+      if (optionalAppUser.isEmpty()) {
         return Collections.emptyList();
       }
-      List<GrantedAuthority> authorityList =
-          AuthorityUtils.createAuthorityList(
-              appUser.get().getRoles().stream().map(AppRole::getId).toArray(String[]::new));
-      return authorityList;
+
+      return AuthorityUtils.createAuthorityList(
+          optionalAppUser.get().getRoles().stream().map(AppRole::getId).toArray(String[]::new));
     }
   }
 
@@ -80,9 +83,9 @@ public class WebOAuth2ConfigHelper {
 
     @Override
     public Object extractPrincipal(Map<String, Object> map) {
+      log.info("Extract Principal");
       final String userId = getUserId(map);
-      log.info("Extract Principal for {}", userId);
-      final Optional<AppUser> appUser = appUserService.getByUserId(userId);
+      final Optional<AppUser> appUser = appUserService.getAppUser(userId);
       return appUser.orElseGet(() -> appUserService.createAppUser(userId));
     }
   }

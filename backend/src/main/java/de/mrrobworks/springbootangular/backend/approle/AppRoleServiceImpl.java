@@ -26,12 +26,14 @@ public class AppRoleServiceImpl implements AppRoleService {
 
   @Override
   public Map<GrantedAuthority, AppRole> getMappedAppRoles() {
-    final Map<GrantedAuthority, AppRole> ret = new HashMap<>();
+    final Map<GrantedAuthority, AppRole> mappedAppRoles = new HashMap<>();
+
     final List<AppRole> appRoles = appRoleRepository.findAll();
     for (final AppRole appRole : appRoles) {
-      ret.put(new SimpleGrantedAuthority(appRole.getId()), appRole);
+      mappedAppRoles.put(new SimpleGrantedAuthority(appRole.getId()), appRole);
     }
-    return ret;
+
+    return mappedAppRoles;
   }
 
   @Override
@@ -40,14 +42,15 @@ public class AppRoleServiceImpl implements AppRoleService {
   }
 
   @Override
-  public void saveOrUpdate(AppRoleDto appRoleDto) {
+  public AppRoleDto createOrUpdateAppRole(AppRoleDto appRoleDto) {
     AppRole appRole = appRoleRepository.findById(appRoleDto.getId()).orElse(new AppRole());
     appRoleMapper.updateDtoToAppRole(appRoleDto, appRole);
-    appRoleRepository.save(appRole);
+    AppRole savedAppRole = appRoleRepository.save(appRole);
+    return appRoleMapper.fromAppRole(savedAppRole);
   }
 
   @Override
-  public void delete(String id) {
+  public void deleteAppRole(String id) {
     appRoleRepository.deleteById(id);
   }
 }

@@ -36,8 +36,8 @@ public class AppUserController {
   }
 
   @PutMapping("/{id}")
-  public void updateUser(
+  public ResponseEntity<AppUserDto> updateUser(
       @RequestBody @Valid AppUserDto appUser, @PathVariable("id") String id, Errors errors) {
-    appUserService.updateAppUser(appUser);
+    return ResponseEntity.ok().body(appUserService.updateAppUser(appUser));
   }
 }

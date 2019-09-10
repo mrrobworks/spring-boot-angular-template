@@ -142,7 +142,7 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
   }
 
   @Getter
-  private final class ClientResources {
+  private static final class ClientResources {
 
     @NestedConfigurationProperty
     private AuthorizationCodeResourceDetails client = new AuthorizationCodeResourceDetails();

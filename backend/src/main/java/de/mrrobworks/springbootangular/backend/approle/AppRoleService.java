@@ -14,7 +14,7 @@ public interface AppRoleService {
 
   List<AppRoleDto> getAppRoles();
 
-  void saveOrUpdate(AppRoleDto appRole);
+  AppRoleDto createOrUpdateAppRole(AppRoleDto appRole);
 
-  void delete(String id);
+  void deleteAppRole(String id);
 }

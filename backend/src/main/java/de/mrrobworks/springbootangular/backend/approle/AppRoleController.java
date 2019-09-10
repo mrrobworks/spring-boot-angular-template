@@ -31,18 +31,18 @@ public class AppRoleController {
   }
 
   @PutMapping("/{id}")
-  public void updateRole(
+  public ResponseEntity<AppRoleDto> updateRole(
       @RequestBody @Valid AppRoleDto appRole, @PathVariable("id") String id, Errors errors) {
-    appRoleService.saveOrUpdate(appRole);
+    return ResponseEntity.ok().body(appRoleService.createOrUpdateAppRole(appRole));
   }
 
   @PostMapping("/add")
-  public void addRole(@RequestBody @Valid AppRoleDto appRole, Errors errors) {
-    appRoleService.saveOrUpdate(appRole);
+  public ResponseEntity<AppRoleDto> addRole(@RequestBody @Valid AppRoleDto appRole, Errors errors) {
+    return ResponseEntity.ok().body(appRoleService.createOrUpdateAppRole(appRole));
   }
 
   @DeleteMapping("/{id}")
   public void deleteRole(@PathVariable("id") String id) {
-    this.appRoleService.delete(id);
+    this.appRoleService.deleteAppRole(id);
   }
 }
