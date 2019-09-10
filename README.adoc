@@ -12,16 +12,17 @@ endif::[]
 
 Starter Template to create a *OAuth2* secured *dockerized Spring Boot 2* Application with *Angular 8* Frontend.
 
-A user with a Google- or Github-Account get access to the Application using OAuth2-Authentication, so
-no additional User Registration is required. A new user get the Default-Role _ROLE_USER_. Additional Roles,
-like _ROLE_ADMIN_ for administrative access, can be assigned to a user through the Role-Management.
+A user with a Google- or Github-Account get access to the Application using OAuth2-Authentication, so no additional User Registration is required.
+A new user get the Default-Role _ROLE_USER_.
+Additional Roles, like _ROLE_ADMIN_ for administrative access, can be assigned to a user through the Role-Management.
 The data get stored in a PostgreSQL database inside a Docker-Container.
 
 .Login-Screen
 image:https://user-images.githubusercontent.com/37511144/57142263-678bb880-6dbc-11e9-924d-14ab1ed2c710.png[spring-boot-angular-login]
 
 == Technology-Stack image:http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat["StackShare", link="https://stackshare.io/mrrobworks/spring-boot-angular-template-stack"]
-image:https://user-images.githubusercontent.com/37511144/56864782-bf927b80-69c6-11e9-9779-d12c6dbdf1b4.png[spring-boot-angular-template-stack]
+
+image:https://user-images.githubusercontent.com/37511144/64632809-2787b280-d3fa-11e9-8c7c-fb924e7a86ee.png[spring-boot-angular-template-stack]
 
 Need to be installed on the OS to startup the application:
 https://www.docker.com/get-started[Docker]
@@ -34,22 +35,24 @@ https://nodejs.org/en/[Node.js],
 https://cli.angular.io/[Angular-CLI]
 
 == Getting Started
+
 To get the application running, some configuration need to be to do.
 
 === Prerequisites
+
 *Step 1:* Install  https://www.docker.com/get-started[Docker] on your OS. Direct Download Links:
 https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe[Docker for Windows],
 https://download.docker.com/mac/stable/Docker.dmg[Docker for Mac-OS]
 
 *Step 2:* After Docker is installed, go to the _Docker-Settings_ and share the drive in which you will later download the
 https://github.com/mrrobworks/spring-boot-angular-template/releases/download/v0.1-alpha/spring-boot-angular-template.tar.gz[latest Release]
-of the Spring-Boot-Angular-Template. This is necessary for accessing the SQL-Files for setting up the database.
+of the Spring-Boot-Angular-Template.
+This is necessary for accessing the SQL-Files for setting up the database.
 
 [[obtaining-api-keys]]
 === Obtaining API-Keys
 
-To use the O2Auth-Authentication from Google or Github, we need to register this application to obtain the appropiate
-Client-ID and Client-Secret.
+To use the O2Auth-Authentication from Google or Github, we need to register this application to obtain the appropiate Client-ID and Client-Secret.
 
 '''
 
@@ -59,11 +62,10 @@ image:https://user-images.githubusercontent.com/37511144/55681624-ab5be100-5928-
 
 *Step 2:* Click on the Button *Create Project*
 
-*Step 3:* In the following _New Project_-Dialog set as _Project name_ *spring_boot_angular_template* and click on the Button
-*Create*
+*Step 3:* In the following _New Project_-Dialog set as _Project name_ *spring_boot_angular_template* and click on the Button *Create*
 
-*Step 4:* On the top left, click on the Button with the *three horizontal stripes* to open the left-side Navigation-Menu. Select
-*APIs & Services -> Credentials*
+*Step 4:* On the top left, click on the Button with the *three horizontal stripes* to open the left-side Navigation-Menu.
+Select *APIs & Services -> Credentials*
 
 *Step 5:* In the _Credentials-View_ click on the Button *Create credentials* and than select the Menu-Item *OAuth client ID*.
 
@@ -113,6 +115,7 @@ $ docker load < docker-image.tar
 ```
 
 *Step 3:* In the file `docker-compose.ref.yml` search for the following entries:
+
 ```
 GOOGLE_CLIENT_ID: [google-client-id]
 GOOGLE_CLIENT_SECRET: [google-client-secret]
@@ -120,14 +123,14 @@ GITHUB_CLIENT_ID: [github-client-id]
 GITHUB_CLIENT_SECRET: [github-client-secret]
 ```
 
-Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied
-values from the <<obtaining-api-keys>>-Section.
+Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied values from the <<obtaining-api-keys>>-Section.
 
 === Run the application
 
 Now you can simply run the application with following steps:
 
 *Step 1:* Type following:
+
 ```bash
 $ docker-compose -f docker-compose.yml -f docker-compose.ref.yml up
 ```
@@ -136,11 +139,13 @@ $ docker-compose -f docker-compose.yml -f docker-compose.ref.yml up
 
 === Development
 
-Before development getting started, we need a terminal for executing commands. If you are running a bash-shell on a
-Linux-Distrubtion or Mac-OS everything should be fine. The Windows _Powershell_ and _CMD_ could make some problems and
-the build-process fails. My recommendation is to install the
+Before development getting started, we need a terminal for executing commands.
+If you are running a bash-shell on a Linux-Distrubtion or Mac-OS everything should be fine.
+The Windows _Powershell_ and _CMD_ could make some problems and the build-process fails.
+My recommendation is to install the
 https://docs.microsoft.com/de-de/windows/wsl/install-win10[Windows Subsystem for Linux (WSL)]
-in Windows 10 and using the bash-shell from it. For further use of Docker in WSL follow the instructions described in this
+in Windows 10 and using the bash-shell from it.
+For further use of Docker in WSL follow the instructions described in this
 https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly[Blog-Post].
 
 Now we need to install some additional software:
@@ -150,9 +155,11 @@ https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655
 https://maven.apache.org/download.cgi[Maven] and https://nodejs.org/en/[Node.js] on your OS.
 
 *Step 2:* Open a terminal and type
+
 ```bash
 $ npm install -g @angular/cli
 ```
+
 to install the https://cli.angular.io/[Angular-CLI]
 
 *Step 3:* Open your IDE and install https://projectlombok.org/download[Lombok] as a Plugin.
@@ -160,10 +167,12 @@ to install the https://cli.angular.io/[Angular-CLI]
 Now we can download and install the Spring-Boot-Angular-Template for development:
 
 *Step 1:* Git-Clone the Spring-Boot-Angular-Template to your working directory with:
+
 ```bash
 $ git clone https://github.com/mrrobworks/spring-boot-angular-template.git
 $ cd spring-boot-angular-template
 ```
+
 *Step 2:* In the `application.dev.yml` you will find following:
 
 ```
@@ -177,38 +186,40 @@ github:
     client-secret: [google-client-secret]
 ```
 
-Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied
-values from the <<obtaining-api-keys>>-Section.
+Replace `[google-client-id]`, `[google-client-secret]`, `[github-client-id]`, `[github-client-secret]` with your copied values from the <<obtaining-api-keys>>-Section.
 
 *Step 3:* Install the application with the command:
+
 ```bash
 $ ./mvnw clean install
 ```
 
-To start the PostgreSQL database in a Docker-Container, open a terminal, change the location to
-the project-root directory and type following:
+To start the PostgreSQL database in a Docker-Container, open a terminal, change the location to the project-root directory and type following:
+
 ```bash
 $  docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 
 If you develop with https://www.jetbrains.com/idea/[IntelliJ IDEA] there are also some
 https://github.com/mrrobworks/spring-boot-angular-template/tree/master/.idea/runConfigurations[Run-Configurations]
-in the Project-Repository. Start the Run-Configurations _docker-compose-DEV_, _backend-spring-boot-DEV_
-and _frontend-angular-DEV_ in IntellJ and you are ready to go. Open a webbrowser, type `http://localhost:4200`
+in the Project-Repository.
+Start the Run-Configurations _docker-compose-DEV_, _backend-spring-boot-DEV_ and _frontend-angular-DEV_ in IntellJ and you are ready to go.
+Open a webbrowser, type `http://localhost:4200`
 and the webapplication shows up.
 
 === Troubleshooting
 
 *Trouble 1:* When installing the application with `./mvnw clean install` and you getting a error like this:
+
 ```
 [ERROR] Get https://registry-1.docker.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
 [WARNING] An attempt failed, will retry 1 more times
 org.apache.maven.plugin.MojoExecutionException: Could not build image
 ```
+
 then restart the Docker deamon and the error should be gone.
 
-*Trouble 2:* Using CMD or Powershell in Windows and install the application with `mvnw.cmd clean install` it
-appears following:
+*Trouble 2:* Using CMD or Powershell in Windows and install the application with `mvnw.cmd clean install` it appears following:
 
 ```
 [INFO] > cd bin && ng build --prod
@@ -217,9 +228,11 @@ appears following:
 [ERROR] operable program or batch file.
 ```
 
-This is usually a problem when installing the application with CMD or Powershell. The command `ng`
-from the Angular-CLI is not recognized correctly. You need to install _Node.js_ and _Angular-CLI_
-and then set the corresponding Windows-Evironment-Path variables. Also you can change in `frontend/package.json`
+This is usually a problem when installing the application with CMD or Powershell.
+The command `ng`
+from the Angular-CLI is not recognized correctly.
+You need to install _Node.js_ and _Angular-CLI_ and then set the corresponding Windows-Evironment-Path variables.
+Also you can change in `frontend/package.json`
 the following:
 
 ```
@@ -244,6 +257,7 @@ the following:
 Follow the instructions from https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally[here].
 
 == TODOs
+
 - [ ] Fix .gitignore-File
 - [ ] Using var for local-variables
 - [ ] WebMvcTest for REST-Controller (mockMvc)
