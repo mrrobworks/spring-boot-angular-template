@@ -16,10 +16,12 @@ import java.util.Map;
 public class AppRoleServiceImpl implements AppRoleService {
 
   @NonNull private AppRoleRepository appRoleRepository;
+  @NonNull private AppRoleMapper appRoleMapper;
 
   @Override
-  public AppRole getAppRole(@NonNull final String id) {
-    return appRoleRepository.findById(id).orElse(null);
+  public AppRoleDto getAppRole(@NonNull final String id) {
+    AppRole appRole = appRoleRepository.findById(id).orElse(null);
+    return appRoleMapper.fromAppRole(appRole);
   }
 
   @Override
@@ -27,18 +29,20 @@ public class AppRoleServiceImpl implements AppRoleService {
     final Map<GrantedAuthority, AppRole> ret = new HashMap<>();
     final List<AppRole> appRoles = appRoleRepository.findAll();
     for (final AppRole appRole : appRoles) {
-      ret.put(new SimpleGrantedAuthority(appRole.getAuthority()), appRole);
+      ret.put(new SimpleGrantedAuthority(appRole.getId()), appRole);
     }
     return ret;
   }
 
   @Override
-  public List<AppRole> getAppRoles() {
-    return appRoleRepository.findAll();
+  public List<AppRoleDto> getAppRoles() {
+    return appRoleMapper.appRoleListToAppRoleDtoList(appRoleRepository.findAll());
   }
 
   @Override
-  public void save(AppRole appRole) {
+  public void saveOrUpdate(AppRoleDto appRoleDto) {
+    AppRole appRole = appRoleRepository.findById(appRoleDto.getId()).orElse(new AppRole());
+    appRoleMapper.updateDtoToAppRole(appRoleDto, appRole);
     appRoleRepository.save(appRole);
   }
 

@@ -21,21 +21,23 @@ import java.util.List;
 public class AppUserController {
 
   private final @NonNull AppUserService appUserService;
+  private final @NonNull AppUserMapper appUserMapper;
 
   @RequestMapping("/info")
-  public ResponseEntity<AppUser> user(@AuthenticationPrincipal AppUser user) {
-    return ResponseEntity.ok(user);
+  public ResponseEntity<AppUserDto> user(@AuthenticationPrincipal AppUser user) {
+    AppUserDto body = appUserMapper.fromAppUser(user);
+    return ResponseEntity.ok(body);
   }
 
   @ApiOperation(value = "Get a list of application users.")
   @GetMapping("/list")
-  public ResponseEntity<List<AppUser>> getAppUsers() {
+  public ResponseEntity<List<AppUserDto>> getAppUsers() {
     return ResponseEntity.ok(appUserService.getAllAppUsers());
   }
 
   @PutMapping("/{id}")
   public void updateUser(
-      @RequestBody @Valid AppUser appUser, @PathVariable("id") String id, Errors errors) {
-    appUserService.save(appUser);
+      @RequestBody @Valid AppUserDto appUser, @PathVariable("id") String id, Errors errors) {
+    appUserService.updateAppUser(appUser);
   }
 }

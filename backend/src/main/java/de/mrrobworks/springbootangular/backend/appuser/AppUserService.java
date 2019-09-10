@@ -7,9 +7,9 @@ public interface AppUserService {
 
   Optional<AppUser> getByUserId(String id);
 
-  void createAppUser(final AppUser appUser);
+  AppUser createAppUser(String userId);
 
-  List<AppUser> getAllAppUsers();
+  List<AppUserDto> getAllAppUsers();
 
-  void save(AppUser appUser);
+  AppUserDto updateAppUser(AppUserDto appUser);
 }

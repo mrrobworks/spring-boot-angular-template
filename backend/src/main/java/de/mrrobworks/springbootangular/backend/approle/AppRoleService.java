@@ -8,13 +8,13 @@ import java.util.Map;
 
 public interface AppRoleService {
 
-  AppRole getAppRole(@NonNull final String id);
+  AppRoleDto getAppRole(@NonNull final String id);
 
   Map<GrantedAuthority, AppRole> getMappedAppRoles();
 
-  List<AppRole> getAppRoles();
+  List<AppRoleDto> getAppRoles();
 
-  void save(AppRole appRole);
+  void saveOrUpdate(AppRoleDto appRole);
 
   void delete(String id);
 }

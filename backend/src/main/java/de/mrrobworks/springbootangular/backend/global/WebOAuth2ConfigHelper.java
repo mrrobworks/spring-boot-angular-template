@@ -1,7 +1,6 @@
 package de.mrrobworks.springbootangular.backend.global;
 
 import de.mrrobworks.springbootangular.backend.approle.AppRole;
-import de.mrrobworks.springbootangular.backend.approle.AppRoleService;
 import de.mrrobworks.springbootangular.backend.appuser.AppUser;
 import de.mrrobworks.springbootangular.backend.appuser.AppUserService;
 import lombok.Getter;
@@ -23,7 +22,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Getter
@@ -59,12 +61,14 @@ public class WebOAuth2ConfigHelper {
     public List<GrantedAuthority> extractAuthorities(Map<String, Object> map) {
       final String userId = getUserId(map);
       log.info("Extract authorities for {}", userId);
-      final Optional<AppUser> appUser = appUserService.getByUserId(userId);
+      Optional<AppUser> appUser = appUserService.getByUserId(userId);
       if (appUser.isEmpty()) {
         return Collections.emptyList();
       }
-      return AuthorityUtils.createAuthorityList(
-          appUser.get().getRoles().stream().map(AppRole::getAuthority).toArray(String[]::new));
+      List<GrantedAuthority> authorityList =
+          AuthorityUtils.createAuthorityList(
+              appUser.get().getRoles().stream().map(AppRole::getId).toArray(String[]::new));
+      return authorityList;
     }
   }
 
@@ -73,31 +77,13 @@ public class WebOAuth2ConfigHelper {
   private static class WebOAuth2PrincipalExtractor implements PrincipalExtractor {
 
     private final @NonNull AppUserService appUserService;
-    private final @NonNull AppRoleService appRoleService;
 
     @Override
     public Object extractPrincipal(Map<String, Object> map) {
       final String userId = getUserId(map);
       log.info("Extract Principal for {}", userId);
       final Optional<AppUser> appUser = appUserService.getByUserId(userId);
-      return appUser.orElseGet(() -> createAppUser(userId));
-    }
-
-    private AppUser createAppUser(final String userId) {
-      final AppUser appUser = new AppUser();
-      appUser.setId(userId);
-      final List<AppRole> appUserRoles = new ArrayList<>();
-      final Map<GrantedAuthority, AppRole> appRoles = appRoleService.getMappedAppRoles();
-      // TODO: For Test reasons: New users get the Role ROLE_ADMIN.
-      final List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_ADMIN");
-      // final List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
-      for (final GrantedAuthority grantedAuthority : authorities) {
-        appUserRoles.add(appRoles.get(grantedAuthority));
-      }
-      appUser.setRoles(appUserRoles);
-
-      appUserService.createAppUser(appUser);
-      return appUser;
+      return appUser.orElseGet(() -> appUserService.createAppUser(userId));
     }
   }
 

@@ -21,24 +21,24 @@ public class AppRoleController {
   private final @NonNull AppRoleService appRoleService;
 
   @GetMapping("/{id}")
-  public ResponseEntity<AppRole> getAppRole(@PathVariable String id) {
+  public ResponseEntity<AppRoleDto> getAppRole(@PathVariable String id) {
     return ResponseEntity.ok().body(appRoleService.getAppRole(id));
   }
 
   @GetMapping("/list")
-  public ResponseEntity<List<AppRole>> getAppRoles() {
+  public ResponseEntity<List<AppRoleDto>> getAppRoles() {
     return ResponseEntity.ok().body(appRoleService.getAppRoles());
   }
 
   @PutMapping("/{id}")
   public void updateRole(
-      @RequestBody @Valid AppRole appRole, @PathVariable("id") String id, Errors errors) {
-    appRoleService.save(appRole);
+      @RequestBody @Valid AppRoleDto appRole, @PathVariable("id") String id, Errors errors) {
+    appRoleService.saveOrUpdate(appRole);
   }
 
   @PostMapping("/add")
-  public void addRole(@RequestBody @Valid AppRole appRole, Errors errors) {
-    appRoleService.save(appRole);
+  public void addRole(@RequestBody @Valid AppRoleDto appRole, Errors errors) {
+    appRoleService.saveOrUpdate(appRole);
   }
 
   @DeleteMapping("/{id}")
