@@ -4,9 +4,7 @@ import de.mrrobworks.springbootangular.backend.approle.AppRoleRepository;
 import de.mrrobworks.springbootangular.backend.appuser.AppUserRepository;
 import de.mrrobworks.springbootangular.backend.person.PersonRepository;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -24,12 +22,10 @@ import org.springframework.stereotype.Component;
  */
 @Getter
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class DbProvider {
 
-  @NonNull private PersonRepository personRepository;
-
-  @NonNull private AppUserRepository appUserRepository;
-
-  @NonNull private AppRoleRepository appRoleRepository;
+  private final PersonRepository personRepository;
+  private final AppUserRepository appUserRepository;
+  private final AppRoleRepository appRoleRepository;
 }

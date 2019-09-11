@@ -1,35 +1,35 @@
 package de.mrrobworks.springbootangular.backend.approle;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class AppRoleServiceImpl implements AppRoleService {
 
-  @NonNull private AppRoleRepository appRoleRepository;
-  @NonNull private AppRoleMapper appRoleMapper;
+  @NonNull private final AppRoleRepository appRoleRepository;
+  @NonNull private final AppRoleMapper appRoleMapper;
 
   @Override
-  public AppRoleDto getAppRole(@NonNull final String id) {
-    AppRole appRole = appRoleRepository.findById(id).orElse(null);
+  public AppRoleDto getAppRole(String id) {
+    AppRole appRole = appRoleRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     return appRoleMapper.fromAppRole(appRole);
   }
 
   @Override
   public Map<GrantedAuthority, AppRole> getMappedAppRoles() {
-    final Map<GrantedAuthority, AppRole> mappedAppRoles = new HashMap<>();
+    var mappedAppRoles = new HashMap<GrantedAuthority, AppRole>();
 
-    final List<AppRole> appRoles = appRoleRepository.findAll();
-    for (final AppRole appRole : appRoles) {
+    List<AppRole> appRoles = appRoleRepository.findAll();
+    for (AppRole appRole : appRoles) {
       mappedAppRoles.put(new SimpleGrantedAuthority(appRole.getId()), appRole);
     }
 
@@ -50,7 +50,7 @@ public class AppRoleServiceImpl implements AppRoleService {
   }
 
   @Override
-  public void deleteAppRole(String id) {
+  public void deleteAppRole(@NonNull String id) {
     appRoleRepository.deleteById(id);
   }
 }

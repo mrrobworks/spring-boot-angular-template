@@ -16,11 +16,11 @@ import java.util.concurrent.TimeUnit;
 public class LogAspect {
 
   @Around("execution(* de.mrrobworks.springbootangular.backend.*.*ServiceImpl.*(..))")
-  public Object logTime(final ProceedingJoinPoint joinPoint) throws Throwable {
-    final Object ret;
-    final long startTime = System.currentTimeMillis();
+  public static Object logTime(ProceedingJoinPoint joinPoint) throws Throwable {
+    Object ret;
+    long startTime = System.currentTimeMillis();
     ret = joinPoint.proceed();
-    final long seconds = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - startTime);
+    long seconds = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis() - startTime);
     log.info("Method \"{}\" took {} sec.", joinPoint.getSignature(), seconds);
     return ret;
   }
@@ -28,7 +28,7 @@ public class LogAspect {
   @AfterThrowing(
       value = "execution(* de.mrrobworks.springbootangular.backend.*.*ServiceImpl.*(..))",
       throwing = "e")
-  public void logException(JoinPoint joinPoint, Throwable e) {
+  public static void logException(JoinPoint joinPoint, Throwable e) {
     log.error(joinPoint + " -> " + e.getMessage(), e);
   }
 }

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,5 +20,5 @@ public class AppRole {
   private String description;
 
   @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-  private List<AppUser> users = new ArrayList<>();
+  private List<AppUser> users;
 }

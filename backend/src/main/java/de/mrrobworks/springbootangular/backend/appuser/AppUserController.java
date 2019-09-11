@@ -2,11 +2,10 @@ package de.mrrobworks.springbootangular.backend.appuser;
 
 import de.mrrobworks.springbootangular.backend.global.CorsConfiguration;
 import io.swagger.annotations.ApiOperation;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +15,16 @@ import java.util.List;
 
 @RestController
 @CorsConfiguration
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 @RequestMapping(value = "/backend/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AppUserController {
 
-  private final @NonNull AppUserService appUserService;
-  private final @NonNull AppUserMapper appUserMapper;
+  @NonNull private final AppUserService appUserService;
+  @NonNull private final AppUserMapper appUserMapper;
 
   @RequestMapping("/info")
   public ResponseEntity<AppUserDto> user(@AuthenticationPrincipal AppUser user) {
-    AppUserDto body = appUserMapper.fromAppUser(user);
-    return ResponseEntity.ok(body);
+    return ResponseEntity.ok(appUserMapper.fromAppUser(user));
   }
 
   @ApiOperation(value = "Get a list of application users.")

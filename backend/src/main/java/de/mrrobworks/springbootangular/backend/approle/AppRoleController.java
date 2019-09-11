@@ -1,11 +1,10 @@
 package de.mrrobworks.springbootangular.backend.approle;
 
 import de.mrrobworks.springbootangular.backend.global.CorsConfiguration;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +13,11 @@ import java.util.List;
 
 @RestController
 @CorsConfiguration
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 @RequestMapping(value = "/backend/role", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AppRoleController {
 
-  private final @NonNull AppRoleService appRoleService;
+  @NonNull private final AppRoleService appRoleService;
 
   @GetMapping("/{id}")
   public ResponseEntity<AppRoleDto> getAppRole(@PathVariable String id) {
@@ -43,6 +42,6 @@ public class AppRoleController {
 
   @DeleteMapping("/{id}")
   public void deleteRole(@PathVariable("id") String id) {
-    this.appRoleService.deleteAppRole(id);
+    appRoleService.deleteAppRole(id);
   }
 }

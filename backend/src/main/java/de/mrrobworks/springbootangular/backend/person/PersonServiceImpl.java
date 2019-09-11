@@ -1,20 +1,20 @@
 package de.mrrobworks.springbootangular.backend.person;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
-  @NonNull private PersonRepository personRepository;
+  @NonNull private final PersonRepository personRepository;
+  @NonNull private final PersonMapper personMapper;
 
   @Override
-  public List<Person> findAllPersons() {
-    return personRepository.findAll();
+  public List<PersonDto> findAllPersons() {
+    return personMapper.personListToPersonDtoList(personRepository.findAll());
   }
 }

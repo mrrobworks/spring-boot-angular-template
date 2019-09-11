@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface PersonService {
 
-  List<Person> findAllPersons();
+  List<PersonDto> findAllPersons();
 }

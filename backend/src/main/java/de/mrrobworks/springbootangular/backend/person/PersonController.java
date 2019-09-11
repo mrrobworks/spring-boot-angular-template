@@ -1,11 +1,10 @@
 package de.mrrobworks.springbootangular.backend.person;
 
 import de.mrrobworks.springbootangular.backend.global.CorsConfiguration;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,16 +16,16 @@ import java.util.List;
 @RestController
 @CorsConfiguration
 @RequestMapping("/backend/person")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class PersonController {
 
-  private final @NonNull PersonService service;
+  @NonNull private final PersonService personService;
 
   @GetMapping(value = "/findallpersons")
-  public ResponseEntity<List<Person>> findAllPersons() {
-    final var auth = SecurityContextHolder.getContext().getAuthentication();
+  public ResponseEntity<List<PersonDto>> findAllPersons() {
+    var auth = SecurityContextHolder.getContext().getAuthentication();
     log.info("Auth-name: {}", auth.getName());
     log.info("Auth-authorities: {}", auth.getAuthorities());
-    return ResponseEntity.ok(service.findAllPersons());
+    return ResponseEntity.ok(personService.findAllPersons());
   }
 }

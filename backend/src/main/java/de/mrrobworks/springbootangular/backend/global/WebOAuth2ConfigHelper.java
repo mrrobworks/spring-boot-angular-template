@@ -4,12 +4,11 @@ import de.mrrobworks.springbootangular.backend.approle.AppRole;
 import de.mrrobworks.springbootangular.backend.appuser.AppUser;
 import de.mrrobworks.springbootangular.backend.appuser.AppUserService;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -30,18 +29,17 @@ import java.util.Optional;
 @Slf4j
 @Getter
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class WebOAuth2ConfigHelper {
 
-  private final @NonNull WebOAuth2AuthoritiesExtractor webOAuth2AuthoritiesExtractor;
-  private final @NonNull WebOAuth2PrincipalExtractor webOAuth2PrincipalExtractor;
-  private final @NonNull WebOAuth2AuthenticationSuccessHandler webOAuth2AuthSuccessHandler;
+  private final WebOAuth2AuthoritiesExtractor webOAuth2AuthoritiesExtractor;
+  private final WebOAuth2PrincipalExtractor webOAuth2PrincipalExtractor;
+  private final WebOAuth2AuthenticationSuccessHandler webOAuth2AuthSuccessHandler;
 
-  // TODO: throw BadCredentialsException if login failed
   private static String getUserId(Map<String, Object> map) {
-    final HttpServletRequest currentRequest =
+    HttpServletRequest currentRequest =
         ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-    final String requestURI = currentRequest.getRequestURI();
+    String requestURI = currentRequest.getRequestURI();
     String userId = null;
 
     if (requestURI.equals(WebOAuth2Config.GOOGLE_LOGIN_URL)) {
@@ -50,20 +48,24 @@ public class WebOAuth2ConfigHelper {
       userId = String.valueOf(map.get("id"));
     }
 
+    if (userId == null) {
+      throw new BadCredentialsException("User-Id could not be determined.");
+    }
+
     log.info("Identified User-Id \"{}\"", userId);
     return userId;
   }
 
   @Component
-  @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+  @RequiredArgsConstructor
   private static class WebOAuth2AuthoritiesExtractor implements AuthoritiesExtractor {
 
-    private final @NonNull AppUserService appUserService;
+    private final AppUserService appUserService;
 
     @Override
     public List<GrantedAuthority> extractAuthorities(Map<String, Object> map) {
       log.info("Extract Authorities");
-      final String userId = getUserId(map);
+      String userId = getUserId(map);
 
       Optional<AppUser> optionalAppUser = appUserService.getAppUser(userId);
       if (optionalAppUser.isEmpty()) {
@@ -76,16 +78,16 @@ public class WebOAuth2ConfigHelper {
   }
 
   @Component
-  @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+  @RequiredArgsConstructor
   private static class WebOAuth2PrincipalExtractor implements PrincipalExtractor {
 
-    private final @NonNull AppUserService appUserService;
+    private final AppUserService appUserService;
 
     @Override
     public Object extractPrincipal(Map<String, Object> map) {
       log.info("Extract Principal");
-      final String userId = getUserId(map);
-      final Optional<AppUser> appUser = appUserService.getAppUser(userId);
+      String userId = getUserId(map);
+      Optional<AppUser> appUser = appUserService.getAppUser(userId);
       return appUser.orElseGet(() -> appUserService.createAppUser(userId));
     }
   }
@@ -98,7 +100,7 @@ public class WebOAuth2ConfigHelper {
     public void onAuthenticationSuccess(
         HttpServletRequest request, HttpServletResponse response, Authentication authentication)
         throws IOException, ServletException {
-      this.setDefaultTargetUrl("/");
+      setDefaultTargetUrl("/");
       super.onAuthenticationSuccess(request, response, authentication);
     }
   }

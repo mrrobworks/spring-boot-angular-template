@@ -2,9 +2,8 @@ package de.mrrobworks.springbootangular.backend.appuser;
 
 import de.mrrobworks.springbootangular.backend.approle.AppRole;
 import de.mrrobworks.springbootangular.backend.approle.AppRoleService;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
@@ -16,12 +15,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class AppUserServiceImpl implements AppUserService {
 
-  @NonNull private AppRoleService appRoleService;
-  @NonNull private AppUserRepository appUserRepository;
-  @NonNull private AppUserMapper appUserMapper;
+  @NonNull private final AppRoleService appRoleService;
+  @NonNull private final AppUserRepository appUserRepository;
+  @NonNull private final AppUserMapper appUserMapper;
 
   @Override
   public List<AppUserDto> getAllAppUsers() {
@@ -32,7 +31,7 @@ public class AppUserServiceImpl implements AppUserService {
   @Override
   public AppUserDto updateAppUser(AppUserDto appUserDto) {
     AppUser appUser =
-        appUserRepository.findById(appUserDto.getId()).orElseThrow(EntityNotFoundException::new);
+            appUserRepository.findById(appUserDto.getId()).orElseThrow(EntityNotFoundException::new);
     appUserMapper.updateDtoToAppUser(appUserDto, appUser);
     AppUser savedAppUser = appUserRepository.save(appUser);
     return appUserMapper.fromAppUser(savedAppUser);
@@ -44,8 +43,8 @@ public class AppUserServiceImpl implements AppUserService {
   }
 
   @Override
-  public AppUser createAppUser(final String userId) {
-    final Map<GrantedAuthority, AppRole> appRoles = appRoleService.getMappedAppRoles();
+  public AppUser createAppUser(String userId) {
+    Map<GrantedAuthority, AppRole> appRoles = appRoleService.getMappedAppRoles();
     // For Test reasons: New users get the Role "ROLE_ADMIN" instead of "ROLE_USER"
     List<AppRole> appUserRoles =
         AuthorityUtils.createAuthorityList("ROLE_ADMIN").stream()
