@@ -6,10 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,20 +19,16 @@ public class AppRoleServiceImpl implements AppRoleService {
 
   @Override
   public AppRoleDto getAppRole(String id) {
-    AppRole appRole = appRoleRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    AppRole appRole = appRoleRepository.findByIdGet(id);
     return appRoleMapper.fromAppRole(appRole);
   }
 
   @Override
   public Map<GrantedAuthority, AppRole> getMappedAppRoles() {
-    var mappedAppRoles = new HashMap<GrantedAuthority, AppRole>();
-
-    List<AppRole> appRoles = appRoleRepository.findAll();
-    for (AppRole appRole : appRoles) {
-      mappedAppRoles.put(new SimpleGrantedAuthority(appRole.getId()), appRole);
-    }
-
-    return mappedAppRoles;
+    return appRoleRepository.findAll().stream()
+        .collect(
+            Collectors.toMap(
+                appRole -> new SimpleGrantedAuthority(appRole.getId()), appRole -> appRole));
   }
 
   @Override
@@ -50,7 +45,7 @@ public class AppRoleServiceImpl implements AppRoleService {
   }
 
   @Override
-  public void deleteAppRole(@NonNull String id) {
+  public void deleteAppRole(String id) {
     appRoleRepository.deleteById(id);
   }
 }

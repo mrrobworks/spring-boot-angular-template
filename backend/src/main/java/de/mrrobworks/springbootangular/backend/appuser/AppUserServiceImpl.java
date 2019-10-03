@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,8 +29,7 @@ public class AppUserServiceImpl implements AppUserService {
 
   @Override
   public AppUserDto updateAppUser(AppUserDto appUserDto) {
-    AppUser appUser =
-            appUserRepository.findById(appUserDto.getId()).orElseThrow(EntityNotFoundException::new);
+    AppUser appUser = appUserRepository.findByIdGet(appUserDto.getId());
     appUserMapper.updateDtoToAppUser(appUserDto, appUser);
     AppUser savedAppUser = appUserRepository.save(appUser);
     return appUserMapper.fromAppUser(savedAppUser);
@@ -44,12 +42,15 @@ public class AppUserServiceImpl implements AppUserService {
 
   @Override
   public AppUser createAppUser(String userId) {
-    Map<GrantedAuthority, AppRole> appRoles = appRoleService.getMappedAppRoles();
+    Map<GrantedAuthority, AppRole> mappedAppRoles = appRoleService.getMappedAppRoles();
     // For Test reasons: New users get the Role "ROLE_ADMIN" instead of "ROLE_USER"
-    List<AppRole> appUserRoles =
-        AuthorityUtils.createAuthorityList("ROLE_ADMIN").stream()
-            .map(appRoles::get)
-            .collect(Collectors.toList());
-    return appUserRepository.save(AppUser.builder().id(userId).roles(appUserRoles).build());
+    return appUserRepository.save(
+        AppUser.builder()
+            .id(userId)
+            .roles(
+                AuthorityUtils.createAuthorityList("ROLE_ADMIN").stream()
+                    .map(mappedAppRoles::get)
+                    .collect(Collectors.toList()))
+            .build());
   }
 }
