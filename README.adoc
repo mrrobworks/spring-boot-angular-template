@@ -258,15 +258,15 @@ Follow the instructions from https://docs.npmjs.com/resolving-eacces-permissions
 
 == TODOs
 
-- [ ] Fix .gitignore-File
-- [ ] Add Swagger Documentation for REST-Controllers
 - [ ] Redesign Angular-Frontend CSS
-- [ ] Review Code in Frontend
 - [ ] Replace some components in frontend (Checkbox)
-- [ ] Using EntityGraph for JPA (instead FetchType.EAGER)?
+- [ ] Review Code in Frontend
+- [ ] WebMvcTest for REST-Controller (mockMvc)
+- [ ] Add Swagger Documentation for REST-Controllers
 - [ ] Swagger with OAuth2 or BasicAuth?
 - [ ] Add spring-boot-devtools?
-- [ ] WebMvcTest for REST-Controller (mockMvc)
+- [ ] Using EntityGraph for JPA (instead FetchType.EAGER)?
+- [x] Fix .gitignore-File
 - [x] Add Mockito Tests
 - [x] Create ViewModel-Beans for each JPA-Model-Entity-Bean?
 Using Mapstruct.
