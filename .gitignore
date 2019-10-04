@@ -204,6 +204,7 @@ fabric.properties
 *.ipr
 
 # Misc
+!.mvn/wrapper/**
 log/
 target/
 dist/
