@@ -22,7 +22,7 @@ image:https://user-images.githubusercontent.com/37511144/57142263-678bb880-6dbc-
 
 == Technology-Stack image:http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat["StackShare", link="https://stackshare.io/mrrobworks/spring-boot-angular-template-stack"]
 
-image:https://user-images.githubusercontent.com/37511144/64632809-2787b280-d3fa-11e9-8c7c-fb924e7a86ee.png[spring-boot-angular-template-stack]
+image:https://user-images.githubusercontent.com/37511144/66196552-092f7280-e699-11e9-9c04-3c1e65f146d3.png[spring-boot-angular-template-stack]
 
 Need to be installed on the OS to startup the application:
 https://www.docker.com/get-started[Docker]
@@ -259,17 +259,18 @@ Follow the instructions from https://docs.npmjs.com/resolving-eacces-permissions
 == TODOs
 
 - [ ] Fix .gitignore-File
-- [ ] Using var for local-variables
-- [ ] WebMvcTest for REST-Controller (mockMvc)
 - [ ] Add Swagger Documentation for REST-Controllers
-- [ ] Add Mockito Tests
 - [ ] Redesign Angular-Frontend CSS
 - [ ] Review Code in Frontend
 - [ ] Replace some components in frontend (Checkbox)
 - [ ] Using EntityGraph for JPA (instead FetchType.EAGER)?
 - [ ] Swagger with OAuth2 or BasicAuth?
 - [ ] Add spring-boot-devtools?
-- [ ] Create ViewModel-Beans for each JPA-Model-Entity-Bean?
+- [ ] WebMvcTest for REST-Controller (mockMvc)
+- [x] Add Mockito Tests
+- [x] Create ViewModel-Beans for each JPA-Model-Entity-Bean?
+Using Mapstruct.
+- [x] Using var for local-variables
 - [x] Microservices from this project for creating github-repositories
 - [x] Remove Maven-Module dbsetup and move sql-Files to backend
 - [x] Replace Liquibase with Flyway
