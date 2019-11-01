@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LoginService } from '../services/login.service';
-import { SelectItem } from 'primeng/api';
-import { finalize } from 'rxjs/operators';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {LoginService} from '../services/login.service';
+import {SelectItem} from 'primeng/api';
+import {finalize} from 'rxjs/operators';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,11 +17,12 @@ export class LoginComponent implements OnInit {
   selectedAccount: string;
 
   public loginAccounts: Array<SelectItem> = [
-    { label: 'Google', value: '/login/google', icon: 'fab fa-google' },
-    { label: 'Github', value: '/login/github', icon: 'fab fa-github' }
+    {label: 'Google', value: '/login/google', icon: 'fab fa-google'},
+    {label: 'Github', value: '/login/github', icon: 'fab fa-github'}
   ];
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {
+  }
 
   ngOnInit() {
     this.authenticate();
@@ -43,12 +45,24 @@ export class LoginComponent implements OnInit {
             'currentUser',
             JSON.stringify(this.currentUser)
           );
-          this.loginEvent.emit(true);
+          // this.loginEvent.emit(true);
+          this.receiveLoginEvent(true);
         },
         error => {
           console.log('Authentication fail.');
           this.loginEvent.emit(false);
         }
       );
+  }
+
+  receiveLoginEvent(success: boolean) {
+    if (success) {
+      this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+      // this.router.navigate(['/personlist']);
+    } else {
+      this.currentUser = null;
+    }
+    // this.navTopBarComponent.enableOrDisableComponents();
+    this.router.navigate(['/']);
   }
 }

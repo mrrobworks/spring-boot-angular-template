@@ -1,9 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
   <a class="navbar-brand">
-    <img
-      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg== "
-      width="30" height="30" alt="">
+    <a routerLink="/">
+      <img
+        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg== "
+        width="35" height="35" alt="">
+    </a>
   </a>
 
   <!-- For mobile devices a menu toggle-button -->
@@ -13,31 +15,36 @@
   </button>
 
   <!-- button above uses data-target="#navbarNavAltMarkup" -> id="navbarNavAltMarkup"-->
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" *ngIf="currentUser">
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
     <ul class="navbar-nav mr-auto">
 
       <!-- Menu-Item: Persons -->
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf="currentUser">
         <a class="nav-link" routerLink="/personlist">Persons <span
           class="sr-only">(current)</span></a>
       </li>
 
       <!-- Menu-Item: Users -->
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="currentUser">
         <a href="" class="nav-link" routerLink="/userlist" [appShowIfPermission]="'ROLE_ADMIN'">Users</a>
       </li>
 
       <!-- Menu-Item: Roles -->
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="currentUser">
         <a class="nav-link" routerLink="/rolelist" [appShowIfPermission]="'ROLE_ADMIN'">Roles</a>
       </li>
 
     </ul>
 
-    <!-- Menu-Item (Drop-Down): Settings -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
+      <!-- Menu-Item: Log in -->
+      <li class="nav-item" *ngIf="!currentUser">
+        <a class="nav-link" routerLink="/login">Sign in</a>
+      </li>
+
+      <!-- Menu-Item (Drop-Down): Settings -->
+      <li class="nav-item dropdown" *ngIf="currentUser">
         <a href="#" class="nav-link dropdown-toggle" role="button"
            data-toggle="dropdown"><i class="fa fa-cog"></i>&nbsp;</a>
         <div class="dropdown-menu dropdown-menu-right">

@@ -1,16 +1,16 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LoginService } from '../services/login.service';
-import { TemplateUser } from '../models/template-user';
-import { finalize } from 'rxjs/operators';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {LoginService} from '../services/login.service';
+import {TemplateUser} from '../models/template-user';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-top-bar',
   templateUrl: './nav-top-bar.component.html',
   styles: [
-    `
-      .dropdown-menu a {
-        color: #ff0000 !important;
-      }
+      `
+          .dropdown-menu a {
+              color: #ff0000 !important;
+          }
     `
   ]
 })
@@ -20,9 +20,11 @@ export class NavTopBarComponent implements OnInit {
 
   currentUser: TemplateUser;
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService) {
+  }
 
   ngOnInit(): void {
+    console.log('ngOnInit()');
     this.enableOrDisableComponents();
   }
 

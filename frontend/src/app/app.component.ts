@@ -1,25 +1,27 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { TemplateUser } from './models/template-user';
-import { NavTopBarComponent } from './nav-top-bar/nav-top-bar.component';
-import { LoginComponent } from './login/login.component';
-import { Router } from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {TemplateUser} from './models/template-user';
+import {NavTopBarComponent} from './nav-top-bar/nav-top-bar.component';
+import {LoginComponent} from './login/login.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  @ViewChild(NavTopBarComponent, { static: true })
+  @ViewChild(NavTopBarComponent, {static: true})
   private navTopBarComponent: NavTopBarComponent;
 
-  @ViewChild(LoginComponent, { static: false })
+  @ViewChild(LoginComponent, {static: false})
   private loginComponent: LoginComponent;
 
   currentUser: TemplateUser;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
+    console.log('AppComponent ngOnInit');
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
   }
 
