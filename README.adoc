@@ -10,7 +10,7 @@ endif::[]
 
 = Spring-Boot-Angular-Template image:https://travis-ci.com/mrrobworks/spring-boot-angular-template.svg?branch=master["Build Status", link="https://travis-ci.com/mrrobworks/spring-boot-angular-template"]
 
-Starter Template to create a *OAuth2* secured *dockerized Spring Boot 2.2* Application with *Angular 8* Frontend.
+Starter Template to create a *OAuth2* secured *dockerized Spring Boot 2.1* Application with *Angular 8* Frontend.
 
 A user with a Google- or Github-Account get access to the Application using OAuth2-Authentication, so no additional User Registration is required.
 A new user get the Default-Role _ROLE_USER_.
