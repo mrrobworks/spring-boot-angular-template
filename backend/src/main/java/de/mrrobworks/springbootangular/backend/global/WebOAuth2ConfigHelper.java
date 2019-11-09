@@ -6,12 +6,18 @@ import de.mrrobworks.springbootangular.backend.appuser.AppUserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -21,10 +27,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Getter
@@ -32,20 +35,20 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class WebOAuth2ConfigHelper {
 
-  private final WebOAuth2AuthoritiesExtractor webOAuth2AuthoritiesExtractor;
-  private final WebOAuth2PrincipalExtractor webOAuth2PrincipalExtractor;
+  private final WebOAuth2AuthoritiesMapper webOAuth2AuthoritiesMapper;
+  private final WebOAuth2UserService webOAuth2UserService;
   private final WebOAuth2AuthenticationSuccessHandler webOAuth2AuthSuccessHandler;
 
-  private static String getUserId(Map<String, Object> map) {
+  public static String getUserId(Map<String, Object> attributes) {
     HttpServletRequest currentRequest =
         ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
     String requestURI = currentRequest.getRequestURI();
     String userId = null;
 
     if (requestURI.equals(WebOAuth2Config.GOOGLE_LOGIN_URL)) {
-      userId = String.valueOf(map.get("sub"));
+      userId = String.valueOf(attributes.get(IdTokenClaimNames.SUB));
     } else if (requestURI.equals(WebOAuth2Config.GITHUB_LOGIN_URL)) {
-      userId = String.valueOf(map.get("id"));
+      userId = String.valueOf(attributes.get("id"));
     }
 
     if (userId == null) {
@@ -58,14 +61,21 @@ public class WebOAuth2ConfigHelper {
 
   @Component
   @RequiredArgsConstructor
-  private static class WebOAuth2AuthoritiesExtractor implements AuthoritiesExtractor {
+  private static class WebOAuth2AuthoritiesMapper implements GrantedAuthoritiesMapper {
 
     private final AppUserService appUserService;
 
     @Override
-    public List<GrantedAuthority> extractAuthorities(Map<String, Object> map) {
+    public Collection<? extends GrantedAuthority> mapAuthorities(
+        Collection<? extends GrantedAuthority> authorities) {
       log.info("Extract Authorities");
-      String userId = getUserId(map);
+
+      if (authorities.isEmpty()) {
+        return Collections.emptyList();
+      }
+
+      var oAuth2UserAuthority = (OAuth2UserAuthority) authorities.iterator();
+      String userId = getUserId(oAuth2UserAuthority.getAttributes());
 
       Optional<AppUser> optionalAppUser = appUserService.getAppUser(userId);
       if (optionalAppUser.isEmpty()) {
@@ -79,16 +89,32 @@ public class WebOAuth2ConfigHelper {
 
   @Component
   @RequiredArgsConstructor
-  private static class WebOAuth2PrincipalExtractor implements PrincipalExtractor {
+  private static class WebOAuth2UserService
+      implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final AppUserService appUserService;
 
     @Override
-    public Object extractPrincipal(Map<String, Object> map) {
+    public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest)
+        throws OAuth2AuthenticationException {
       log.info("Extract Principal");
-      String userId = getUserId(map);
-      Optional<AppUser> appUser = appUserService.getAppUser(userId);
-      return appUser.orElseGet(() -> appUserService.createAppUser(userId));
+
+      Map<String, Object> attributes = oAuth2UserRequest.getAdditionalParameters();
+      String userId = getUserId(attributes);
+      AppUser appUser =
+          appUserService.getAppUser(userId).orElseGet(() -> appUserService.createAppUser(userId));
+      List<GrantedAuthority> authorityList =
+          AuthorityUtils.createAuthorityList(
+              appUser.getRoles().stream().map(AppRole::getId).toArray(String[]::new));
+
+      String nameKeyAttribute = "";
+      if (oAuth2UserRequest.getClientRegistration().getClientName().equals("Google")) {
+        nameKeyAttribute = "id";
+      } else if (oAuth2UserRequest.getClientRegistration().getClientName().equals("GitHub")) {
+        nameKeyAttribute = IdTokenClaimNames.SUB;
+      }
+
+      return new DefaultOAuth2User(authorityList, attributes, nameKeyAttribute);
     }
   }
 

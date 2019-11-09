@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LoginService } from '../services/login.service';
-import { SelectItem } from 'primeng/api';
-import { finalize } from 'rxjs/operators';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {LoginService} from '../services/login.service';
+import {SelectItem} from 'primeng/api';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +16,12 @@ export class LoginComponent implements OnInit {
   selectedAccount: string;
 
   public loginAccounts: Array<SelectItem> = [
-    { label: 'Google', value: '/login/google', icon: 'fab fa-google' },
-    { label: 'Github', value: '/login/github', icon: 'fab fa-github' }
+    {label: 'Google', value: '/login/google', icon: 'fab fa-google'},
+    {label: 'Github', value: '/login/github', icon: 'fab fa-github'}
   ];
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService) {
+  }
 
   ngOnInit() {
     this.authenticate();
@@ -47,6 +48,8 @@ export class LoginComponent implements OnInit {
         },
         error => {
           console.log('Authentication fail.');
+          let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+          console.log('error: ' + errMsg);
           this.loginEvent.emit(false);
         }
       );

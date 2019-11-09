@@ -4,11 +4,14 @@ spring:
     username: postgres_dev
     password: changeit_dev
     url: jdbc:postgresql://localhost:54321/spring_boot_angular_db_dev
-google:
-  client:
-    client-id: [google-client-id]
-    client-secret: [google-client-secret]
-github:
-  client:
-    client-id: [github-client-id]
-    client-secret: [google-client-secret]
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: [google-client-id]
+            client-secret: [google-client-secret]
+            redirect-uri: http://localhost:4200/
+          github:
+            client-id: [github-client-id]
+            client-secret: [github-client-secret]

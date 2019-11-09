@@ -11,18 +11,3 @@ spring:
           use_jdbc_metadata_defaults: false
 server:
   port: 8081
-google:
-  client:
-    access-token-uri: https://www.googleapis.com/oauth2/v4/token
-    client-authentication-scheme: form
-    scope: https://www.googleapis.com/auth/userinfo.profile
-    user-authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
-  resource:
-    user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
-github:
-  client:
-    access-token-uri: https://github.com/login/oauth/access_token
-    client-authentication-scheme: form
-    user-authorization-uri: https://github.com/login/oauth/authorize
-  resource:
-    user-info-uri: https://api.github.com/user
