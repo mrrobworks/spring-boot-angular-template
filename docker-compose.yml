@@ -1,7 +1,7 @@
 version: '3'
 services:
   flyway:
-    image: boxfuse/flyway:6.0-alpine
+    image: boxfuse/flyway:6.0.0-beta-alpine
     container_name: spring-boot-angular-template-flyway
     volumes:
       - ./backend/src/main/resources/db/migration/:/flyway/sql
