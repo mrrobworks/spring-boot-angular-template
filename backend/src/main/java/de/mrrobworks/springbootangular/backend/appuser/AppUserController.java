@@ -3,7 +3,7 @@ package de.mrrobworks.springbootangular.backend.appuser;
 import de.mrrobworks.springbootangular.backend.global.CorsConfiguration;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
@@ -13,12 +13,11 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static de.mrrobworks.springbootangular.backend.global.WebOAuth2ConfigHelper.getUserId;
 
+@Slf4j
 @RestController
 @CorsConfiguration
 @RequiredArgsConstructor
@@ -28,16 +27,18 @@ public class AppUserController {
   @NonNull private final AppUserService appUserService;
   @NonNull private final AppUserMapper appUserMapper;
 
-  @GetMapping("/noauth")
-  public ResponseEntity<?> noAuth() {
-    Map<String, String> body = new HashMap<>();
-    body.put("message", "unauthorized");
-    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body);
-  }
+  //  @GetMapping("/noauth")
+  //  public ResponseEntity<?> noAuth() {
+  //    Map<String, String> body = new HashMap<>();
+  //    body.put("message", "unauthorized");
+  //    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(body);
+  //  }
 
   // TODO:https://github.com/spring-projects/spring-security/blob/master/samples/boot/oauth2login/src/main/java/sample/web/OAuth2LoginController.java
   @RequestMapping("/info")
+  @ResponseBody
   public ResponseEntity<AppUserDto> user(@AuthenticationPrincipal OAuth2User oauth2User) {
+    log.info("##### /backend/user/info " + oauth2User.getName());
     String userId = getUserId(oauth2User.getAttributes());
     AppUser appUser =
         appUserService.getAppUser(userId).orElseGet(() -> appUserService.createAppUser(userId));
