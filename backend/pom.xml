@@ -225,7 +225,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>mrrobworks/spring-boot-angular-template</repository>
+                    <repository>docker.pkg.github.com/mrrobworks/spring-boot-angular-template/spring-boot-angular-template</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>

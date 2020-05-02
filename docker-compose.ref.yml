@@ -1,7 +1,7 @@
 version: '3'
 services:
   spring-boot-angular-template:
-    image: mrrobworks/spring-boot-angular-template:0.2-SNAPSHOT
+    image: docker.pkg.github.com/mrrobworks/spring-boot-angular-template/spring-boot-angular-template:0.2-SNAPSHOT
     container_name: spring-boot-angular-template-service
     volumes:
       - ./wait-for.sh:/tmp/wait-for.sh
