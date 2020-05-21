@@ -8,7 +8,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Spring-Boot-Angular-Template image:https://travis-ci.com/mrrobworks/spring-boot-angular-template.svg?branch=master["Build Status", link="https://travis-ci.com/mrrobworks/spring-boot-angular-template"]
+= Spring-Boot-Angular-Template image:https://travis-ci.com/mrrobworks/spring-boot-angular-template.svg?branch=master["Build Status", link="https://travis-ci.com/mrrobworks/spring-boot-angular-template"] image:https://sonarcloud.io/api/project_badges/measure?project=mrrobworks_spring-boot-angular-template&metric=coverage["Sonarcloud Status", link="https://sonarcloud.io/dashboard?branch=master&id=mrrobworks_spring-boot-angular-template"] image:https://sonarcloud.io/api/project_badges/measure?project=mrrobworks_spring-boot-angular-template&metric=sqale_index["Sonarcloud Status", link="https://sonarcloud.io/dashboard?branch=master&id=mrrobworks_spring-boot-angular-template"]
 
 Starter Template to create a *OAuth2* secured *dockerized Spring Boot 2.1* Application with *Angular 8* Frontend.
 
