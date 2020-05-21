@@ -2,8 +2,13 @@ language: java
 jdk:
   - oraclejdk11
 
+addons:
+  sonarcloud:
+    organization: "mrrobworks" # the key of the org you chose at step #3
+    token:
+      secure: "g7xxaua+vuEmCYIeaNpdgKwntqrBHtzN4i9p14DFyM5/E2b1r+aH7RljG8RbzujGCvesii9tAa+ai6OVpsWpSVw+nKs/qYUp44vQXIP5m7OoLM4DrTJSFC0YwP4c/68zXFdkSWM0sHjAwJLyXNbqkXUWxajlix8X7AwWbIAUm+Pm5IpR85a9jYPaDWofj3oheRO6+sFRHWOzB7vP58tffd7uYLs4mG4tpm+V3nYsonOD4/cOAn+UvTyRygqluulSe6e8doRecboxgaj6LGnmCzfvzcHVA6NDqpy3HTtfzt84DQGm2JupgSO1Z66mCNU/T9wYj3DB3soc4KX7GJ7qA7f2HHn6+Tg/p3uBGDbJHa9sUCRm6c5qsUDukETrTfx2q6YUlc82x3z/x9EeJFezkk6tif4eYS8Inz6rtraeC/Zqp6gJAC1KQQ3h1n+etvOQe8Woz1Wo9bFxlEe2GcMWMWh/CTiFj3V7cwyYdIYe7mInhwXFySLFIumLPsjVjwAKbQe7nz7fX9fCYH6NaQw7qcGeLmoM3XkqMCvX26uipP4BeMc4rSW6zz5mfI+SKM0LiHBLWS5nkWKRmTot0JuDCMs4LF8Hm+4K9TdP/AQPbsoiu5yF8n7pg4RGh8cp8Ft09mCvSxZP41e71mZoc/ObOmbouBhMtz/gf5vsdWQvn04=" # encrypted value of your token
 script:
-  - ./mvnw clean install
+  - mvn clean verify sonar:sonar -Pcoverage -Dsonar.projectKey=mrrobworks
 
 before_install:
   - chmod +x mvnw
