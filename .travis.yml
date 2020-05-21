@@ -9,7 +9,7 @@ addons:
       secure: "nNvJs7/LxOFaZE90uh0snpS6DVibEx1teR3xxnarSdTaIHhMrrn2RzBJ4ahY3LLVbj6vM3oaP1HeF5zajxfB4gBy0rgUT8/zKKzdaE5vkTrYImF1aZQ6ulFXZGoSpWxv4uB3/DNlSpx+1e/ppUsL44Aa2sPRwpYB0yqqfyByEnKlpgEYjpNbWFu1TXG7U4bORCMkuG+rcNKG3oOwyRQrLY86x2J5OZt5XVbiQuY5rvfCLedx25Ds/2V5UPuS4Anqv7x9zFnLWKYra790S4SnlMReFuSRps3oQ8+luB7kJldLZJ8DyTfXAgJWtL0nqQXZlB0f7cqiWXouXnXNHeOivAOBad9iY7FcXtI+TMLkMVkncNXKwCZKKMju22Z4uML/Rre0x6Tv0XLmLElxlT2qqL+tXrAFghlGESSXEi0sN6/hteWH4q8ZodJrnayh2I1QxfM/613bkJ88ia2GVPq8/SdY0Qwx5uHVICpquNTto59U1QmqhhCjc0PzT5zzUGM9ZiTlBbIlqgAclgWFSM6EWGsWutUc6xWEXJ073g+q8pmYufXrIZqKqbUmhYTaRBYKMWuiTd9eB/EFLLYzZQPBhsxI8Cx7RYgchGAu7zUZQQEH3z/OQB7BX0y+V1OyucT3mKEThG0cXrwdcOlr2jdvRb3p28daPaIUmDhOOgfyoBY="
 
 script:
-  - mvn clean install sonar:sonar -Dsonar.projectKey=mrrobworks_spring-boot-angular-template -Dsonar.sources=. -Dsonar.sourceEncoding=UTF-8
+  - mvn clean install sonar:sonar -Dsonar.projectKey=mrrobworks_spring-boot-angular-template -Dsonar.sources=src/main/java -Dsonar.sourceEncoding=UTF-8
 
 before_install:
   - chmod +x mvnw
