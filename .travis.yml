@@ -15,4 +15,4 @@ before_install:
   - chmod +x mvnw
 
 git:
-  depth: true
+  depth: false
