@@ -13,6 +13,3 @@ script:
 
 before_install:
   - chmod +x mvnw
-
-git:
-  depth: false
