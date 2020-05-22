@@ -51,7 +51,7 @@
 					</execution>
 
           <!-- https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally -->
-          <!--<execution>
+          <execution>
             <id>npm-angular-cli-install</id>
             <goals>
               <goal>npm</goal>
@@ -59,7 +59,7 @@
             <configuration>
               <arguments>install -g @angular/cli${angular-cli.version}</arguments>
             </configuration>
-          </execution>-->
+          </execution>
 
 					<execution>
 						<id>npm-install</id>
@@ -71,7 +71,7 @@
 						</configuration>
 					</execution>
 
-          <!--<execution>
+          <execution>
             <id>rimraf-dist</id>
             <goals>
               <goal>npm</goal>
@@ -89,7 +89,7 @@
 						<configuration>
 							<arguments>run build</arguments>
 						</configuration>
-					</execution>-->
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
