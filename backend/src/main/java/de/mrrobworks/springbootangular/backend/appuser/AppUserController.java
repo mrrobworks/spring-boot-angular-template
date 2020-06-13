@@ -35,7 +35,7 @@ public class AppUserController {
   //  }
 
   // TODO:https://github.com/spring-projects/spring-security/blob/master/samples/boot/oauth2login/src/main/java/sample/web/OAuth2LoginController.java
-  @RequestMapping("/info")
+  @GetMapping("/info")
   @ResponseBody
   public ResponseEntity<AppUserDto> user(@AuthenticationPrincipal OAuth2User oauth2User) {
     log.info("##### /backend/user/info " + oauth2User.getName());

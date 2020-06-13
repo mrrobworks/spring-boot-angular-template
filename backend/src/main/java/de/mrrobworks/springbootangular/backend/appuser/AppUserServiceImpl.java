@@ -37,7 +37,8 @@ public class AppUserServiceImpl implements AppUserService {
 
   @Override
   public Optional<AppUser> getAppUser(String userId) {
-    return appUserRepository.findById(userId);
+    Optional<AppUser> byId = appUserRepository.findById(userId);
+    return byId;
   }
 
   @Override

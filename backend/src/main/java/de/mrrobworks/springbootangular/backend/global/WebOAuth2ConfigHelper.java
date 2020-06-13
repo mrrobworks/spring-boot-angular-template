@@ -45,11 +45,12 @@ public class WebOAuth2ConfigHelper {
     String requestURI = currentRequest.getRequestURI();
     String userId = null;
 
-    if (requestURI.equals(WebOAuth2Config.GOOGLE_LOGIN_URL)) {
-      userId = String.valueOf(attributes.get(IdTokenClaimNames.SUB));
-    } else if (requestURI.equals(WebOAuth2Config.GITHUB_LOGIN_URL)) {
-      userId = String.valueOf(attributes.get("id"));
-    }
+    // TODO: currentRequest URL is "/" so no distinction between google and github possible. Another solution is necessary
+    // if (requestURI.equals(WebOAuth2Config.GOOGLE_LOGIN_URL)) {
+    userId = String.valueOf(attributes.get(IdTokenClaimNames.SUB));
+    // } else if (requestURI.equals(WebOAuth2Config.GITHUB_LOGIN_URL)) {
+    //  userId = String.valueOf(attributes.get("id"));
+    // }
 
     if (userId == null) {
       throw new BadCredentialsException("User-Id could not be determined.");
@@ -74,7 +75,7 @@ public class WebOAuth2ConfigHelper {
         return Collections.emptyList();
       }
 
-      var oAuth2UserAuthority = (OAuth2UserAuthority) authorities.iterator();
+      var oAuth2UserAuthority = (OAuth2UserAuthority) authorities.iterator().next();
       String userId = getUserId(oAuth2UserAuthority.getAttributes());
 
       Optional<AppUser> optionalAppUser = appUserService.getAppUser(userId);

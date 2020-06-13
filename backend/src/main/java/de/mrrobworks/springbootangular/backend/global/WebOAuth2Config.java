@@ -3,10 +3,8 @@ package de.mrrobworks.springbootangular.backend.global;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 // TODO: https://spring.io/guides/tutorials/spring-boot-oauth2/
 @Slf4j
@@ -33,7 +31,7 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
     return Collections.singletonMap("name", principal.getAttribute("name"));
   }*/
 
-  @Override
+  /*@Override
   public void configure(WebSecurity web) {
     web.ignoring()
         .antMatchers(
@@ -51,27 +49,50 @@ public class WebOAuth2Config extends WebSecurityConfigurerAdapter {
             "/swagger-resources/**",
             "/configuration/**",
             "/webjars/**");
-  }
+  }*/
 
   @Override
   public void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests(a -> a.antMatchers("/backend/**").authenticated())
+    http.antMatcher("/**")
+        .authorizeRequests(
+            a ->
+                a.antMatchers(
+                        "/",
+                        "/login",
+                        "/**.html",
+                        "/**.js",
+                        "/**.css",
+                        "/**.ico",
+                        "/**.otf",
+                        "/**.ttf",
+                        "/**.woff",
+                        "/**.woff2",
+                        "/v2/api-docs",
+                        "/swagger-resources/**",
+                        "/configuration/**",
+                        "/webjars/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
+
         // .exceptionHandling(
         //    e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-        .csrf(c -> c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
-        .logout(l -> l.logoutSuccessUrl("/").permitAll())
+        // .csrf(c -> c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+        .csrf()
+        .disable()
+        // .logout(l -> l.logoutSuccessUrl("/").permitAll())
         .oauth2Login(
             o ->
-                o.loginPage("/login")
+                o.loginPage("/")
                     .authorizationEndpoint(
                         authorizationEndpoint -> authorizationEndpoint.baseUri("/login"))
-                    .redirectionEndpoint(r -> r.baseUri("/personlist"))
-            // .successHandler(webOAuth2ConfigHelper.getWebOAuth2AuthSuccessHandler())
-            /*.userInfoEndpoint(
-            userInfoEndpoint ->
-                userInfoEndpoint
-                    .userAuthoritiesMapper(
-                        webOAuth2ConfigHelper.getWebOAuth2AuthoritiesMapper())
-                    .userService(webOAuth2ConfigHelper.getWebOAuth2UserService()))*/ );
+                    .redirectionEndpoint(r -> r.baseUri("/"))
+                    // .successHandler(webOAuth2ConfigHelper.getWebOAuth2AuthSuccessHandler())
+                    .userInfoEndpoint(
+                        userInfoEndpoint ->
+                            userInfoEndpoint
+                                .userAuthoritiesMapper(
+                                    webOAuth2ConfigHelper.getWebOAuth2AuthoritiesMapper())
+                                .userService(webOAuth2ConfigHelper.getWebOAuth2UserService())));
   }
 }
